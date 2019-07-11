@@ -1,8 +1,4 @@
-doBugLogic = function (grid, agents, i, j) {
-    if (grid.rows[i][j].agent !== null && grid.rows[i][j].agent.type === 'greenbug' &&
-    grid.rows[i][j].agent.done === false) {
-
-    let greenbug = grid.rows[i][j].agent;
+doGreenbugLogic = function(grid, greenbug, i, j) {
     greenbug.done = true;
     if (grid.rows[i][j].state.green > 0) {
       greenbug.stomach += Math.min(50, grid.rows[i][j].state.green);
@@ -35,5 +31,11 @@ doBugLogic = function (grid, agents, i, j) {
     } else {
       greenbug.dead = true;
     }
+}
+
+doBugLogic = function (grid, agents, i, j) {
+    if (grid.rows[i][j].agent !== null && grid.rows[i][j].agent.type === 'greenbug' &&
+    grid.rows[i][j].agent.done === false) {
+    doGreenbugLogic(grid, grid.rows[i][j].agent, i, j);
   }
 }

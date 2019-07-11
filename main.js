@@ -27,20 +27,14 @@ var agents = [
     stomach: 100
   },
   {
-    type: 'greenbug',
-    done: false,
-    stomach: 100
-  },
-  {
-    type: 'greenbug',
+    type: 'bluebug',
     done: false,
     stomach: 100
   }
 ];
 
 grid.rows[10][10].agent = agents[0];
-grid.rows[17][3].agent = agents[1];
-grid.rows[27][13].agent = agents[2];
+grid.rows[16][18].agent = agents[1];
 
 
 drawGrid = function(grid) {
@@ -56,6 +50,7 @@ drawGrid = function(grid) {
           (255 - blueGrass - redGrass) + ", " +
           (255 - greenGrass - redGrass) + ")";
         ctx.fillRect(i * 30 + 1, j * 30 + 1, 29, 29);
+
         if (grid.rows[i][j].agent != null && grid.rows[i][j].agent.type === 'greenbug') {
           let greenbug = grid.rows[i][j].agent;
           let shade = greenbug.stomach;
@@ -63,7 +58,15 @@ drawGrid = function(grid) {
           ctx.fillRect(i * 30 + 8, j * 30 + 8, 15, 15);
           ctx.fillStyle = "rgb(0, " + shade + ", 0)";
           ctx.fillRect(i * 30 + 11, j * 30 + 11, 9, 9);
+        } else if (grid.rows[i][j].agent != null && grid.rows[i][j].agent.type === 'bluebug') {
+          let bluebug = grid.rows[i][j].agent;
+          let shade = bluebug.stomach;
+          ctx.fillStyle = "rgb(0, 0, 0)";
+          ctx.fillRect(i * 30 + 8, j * 30 + 8, 15, 15);
+          ctx.fillStyle = "rgb(0, 0, " + shade + ")";
+          ctx.fillRect(i * 30 + 11, j * 30 + 11, 9, 9);
         }
+
       }
     }
 };
