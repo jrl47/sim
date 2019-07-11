@@ -16,6 +16,10 @@ class Timer { // SINGLETON
             Timer.instance = this;
             this.tickCallbacks = [];
             this.ticks = 0;
+
+            this.expected = -1;
+            this.interval = 100;
+
             this.unpause();
         }
         Timer.instance.tickCallbacks.push(tickCallback);
@@ -25,7 +29,21 @@ class Timer { // SINGLETON
         clearInterval(intervalId);
     } 
     unpause() {
-        Timer.instance.intervalId = setInterval(() => { Timer.instance.callTickCallbacks(); } , 100);
+        Timer.instance.intervalId = setInterval(
+            () => {
+                if (this.expected === -1) {
+                    this.expected = Date.now() + this.interval;
+                } else {
+                    let newExpected = Date.now() + this.interval;
+                    if (newExpected - this.expected > this.interval + 3) {
+                        console.log('loop struggling!!!');
+                        // clearInterval(Timer.instance.intervalId);
+                    }
+                    this.expected = newExpected;
+                }
+                Timer.instance.callTickCallbacks();
+            }
+            , this.interval);
     }
     callTickCallbacks() {
         for (let i = 0; i < Timer.instance.tickCallbacks.length; i++) {
