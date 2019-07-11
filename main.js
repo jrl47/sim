@@ -60,12 +60,9 @@ drawGrid = function(grid) {
           let greenbug = grid.rows[i][j].agent;
           let shade = greenbug.stomach;
           ctx.fillStyle = "rgb(0, 0, 0)";
-          ctx.fillRect(i * 30 + 6, j * 30 + 6, 19, 19);
+          ctx.fillRect(i * 30 + 8, j * 30 + 8, 15, 15);
           ctx.fillStyle = "rgb(0, " + shade + ", 0)";
-          // ctx.fillStyle = "rgb(" + (255 - blueGrass - greenGrass) + ", " +
-          //   (255 - blueGrass - redGrass) + ", " +
-          //   (255 - greenGrass - redGrass) + ")";
-          ctx.fillRect(i * 30 + 10, j * 30 + 10, 11, 11);
+          ctx.fillRect(i * 30 + 11, j * 30 + 11, 9, 9);
         }
       }
     }
@@ -76,47 +73,9 @@ stepGrid = function(grid) {
   for(let i = 0; i < grid.size; i++) {
     for(let j = 0; j < grid.size; j++) {
       doGooLogic(grid, neighborTotals, i, j);
-
-      if (grid.rows[i][j].agent !== null && grid.rows[i][j].agent.type === 'greenbug' &&
-        grid.rows[i][j].agent.done === false) {
-
-        let greenbug = grid.rows[i][j].agent;
-        greenbug.done = true;
-        if (grid.rows[i][j].state.green > 0) {
-          greenbug.stomach += Math.min(50, grid.rows[i][j].state.green);
-          grid.rows[i][j].state.green -= Math.min(60, grid.rows[i][j].state.green);
-        }
-        greenbug.stomach -= 14;
-        grid.rows[i][j].agent = null;
-        let willReproduce = false;
-        if (greenbug.stomach > 255) {
-          willReproduce = true;
-        }
-        if (greenbug.stomach > 0) { // RIP greenbug if empty stomach, otherwise it moves instead of dies
-          let direction = randInt(0, 3);
-          let destinationCell = grid.rows[mod(i + ORTH_SHIFTS_X[direction], grid.size)][mod(j + ORTH_SHIFTS_Y[direction], grid.size)];
-          if (destinationCell.agent === null) {
-            destinationCell.agent = greenbug;
-            if (willReproduce) {
-              let baby = {
-                type: 'greenbug',
-                done: true, // "summoning sickness!"
-                stomach: 100
-              };
-              greenbug.stomach = 100;
-              grid.rows[i][j].agent = baby;
-              agents.push(baby);
-            }
-          } else {
-            grid.rows[i][j].agent = greenbug;
-          }
-        } else {
-          greenbug.dead = true;
-        }
-      }
+      doBugLogic(grid, agents, i, j);
     }
   }
-
   for (let a = 0; a < agents.length; a++) {
     agents[a].done = false;
     if (agents[a].dead) {
