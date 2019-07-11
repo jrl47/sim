@@ -29,7 +29,8 @@ var agents = [
   {
     type: 'bluebug',
     done: false,
-    stomach: 100
+    stomach: 100,
+    direction: 0
   }
 ];
 
@@ -54,16 +55,16 @@ drawGrid = function(grid) {
         if (grid.rows[i][j].agent != null && grid.rows[i][j].agent.type === 'greenbug') {
           let greenbug = grid.rows[i][j].agent;
           let shade = greenbug.stomach;
-          ctx.fillStyle = "rgb(0, 0, 0)";
+          ctx.fillStyle = "rgb(0, 140, 0)";
           ctx.fillRect(i * 30 + 8, j * 30 + 8, 15, 15);
-          ctx.fillStyle = "rgb(0, " + shade + ", 0)";
+          ctx.fillStyle = "rgb(0, " + shade/2 + ", 0)";
           ctx.fillRect(i * 30 + 11, j * 30 + 11, 9, 9);
         } else if (grid.rows[i][j].agent != null && grid.rows[i][j].agent.type === 'bluebug') {
           let bluebug = grid.rows[i][j].agent;
           let shade = bluebug.stomach;
-          ctx.fillStyle = "rgb(0, 0, 0)";
+          ctx.fillStyle = "rgb(0, 0, 140)";
           ctx.fillRect(i * 30 + 8, j * 30 + 8, 15, 15);
-          ctx.fillStyle = "rgb(0, 0, " + shade + ")";
+          ctx.fillStyle = "rgb(0, 0, " + shade/2 + ")";
           ctx.fillRect(i * 30 + 11, j * 30 + 11, 9, 9);
         }
 
