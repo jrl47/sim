@@ -22,27 +22,25 @@ for (let i = 0; i < grid.size; i++) {
 
 var agents = [
   {
+    type: 'greenbug',
     done: false,
     stomach: 100
   },
   {
+    type: 'greenbug',
     done: false,
     stomach: 100
   },
   {
-    done: false,
-    stomach: 100
-  },
-  {
+    type: 'greenbug',
     done: false,
     stomach: 100
   }
 ];
 
-grid.rows[10][10].agents.greenbug = agents[0];
-grid.rows[17][3].agents.greenbug = agents[1];
-grid.rows[27][13].agents.greenbug = agents[2];
-grid.rows[21][19].agents.greenbug = agents[3];
+grid.rows[10][10].agent = agents[0];
+grid.rows[17][3].agent = agents[1];
+grid.rows[27][13].agent = agents[2];
 
 
 drawGrid = function(grid) {
@@ -58,8 +56,8 @@ drawGrid = function(grid) {
           (255 - blueGrass - redGrass) + ", " +
           (255 - greenGrass - redGrass) + ")";
         ctx.fillRect(i * 30 + 1, j * 30 + 1, 29, 29);
-        if (grid.rows[i][j].agents.greenbug !== null) {
-          let greenbug = grid.rows[i][j].agents.greenbug;
+        if (grid.rows[i][j].agent != null && grid.rows[i][j].agent.type === 'greenbug') {
+          let greenbug = grid.rows[i][j].agent;
           let shade = greenbug.stomach;
           ctx.fillStyle = "rgb(0, 0, 0)";
           ctx.fillRect(i * 30 + 6, j * 30 + 6, 19, 19);
@@ -74,22 +72,22 @@ drawGrid = function(grid) {
 };
 
 stepGrid = function(grid) {
-  // console.log(agents.length);
   neighborTotals = getNeighborTotals(grid);
   for(let i = 0; i < grid.size; i++) {
     for(let j = 0; j < grid.size; j++) {
       doGooLogic(grid, neighborTotals, i, j);
 
-      // TODO adjust this logic to ensure there can only be one agent and just make classes for Agents
-      if (grid.rows[i][j].agents.greenbug !== null && grid.rows[i][j].agents.greenbug.done === false) {
-        let greenbug = grid.rows[i][j].agents.greenbug;
+      if (grid.rows[i][j].agent !== null && grid.rows[i][j].agent.type === 'greenbug' &&
+        grid.rows[i][j].agent.done === false) {
+
+        let greenbug = grid.rows[i][j].agent;
         greenbug.done = true;
         if (grid.rows[i][j].state.green > 0) {
-          greenbug.stomach += Math.min(52, grid.rows[i][j].state.green);
+          greenbug.stomach += Math.min(50, grid.rows[i][j].state.green);
           grid.rows[i][j].state.green -= Math.min(60, grid.rows[i][j].state.green);
         }
         greenbug.stomach -= 14;
-        grid.rows[i][j].agents.greenbug = null;
+        grid.rows[i][j].agent = null;
         let willReproduce = false;
         if (greenbug.stomach > 255) {
           willReproduce = true;
@@ -97,19 +95,20 @@ stepGrid = function(grid) {
         if (greenbug.stomach > 0) { // RIP greenbug if empty stomach, otherwise it moves instead of dies
           let direction = randInt(0, 3);
           let destinationCell = grid.rows[mod(i + ORTH_SHIFTS_X[direction], grid.size)][mod(j + ORTH_SHIFTS_Y[direction], grid.size)];
-          if (destinationCell.agents.greenbug === null) {
-            destinationCell.agents.greenbug = greenbug;
+          if (destinationCell.agent === null) {
+            destinationCell.agent = greenbug;
             if (willReproduce) {
               let baby = {
+                type: 'greenbug',
                 done: true, // "summoning sickness!"
                 stomach: 100
               };
               greenbug.stomach = 100;
-              grid.rows[i][j].agents.greenbug = baby;
+              grid.rows[i][j].agent = baby;
               agents.push(baby);
             }
           } else {
-            grid.rows[i][j].agents.greenbug = greenbug;
+            grid.rows[i][j].agent = greenbug;
           }
         } else {
           greenbug.dead = true;
