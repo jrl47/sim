@@ -16,10 +16,8 @@ getWeightedNeighborTotal = function(grid, color, i, j) {
     }
   
     result += grid.rows[i][j].state[color] * selfWeight;
-    orthShiftsX = [0, 0, -1, 1];
-    orthShiftsY = [-1, 1, 0, 0];
     for (let k = 0; k < 4; k++) {
-      result += grid.rows[mod(i + orthShiftsX[k], grid.size)][mod(j + orthShiftsY[k], grid.size)].state[color] * orthWeight;
+      result += grid.rows[mod(i + ORTH_SHIFTS_X[k], grid.size)][mod(j + ORTH_SHIFTS_Y[k], grid.size)].state[color] * orthWeight;
     }
     return result;
 }

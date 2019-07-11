@@ -3,6 +3,8 @@ class Cell {
         this.x = x;
         this.y = y;
         this.state = {};
-        this.agents = [];
+        this.agents = {
+            greenbug: null
+        };
     }
 }
