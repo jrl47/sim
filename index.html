@@ -12,11 +12,29 @@
             }
         </style>
 
-        <canvas id="myCanvas" width="900" height="900"></canvas>
+        <div style="display:block; overflow:auto">
+            <div id="overview" style="float:left; padding:4px">
+                <canvas id="myCanvas" width="1800" height="1800"></canvas>
+            </div>
+            <div id="feed" style="float:left; padding:4px; width:240px">
+                <button id="greenGrass" style="font-size:x-large"></button>
+                <button id="blueGrass" style="font-size:x-large"></button>
+                <button id="redGrass" style="font-size:x-large"></button>
+                <button id="greenbug" style="font-size:x-large"></button>
+                <button id="bluebug" style="font-size:x-large"></button>
+                <button id="redmuncher" style="font-size:x-large"></button>
+                <div id="numGreenbugsDisplay" style="font-size:x-large"></div>
+                <div id="numBluebugsDisplay" style="font-size:x-large"></div>
+                <div id="numRedmunchersDisplay" style="font-size:x-large"></div>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="util/timer.js"></script>
+        <script type="text/javascript" src="util/button.js"></script>
         <script type="text/javascript" src="constants.js"></script>
         <script type="text/javascript" src="cell.js"></script>
-        <script type="text/javascript" src="grid.js"></script>
-        <script type="text/javascript" src="timer.js"></script>
+        <script type="text/javascript" src="grid.js"></script>        
+        <script type="text/javascript" src="muncher_logic.js"></script>
         <script type="text/javascript" src="goo_logic.js"></script>
         <script type="text/javascript" src="bug_logic.js"></script>
         <script type="text/javascript" src="main.js"></script>

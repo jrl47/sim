@@ -7,10 +7,10 @@ doGreenbugLogic = function(grid, greenbug, i, j) {
     doSharedBugLogic(grid, greenbug, i, j);
 
     if (grid.rows[i][j].state.green > 0) {
-      greenbug.stomach += Math.min(50, grid.rows[i][j].state.green);
-      grid.rows[i][j].state.green -= Math.min(50, grid.rows[i][j].state.green);
+      greenbug.stomach += Math.min(66, grid.rows[i][j].state.green);
+      grid.rows[i][j].state.green -= Math.min(66, grid.rows[i][j].state.green);
     }
-    greenbug.stomach -= 18;
+    greenbug.stomach -= 19;
     grid.rows[i][j].agent = null;
     let willReproduce = false;
     if (greenbug.stomach > 511) {
@@ -25,9 +25,10 @@ doGreenbugLogic = function(grid, greenbug, i, j) {
           let baby = {
             type: 'greenbug',
             done: true, // "summoning sickness!"
-            stomach: 35
+            stomach: 60
           };
-          greenbug.stomach = 75;
+          numGreenbugs++; // it seems unfortunate that this logic must live here for now
+          greenbug.stomach = 80;
           grid.rows[i][j].agent = baby;
           agents.push(baby);
         }
@@ -43,10 +44,10 @@ doBluebugLogic = function(grid, bluebug, i, j) {
     doSharedBugLogic(grid, bluebug, i, j);
 
     if (grid.rows[i][j].state.blue > 0) {
-      bluebug.stomach += Math.min(35, grid.rows[i][j].state.blue);
-      grid.rows[i][j].state.blue -= Math.min(35, grid.rows[i][j].state.blue);
+      bluebug.stomach += Math.min(55, grid.rows[i][j].state.blue);
+      grid.rows[i][j].state.blue -= Math.min(55, grid.rows[i][j].state.blue);
     }
-    bluebug.stomach -= 13;
+    bluebug.stomach -= 14;
     grid.rows[i][j].agent = null;
     let willReproduce = false;
     if (bluebug.stomach > 511) {
@@ -58,17 +59,19 @@ doBluebugLogic = function(grid, bluebug, i, j) {
       }
       let direction = bluebug.direction;
     //   console.log(grid + ' ' + mod(i + ORTH_SHIFTS_X[direction], grid.size) + ' '+  mod(j + ORTH_SHIFTS_Y[direction], grid.size));
-      let destinationCell = grid.rows[mod(i + ORTH_SHIFTS_X[direction], grid.size)][mod(j + ORTH_SHIFTS_Y[direction], grid.size)];
+      let destinationCell = grid.rows[mod(i + ORTH_SHIFTS_X[direction], grid.size)]
+      [mod(j + ORTH_SHIFTS_Y[direction], grid.size)];
       if (destinationCell.agent === null) {
         destinationCell.agent = bluebug;
         if (willReproduce) {
           let baby = {
             type: 'bluebug',
             done: true, // "summoning sickness!"
-            stomach: 30,
+            stomach: 115,
             direction: 1
           };
-          bluebug.stomach = 75;
+          numBluebugs++; // it seems unfortunate that this logic must live here for now
+          bluebug.stomach = 120;
           bluebug.direction = 0;
           grid.rows[i][j].agent = baby;
           agents.push(baby);
