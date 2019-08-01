@@ -18,7 +18,7 @@ class Timer { // SINGLETON
             this.ticks = 0;
 
             this.expected = -1;
-            this.interval = 55;
+            this.interval = 17;
 
             this.unpause();
         }
@@ -26,7 +26,7 @@ class Timer { // SINGLETON
         return Timer.instance;
     }
     pause() {
-        clearInterval(intervalId);
+        clearInterval(Timer.instance.intervalId);
     } 
     unpause() {
         Timer.instance.intervalId = setInterval(

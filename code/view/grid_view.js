@@ -3,9 +3,10 @@ class GridView { // SINGLETON
         if (!GridView.instance) {
           GridView.instance = this;
             this.grid = grid;
-            let c = document.getElementById("myCanvas");
-            this.ctx = c.getContext("2d");
+            this.c = document.getElementById("myCanvas");
+            this.ctx = this.c.getContext("2d");
             this.vc = new ViewControl();
+            this.cec = new CurrentExperimentConstants();
         }
         return GridView.instance;
     }
@@ -25,25 +26,29 @@ class GridView { // SINGLETON
               let shade = greenbug.stomach;
               this.ctx.fillStyle = "rgb(0, 140, 0)";
               this.ctx.fillRect(i * 30 + 8, j * 30 + 8, 15, 15);
-              this.ctx.fillStyle = "rgb(0, " + shade/2 + ", 0)";
+              this.ctx.fillStyle = "rgb(0, " + shade/Math.pow(2, this.cec.greenbugBirthFactor) + ", 0)";
               this.ctx.fillRect(i * 30 + 11, j * 30 + 11, 9, 9);
             } else if (this.vc.showBluebug && grid.rows[i][j].agent != null && grid.rows[i][j].agent.type === 'bluebug') {
               let bluebug = grid.rows[i][j].agent;
               let shade = bluebug.stomach;
               this.ctx.fillStyle = "rgb(0, 0, 140)";
               this.ctx.fillRect(i * 30 + 8, j * 30 + 8, 15, 15);
-              this.ctx.fillStyle = "rgb(0, 0, " + shade/2 + ")";
+              this.ctx.fillStyle = "rgb(0, 0, " + shade/Math.pow(2, this.cec.bluebugBirthFactor) + ")";
               this.ctx.fillRect(i * 30 + 11, j * 30 + 11, 9, 9);
             } else if (this.vc.showRedmuncher && grid.rows[i][j].agent != null && grid.rows[i][j].agent.type === 'redmuncher') {
               let redmuncher = grid.rows[i][j].agent;
               let shade = redmuncher.stomach;
               this.ctx.fillStyle = "rgb(140, 0, 0)";
               this.ctx.fillRect(i * 30 + 8, j * 30 + 8, 15, 15);
-              this.ctx.fillStyle = "rgb(" + shade/4 + ", 0, 0)";
+              this.ctx.fillStyle = "rgb(" + shade/Math.pow(2, this.cec.redmuncherBirthFactor) + ", 0, 0)";
               this.ctx.fillRect(i * 30 + 11, j * 30 + 11, 9, 9);
             }
     
           }
         }
     };
+
+    clear() {
+      this.ctx.clearRect(0, 0, this.c.width, this.c.height);
+    }
 }

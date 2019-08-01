@@ -30,9 +30,9 @@ class GooLogic {
         greenPenalty -= greenMinusBlue
       }
 
-      grid.rows[i][j].state.red = Math.floor(grid.rows[i][j].state.red * Math.pow(.05, redPenalty));
-      grid.rows[i][j].state.green = Math.floor(grid.rows[i][j].state.green * Math.pow(.99, greenPenalty));
-      grid.rows[i][j].state.blue = Math.floor(grid.rows[i][j].state.blue * Math.pow(.3, bluePenalty));
+      grid.rows[i][j].state.red = Math.floor(grid.rows[i][j].state.red * Math.pow(.3, redPenalty/7));
+      grid.rows[i][j].state.green = Math.floor(grid.rows[i][j].state.green * Math.pow(.9, greenPenalty/7));
+      grid.rows[i][j].state.blue = Math.floor(grid.rows[i][j].state.blue * Math.pow(.8, bluePenalty/7));
 
       let chg = 0;
 
@@ -41,12 +41,12 @@ class GooLogic {
         // case 0: chg = 0; break;
         case 0: chg = 9; break;
         case 1: chg = 8; break;
-        case 2: chg = 4; break;
-        case 3: chg = 3; break;
-        case 4: chg = 2; break;
-        case 5: chg = 1; break;
-        case 6: chg = 0; break;
-        case 7: chg = -1; break;
+        case 2: chg = 6; break;
+        case 3: chg = 4; break;
+        case 4: chg = 3; break;
+        case 5: chg = 2; break;
+        case 6: chg = 1; break;
+        case 7: chg = 0; break;
         default: chg = -2;
       }
       grid.rows[i][j].state.green += chg;
@@ -72,14 +72,14 @@ class GooLogic {
       }
 
       let redNeighborTotal = neighborTotals[i][j].red;
-      switch (Math.floor(redNeighborTotal / 200)) {
-        case 0: chg = 14; break;
-        case 1: chg = 11; break;
-        case 2: chg = 7; break;
-        case 3: chg = 5; break;
-        case 4: chg = 33; break;
+      switch (Math.floor(redNeighborTotal / 250)) {
+        case 0: chg = 12; break;
+        case 1: chg = 9; break;
+        case 2: chg = 6; break;
+        case 3: chg = 4; break;
+        case 4: chg = 24; break;
         case 5: chg = -1; break;
-        case 6: chg = 4; break;
+        case 6: chg = 3; break;
         case 7: chg = 5; break;
         default: chg = -55;
       }

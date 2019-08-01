@@ -3,6 +3,7 @@ class BugLogic {
       if (!BugLogic.instance) {
         BugLogic.instance = this;
         this.vc = new ViewControl();
+        this.cec = new CurrentExperimentConstants();
       }
       return BugLogic.instance;
   }
@@ -15,13 +16,13 @@ class BugLogic {
       this.doSharedBugLogic(grid, greenbug, i, j);
 
       if (grid.rows[i][j].state.green > 0) {
-        greenbug.stomach += Math.min(66, grid.rows[i][j].state.green);
-        grid.rows[i][j].state.green -= Math.min(66, grid.rows[i][j].state.green);
+        greenbug.stomach += Math.min(this.cec.greenbugGrazeLimit, grid.rows[i][j].state.green);
+        grid.rows[i][j].state.green -= Math.min(this.cec.greenbugGrazeLimit, grid.rows[i][j].state.green);
       }
-      greenbug.stomach -= 19;
+      greenbug.stomach -= this.cec.greenbugMetabolism;
       grid.rows[i][j].agent = null;
       let willReproduce = false;
-      if (greenbug.stomach > 511) {
+      if (greenbug.stomach > Math.pow(2, this.cec.birthFactorShift + this.cec.greenbugBirthFactor)) {
         willReproduce = true;
       }
       if (greenbug.stomach > 0) { // RIP greenbug if empty stomach, otherwise it moves instead of dies
@@ -33,10 +34,10 @@ class BugLogic {
             let baby = {
               type: 'greenbug',
               done: true, // "summoning sickness!"
-              stomach: 60
+              stomach: this.cec.greenbugBabyStomach
             };
             this.vc.numGreenbugs++; // it seems unfortunate that this logic must live here for now
-            greenbug.stomach = 80;
+            greenbug.stomach = this.cec.greenbugStartStomach;
             grid.rows[i][j].agent = baby;
             agents.push(baby);
           }
@@ -52,13 +53,13 @@ class BugLogic {
       this.doSharedBugLogic(grid, bluebug, i, j);
 
       if (grid.rows[i][j].state.blue > 0) {
-        bluebug.stomach += Math.min(55, grid.rows[i][j].state.blue);
-        grid.rows[i][j].state.blue -= Math.min(55, grid.rows[i][j].state.blue);
+        bluebug.stomach += Math.min(this.cec.bluebugGrazeLimit, grid.rows[i][j].state.blue);
+        grid.rows[i][j].state.blue -= Math.min(this.cec.bluebugGrazeLimit, grid.rows[i][j].state.blue);
       }
-      bluebug.stomach -= 14;
+      bluebug.stomach -= this.cec.bluebugMetabolism;
       grid.rows[i][j].agent = null;
       let willReproduce = false;
-      if (bluebug.stomach > 511) {
+      if (bluebug.stomach > Math.pow(2, this.cec.birthFactorShift + this.cec.bluebugBirthFactor)) {
         willReproduce = true;
       }
       if (bluebug.stomach > 0) { // RIP bluebug if empty stomach, otherwise it moves instead of dies
@@ -75,11 +76,11 @@ class BugLogic {
             let baby = {
               type: 'bluebug',
               done: true, // "summoning sickness!"
-              stomach: 115,
+              stomach: this.cec.bluebugBabyStomach,
               direction: 1
             };
             this.vc.numBluebugs++; // it seems unfortunate that this logic must live here for now
-            bluebug.stomach = 120;
+            bluebug.stomach = this.cec.bluebugStartStomach;
             bluebug.direction = 0;
             grid.rows[i][j].agent = baby;
             agents.push(baby);

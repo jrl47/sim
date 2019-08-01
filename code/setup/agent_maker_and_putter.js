@@ -3,40 +3,37 @@ class AgentMakerAndPutter {
         if (!AgentMakerAndPutter.instance) {
             AgentMakerAndPutter.instance = this;
             this.vc = new ViewControl();
+            this.cec = new CurrentExperimentConstants();
         }
         return AgentMakerAndPutter.instance;
     }
     makeAgentConfig0() {
         let agents = [];
 
-        let NUM_INITIAL_GREENBUGS = 16;
-        let NUM_INITIAL_BLUEBUGS = 24;
-        let NUM_INITIAL_REDMUNCHERS = 5;
+        this.vc.numGreenbugs = this.cec.numInitialGreenbugs;
+        this.vc.numBluebugs = this.cec.numInitialBluebugs;
+        this.vc.numRedmunchers = this.cec.numInitialRedmunchers;
 
-        this.vc.numGreenbugs = NUM_INITIAL_GREENBUGS;
-        this.vc.numBluebugs = NUM_INITIAL_BLUEBUGS;
-        this.vc.numRedmunchers = NUM_INITIAL_REDMUNCHERS;
-
-        for (let i = 0; i < NUM_INITIAL_GREENBUGS; i++) {
+        for (let i = 0; i < this.cec.numInitialGreenbugs; i++) {
             agents.push({
                 type: 'greenbug',
                 done: false,
-                stomach: 80
+                stomach: this.cec.greenbugStartStomach
             })
         }
-        for (let i = 0; i < NUM_INITIAL_BLUEBUGS; i++) {
+        for (let i = 0; i < this.cec.numInitialBluebugs; i++) {
             agents.push({
                 type: 'bluebug',
                 done: false,
-                stomach: 120,
+                stomach: this.cec.bluebugStartStomach,
                 direction: 1
             })
         }
-        for (let i = 0; i < NUM_INITIAL_REDMUNCHERS; i++) {
+        for (let i = 0; i < this.cec.numInitialRedmunchers; i++) {
             agents.push({
                 type: 'redmuncher',
                 done: false,
-                stomach: 900
+                stomach: this.cec.redmuncherStartStomach
             })
         }
 
@@ -47,8 +44,8 @@ class AgentMakerAndPutter {
             let x = randInt(0, grid.size - 1);
             let y = randInt(0, grid.size - 1);
             while (grid.rows[x][y].agent !== null) {
-                x = randInt(0, grid.size);
-                y = randInt(0, grid.size);
+                x = randInt(0, grid.size - 1);
+                y = randInt(0, grid.size - 1);
             }
             grid.rows[x][y].agent = agents[i];
         }
