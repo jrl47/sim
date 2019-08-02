@@ -30,9 +30,9 @@ class GooLogic {
         greenPenalty -= greenMinusBlue
       }
 
-      grid.rows[i][j].state.red = Math.floor(grid.rows[i][j].state.red * Math.pow(.3, redPenalty/7));
-      grid.rows[i][j].state.green = Math.floor(grid.rows[i][j].state.green * Math.pow(.9, greenPenalty/7));
-      grid.rows[i][j].state.blue = Math.floor(grid.rows[i][j].state.blue * Math.pow(.8, bluePenalty/7));
+      grid.rows[i][j].state.red = Math.floor(grid.rows[i][j].state.red * Math.pow(.25, redPenalty/10));
+      grid.rows[i][j].state.green = Math.floor(grid.rows[i][j].state.green * Math.pow(.9, greenPenalty/10));
+      grid.rows[i][j].state.blue = Math.floor(grid.rows[i][j].state.blue * Math.pow(.75, bluePenalty/10));
 
       let chg = 0;
 
