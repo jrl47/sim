@@ -44,7 +44,34 @@ class MuncherLogic {
         willReproduce = true;
       }
       if (redmuncher.stomach > 0) { // RIP redmuncher if empty stomach, otherwise it moves instead of dies
-        let direction = randInt(0, 3); // AI is same as greenbug
+        let direction = randInt(0, 3); // AI is same as unless it sees something
+
+        // "Vision"
+        // "far orth" (lowest priority)
+        let pursueDirections = [0, 1, 2, 3];
+        for (let k = 0; k < ORTH_SHIFTS_X_1.length; k++) {
+          if (grid.rows[mod(i + ORTH_SHIFTS_X_1[k], grid.size)][mod(j + ORTH_SHIFTS_Y_1[k], grid.size)].agent !== null &&
+            grid.rows[mod(i + ORTH_SHIFTS_X_1[k], grid.size)][mod(j + ORTH_SHIFTS_Y_1[k], grid.size)].agent.type === 'bluebug') {
+              direction = pursueDirections[k];
+          }
+        }
+        // diag (arbitrarily chose the 135 degree angle "runaway angle" convention for it)
+        pursueDirections = [0, 2, 3, 1];
+        for (let k = 0; k < DIAG_SHIFTS_X.length; k++) {
+          if (grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)].agent !== null &&
+            grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)].agent.type === 'bluebug') {
+              direction = pursueDirections[k];
+          }
+        }
+        // orth (overrides diag)
+        pursueDirections = [0, 1, 2, 3];
+        for (let k = 0; k < ORTH_SHIFTS_X.length; k++) {
+          if (grid.rows[mod(i + ORTH_SHIFTS_X[k], grid.size)][mod(j + ORTH_SHIFTS_Y[k], grid.size)].agent !== null &&
+            grid.rows[mod(i + ORTH_SHIFTS_X[k], grid.size)][mod(j + ORTH_SHIFTS_Y[k], grid.size)].agent.type === 'bluebug') {
+              direction = pursueDirections[k];
+          }
+        }
+
         let destinationCell = grid.rows[mod(i + ORTH_SHIFTS_X[direction], grid.size)][mod(j + ORTH_SHIFTS_Y[direction], grid.size)];
         if (destinationCell.agent === null) {
           destinationCell.agent = redmuncher;
