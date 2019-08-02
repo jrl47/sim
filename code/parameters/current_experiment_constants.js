@@ -7,9 +7,9 @@ class CurrentExperimentConstants {
             this.numInitialRedmunchers = 4;
             this.greenbugStartStomach = 520;
             this.greenbugBabyStomach = 500;
-            this.greenbugMetabolism = 16;
+            this.greenbugMetabolism = 15;
             this.greenbugGrazeLimit = 82;
-            this.greenbugBirthFactor = 1.6;
+            this.greenbugBirthFactor = 1.5;
             this.bluebugStartStomach = 230;
             this.bluebugBabyStomach = 150;
             this.bluebugMetabolism = 7.5;
@@ -20,7 +20,7 @@ class CurrentExperimentConstants {
             this.redmuncherMetabolism = 38;
             this.redmuncherGrazeLimit = 115;
             this.redmuncherBirthFactor = 3.1;
-            this.redmuncherStomachFactor = 60;
+            this.redmuncherStomachFactor = 64;
             this.birthFactorShift = 8;
         }
         return CurrentExperimentConstants.instance;
