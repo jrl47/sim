@@ -6,10 +6,10 @@ class CurrentExperimentConstants {
             this.numInitialBluebugs = 35;
             this.numInitialRedmunchers = 4;
             this.greenbugStartStomach = 520;
-            this.greenbugBabyStomach = 480;
-            this.greenbugMetabolism = 17.5;
-            this.greenbugGrazeLimit = 81;
-            this.greenbugBirthFactor = 1.7;
+            this.greenbugBabyStomach = 500;
+            this.greenbugMetabolism = 16;
+            this.greenbugGrazeLimit = 82;
+            this.greenbugBirthFactor = 1.6;
             this.bluebugStartStomach = 230;
             this.bluebugBabyStomach = 150;
             this.bluebugMetabolism = 7.5;
