@@ -28,7 +28,7 @@ class GridMaker {
         return grid;
     }
     makeGridSetup2() {
-        let grid = new Grid(20);
+        let grid = new Grid(15);
             for (let i = 0; i < grid.size; i++) {
                 for (let j = 0; j < grid.size; j++) {
                     grid.rows[i][j].state.blue = randInt(0, 255);
