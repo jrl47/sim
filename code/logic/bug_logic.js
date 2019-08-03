@@ -29,20 +29,49 @@ class BugLogic {
         let direction = randInt(0, 3);
 
         // "Vision"
-        // diag (arbitrarily chose the 135 degree angle "runaway angle" convention for it)
-        let runDirections = [2, 0, 1, 3];
-        for (let k = 0; k < DIAG_SHIFTS_X.length; k++) {
-          if (grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)].agent !== null &&
-            grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)].agent.type === 'redmuncher') {
-              direction = runDirections[k];
+        let done = false;
+        // orth
+        let runDirections = [1, 0, 3, 2];
+        if (!done) {
+          for (let k = 0; k < ORTH_SHIFTS_X.length; k++) {
+            if (grid.rows[mod(i + ORTH_SHIFTS_X[k], grid.size)][mod(j + ORTH_SHIFTS_Y[k], grid.size)].agent !== null &&
+              grid.rows[mod(i + ORTH_SHIFTS_X[k], grid.size)][mod(j + ORTH_SHIFTS_Y[k], grid.size)].agent.type === 'redmuncher') {
+                direction = runDirections[k];
+                done = true;
+            }
           }
         }
-        // orth (overrides diag)
-        runDirections = [1, 0, 3, 2];
-        for (let k = 0; k < ORTH_SHIFTS_X.length; k++) {
-          if (grid.rows[mod(i + ORTH_SHIFTS_X[k], grid.size)][mod(j + ORTH_SHIFTS_Y[k], grid.size)].agent !== null &&
-            grid.rows[mod(i + ORTH_SHIFTS_X[k], grid.size)][mod(j + ORTH_SHIFTS_Y[k], grid.size)].agent.type === 'redmuncher') {
-              direction = runDirections[k];
+        // diag (arbitrarily chose the 135 degree angle "runaway angle" convention for it)
+        if (!done) {
+          runDirections = [2, 0, 1, 3];
+          for (let k = 0; k < DIAG_SHIFTS_X.length; k++) {
+            if (grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)].agent !== null &&
+              grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)].agent.type === 'redmuncher') {
+                direction = runDirections[k];
+                done = true;
+            }
+          }
+        }
+        // "far orth" (low priority)
+        if (!done) {
+          runDirections = [1, 0, 3, 2];
+          for (let k = 0; k < ORTH_SHIFTS_X_1.length; k++) {
+            if (grid.rows[mod(i + ORTH_SHIFTS_X_1[k], grid.size)][mod(j + ORTH_SHIFTS_Y_1[k], grid.size)].agent !== null &&
+              grid.rows[mod(i + ORTH_SHIFTS_X_1[k], grid.size)][mod(j + ORTH_SHIFTS_Y_1[k], grid.size)].agent.type === 'redmuncher') {
+                direction = runDirections[k];
+                done = true;
+            }
+          }
+        }
+        // "far diag" (lowest priority)
+        if (!done) {
+          let runDirections = [2, 0, 1, 3];
+          for (let k = 0; k < DIAG_SHIFTS_X_1.length; k++) {
+            if (grid.rows[mod(i + DIAG_SHIFTS_X_1[k], grid.size)][mod(j + DIAG_SHIFTS_Y_1[k], grid.size)].agent !== null &&
+              grid.rows[mod(i + DIAG_SHIFTS_X_1[k], grid.size)][mod(j + DIAG_SHIFTS_Y_1[k], grid.size)].agent.type === 'redmuncher') {
+                direction = runDirections[k];
+                done = true;
+            }
           }
         }
 
@@ -88,36 +117,47 @@ class BugLogic {
         let direction = bluebug.direction;
 
         // "Vision"
-        // "far diag" (lowest priority)
-        let runDirections = [2, 0, 1, 3];
-        for (let k = 0; k < DIAG_SHIFTS_X_1.length; k++) {
-          if (grid.rows[mod(i + DIAG_SHIFTS_X_1[k], grid.size)][mod(j + DIAG_SHIFTS_Y_1[k], grid.size)].agent !== null &&
-            grid.rows[mod(i + DIAG_SHIFTS_X_1[k], grid.size)][mod(j + DIAG_SHIFTS_Y_1[k], grid.size)].agent.type === 'redmuncher') {
-              direction = runDirections[k];
-          }
-        }
-        // "far orth" (low priority)
-        runDirections = [1, 0, 3, 2];
-        for (let k = 0; k < ORTH_SHIFTS_X_1.length; k++) {
-          if (grid.rows[mod(i + ORTH_SHIFTS_X_1[k], grid.size)][mod(j + ORTH_SHIFTS_Y_1[k], grid.size)].agent !== null &&
-            grid.rows[mod(i + ORTH_SHIFTS_X_1[k], grid.size)][mod(j + ORTH_SHIFTS_Y_1[k], grid.size)].agent.type === 'redmuncher') {
-              direction = runDirections[k];
-          }
-        }
-        // diag (arbitrarily chose the 135 degree angle "runaway angle" convention for it)
-        runDirections = [2, 0, 1, 3];
-        for (let k = 0; k < DIAG_SHIFTS_X.length; k++) {
-          if (grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)].agent !== null &&
-            grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)].agent.type === 'redmuncher') {
-              direction = runDirections[k];
-          }
-        }
-        // orth (overrides diag)
-        runDirections = [1, 0, 3, 2];
+        let done = false;
+        // orth
+        let runDirections = [1, 0, 3, 2];
         for (let k = 0; k < ORTH_SHIFTS_X.length; k++) {
           if (grid.rows[mod(i + ORTH_SHIFTS_X[k], grid.size)][mod(j + ORTH_SHIFTS_Y[k], grid.size)].agent !== null &&
             grid.rows[mod(i + ORTH_SHIFTS_X[k], grid.size)][mod(j + ORTH_SHIFTS_Y[k], grid.size)].agent.type === 'redmuncher') {
               direction = runDirections[k];
+              done = true;
+          }
+        }
+        // diag (arbitrarily chose the 135 degree angle "runaway angle" convention for it)
+        if (!done) {
+          runDirections = [2, 0, 1, 3];
+          for (let k = 0; k < DIAG_SHIFTS_X.length; k++) {
+            if (grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)].agent !== null &&
+              grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)].agent.type === 'redmuncher') {
+                direction = runDirections[k];
+                done = true;
+            }
+          }
+        }
+        // "far orth"
+        if (!done) {
+          runDirections = [1, 0, 3, 2];
+          for (let k = 0; k < ORTH_SHIFTS_X_1.length; k++) {
+            if (grid.rows[mod(i + ORTH_SHIFTS_X_1[k], grid.size)][mod(j + ORTH_SHIFTS_Y_1[k], grid.size)].agent !== null &&
+              grid.rows[mod(i + ORTH_SHIFTS_X_1[k], grid.size)][mod(j + ORTH_SHIFTS_Y_1[k], grid.size)].agent.type === 'redmuncher') {
+                direction = runDirections[k];
+                done = true;
+            }
+          }
+        }
+        // "far diag"
+        if (!done) {
+          let runDirections = [2, 0, 1, 3];
+          for (let k = 0; k < DIAG_SHIFTS_X_1.length; k++) {
+            if (grid.rows[mod(i + DIAG_SHIFTS_X_1[k], grid.size)][mod(j + DIAG_SHIFTS_Y_1[k], grid.size)].agent !== null &&
+              grid.rows[mod(i + DIAG_SHIFTS_X_1[k], grid.size)][mod(j + DIAG_SHIFTS_Y_1[k], grid.size)].agent.type === 'redmuncher') {
+                direction = runDirections[k];
+                done = true;
+            }
           }
         }
 

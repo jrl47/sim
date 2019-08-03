@@ -47,38 +47,87 @@ class MuncherLogic {
         let direction = randInt(0, 3); // AI is same as unless it sees something
 
         // "Vision"
-        // "far orth, for greenbugs" (lowestest priority)
+        let done = false;
+        // orth
         let pursueDirections = [0, 1, 2, 3];
-        for (let k = 0; k < ORTH_SHIFTS_X_1.length; k++) {
-          if (grid.rows[mod(i + ORTH_SHIFTS_X_1[k], grid.size)][mod(j + ORTH_SHIFTS_Y_1[k], grid.size)].agent !== null &&
-            grid.rows[mod(i + ORTH_SHIFTS_X_1[k], grid.size)][mod(j + ORTH_SHIFTS_Y_1[k], grid.size)].agent.type === 'green') {
-              direction = pursueDirections[k];
-          }
-        }
-        // "far orth" (lowest priority)
-        pursueDirections = [0, 1, 2, 3];
-        for (let k = 0; k < ORTH_SHIFTS_X_1.length; k++) {
-          if (grid.rows[mod(i + ORTH_SHIFTS_X_1[k], grid.size)][mod(j + ORTH_SHIFTS_Y_1[k], grid.size)].agent !== null &&
-            grid.rows[mod(i + ORTH_SHIFTS_X_1[k], grid.size)][mod(j + ORTH_SHIFTS_Y_1[k], grid.size)].agent.type === 'bluebug') {
-              direction = pursueDirections[k];
+        if (!done) {
+          for (let k = 0; k < ORTH_SHIFTS_X.length; k++) {
+            if (grid.rows[mod(i + ORTH_SHIFTS_X[k], grid.size)][mod(j + ORTH_SHIFTS_Y[k], grid.size)].agent !== null &&
+              grid.rows[mod(i + ORTH_SHIFTS_X[k], grid.size)][mod(j + ORTH_SHIFTS_Y[k], grid.size)].agent.type === 'bluebug') {
+                direction = pursueDirections[k];
+                done = true;
+            }
           }
         }
         // diag (arbitrarily chose the 135 degree angle "runaway angle" convention for it)
-        pursueDirections = [0, 2, 3, 1];
-        for (let k = 0; k < DIAG_SHIFTS_X.length; k++) {
-          if (grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)].agent !== null &&
-            grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)].agent.type === 'bluebug') {
-              direction = pursueDirections[k];
+        if (!done) {
+          pursueDirections = [0, 2, 3, 1];
+          for (let k = 0; k < DIAG_SHIFTS_X.length; k++) {
+            if (grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)].agent !== null &&
+              grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)].agent.type === 'bluebug') {
+                direction = pursueDirections[k];
+                done = true;
+            }
           }
         }
-        // orth (overrides diag)
-        pursueDirections = [0, 1, 2, 3];
-        for (let k = 0; k < ORTH_SHIFTS_X.length; k++) {
-          if (grid.rows[mod(i + ORTH_SHIFTS_X[k], grid.size)][mod(j + ORTH_SHIFTS_Y[k], grid.size)].agent !== null &&
-            grid.rows[mod(i + ORTH_SHIFTS_X[k], grid.size)][mod(j + ORTH_SHIFTS_Y[k], grid.size)].agent.type === 'bluebug') {
-              direction = pursueDirections[k];
+        // "far orth, for bluebugs" 
+        if (!done) {
+          pursueDirections = [0, 1, 2, 3];
+          for (let k = 0; k < ORTH_SHIFTS_X_1.length; k++) {
+            if (grid.rows[mod(i + ORTH_SHIFTS_X_1[k], grid.size)][mod(j + ORTH_SHIFTS_Y_1[k], grid.size)].agent !== null &&
+              grid.rows[mod(i + ORTH_SHIFTS_X_1[k], grid.size)][mod(j + ORTH_SHIFTS_Y_1[k], grid.size)].agent.type === 'bluebug') {
+                direction = pursueDirections[k];
+                done = true;
+            }
           }
         }
+        // "diag, for greenbugs"
+        if (!done) {
+          pursueDirections = [0, 2, 3, 1];
+          for (let k = 0; k < DIAG_SHIFTS_X.length; k++) {
+            if (grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)].agent !== null &&
+              grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)].agent.type === 'greenbug') {
+                direction = pursueDirections[k];
+                done = true;
+            }
+          }
+        }
+        // "far orth, for greenbugs"
+        if (!done) {
+          pursueDirections = [0, 1, 2, 3];
+          for (let k = 0; k < ORTH_SHIFTS_X_1.length; k++) {
+            if (grid.rows[mod(i + ORTH_SHIFTS_X_1[k], grid.size)][mod(j + ORTH_SHIFTS_Y_1[k], grid.size)].agent !== null &&
+              grid.rows[mod(i + ORTH_SHIFTS_X_1[k], grid.size)][mod(j + ORTH_SHIFTS_Y_1[k], grid.size)].agent.type === 'greenbug') {
+                direction = pursueDirections[k];
+                done = true;
+            }
+          }
+        }
+        // "far diag, for all bugs"
+        if (!done) {
+          pursueDirections = [0, 2, 3, 1];
+          for (let k = 0; k < DIAG_SHIFTS_X_1.length; k++) {
+            if (grid.rows[mod(i + DIAG_SHIFTS_X_1[k], grid.size)][mod(j + DIAG_SHIFTS_Y_1[k], grid.size)].agent !== null &&
+              (grid.rows[mod(i + DIAG_SHIFTS_X_1[k], grid.size)][mod(j + DIAG_SHIFTS_Y_1[k], grid.size)].agent.type === 'greenbug' ||
+              grid.rows[mod(i + DIAG_SHIFTS_X_1[k], grid.size)][mod(j + DIAG_SHIFTS_Y_1[k], grid.size)].agent.type === 'bluebug')) {
+                direction = pursueDirections[k];
+                done = true;
+            }
+          }
+        }
+        // "far far orth, for all bugs" (lowestestestestest priority)
+        if (!done) {
+          pursueDirections = [0, 1, 2, 3];
+          for (let k = 0; k < ORTH_SHIFTS_X_2.length; k++) {
+            if (grid.rows[mod(i + ORTH_SHIFTS_X_2[k], grid.size)][mod(j + ORTH_SHIFTS_Y_2[k], grid.size)].agent !== null &&
+              (grid.rows[mod(i + ORTH_SHIFTS_X_2[k], grid.size)][mod(j + ORTH_SHIFTS_Y_2[k], grid.size)].agent.type === 'greenbug' ||
+              grid.rows[mod(i + ORTH_SHIFTS_X_2[k], grid.size)][mod(j + ORTH_SHIFTS_Y_2[k], grid.size)].agent.type === 'bluebug')) {
+                direction = pursueDirections[k];
+                done = true;
+            }
+          }
+        }
+
 
         let destinationCell = grid.rows[mod(i + ORTH_SHIFTS_X[direction], grid.size)][mod(j + ORTH_SHIFTS_Y[direction], grid.size)];
         if (destinationCell.agent === null) {
