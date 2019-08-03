@@ -47,8 +47,16 @@ class MuncherLogic {
         let direction = randInt(0, 3); // AI is same as unless it sees something
 
         // "Vision"
-        // "far orth" (lowest priority)
+        // "far orth, for greenbugs" (lowestest priority)
         let pursueDirections = [0, 1, 2, 3];
+        for (let k = 0; k < ORTH_SHIFTS_X_1.length; k++) {
+          if (grid.rows[mod(i + ORTH_SHIFTS_X_1[k], grid.size)][mod(j + ORTH_SHIFTS_Y_1[k], grid.size)].agent !== null &&
+            grid.rows[mod(i + ORTH_SHIFTS_X_1[k], grid.size)][mod(j + ORTH_SHIFTS_Y_1[k], grid.size)].agent.type === 'green') {
+              direction = pursueDirections[k];
+          }
+        }
+        // "far orth" (lowest priority)
+        pursueDirections = [0, 1, 2, 3];
         for (let k = 0; k < ORTH_SHIFTS_X_1.length; k++) {
           if (grid.rows[mod(i + ORTH_SHIFTS_X_1[k], grid.size)][mod(j + ORTH_SHIFTS_Y_1[k], grid.size)].agent !== null &&
             grid.rows[mod(i + ORTH_SHIFTS_X_1[k], grid.size)][mod(j + ORTH_SHIFTS_Y_1[k], grid.size)].agent.type === 'bluebug') {

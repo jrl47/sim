@@ -18,7 +18,7 @@ class Timer { // SINGLETON
             this.ticks = 0;
 
             this.expected = -1;
-            this.interval = 33;
+            this.interval = 8;
 
             this.unpause();
         }
