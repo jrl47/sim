@@ -16,15 +16,15 @@ class MuncherLogic {
       this.doSharedMuncherLogic(grid, redmuncher, i, j);
 
       if (grid.rows[i][j].state.red > 0) {
-        redmuncher.stomach += Math.min(this.cec.redmuncherGrazeLimit, grid.rows[i][j].state.red);
-        grid.rows[i][j].state.red -= Math.min(this.cec.redmuncherGrazeLimit, grid.rows[i][j].state.red);
+        redmuncher.stomach += Math.min(this.cec.redmuncher.grazeLimit, grid.rows[i][j].state.red);
+        grid.rows[i][j].state.red -= Math.min(this.cec.redmuncher.grazeLimit, grid.rows[i][j].state.red);
       }
       let neighborCell = -1;
       for(let k = 0; k < 4; k++) {
           neighborCell = grid.rows[mod(i + ORTH_SHIFTS_X[k], grid.size)][mod(j + ORTH_SHIFTS_Y[k], grid.size)];
           if(neighborCell.agent !== null && (neighborCell.agent.type === 'greenbug' || neighborCell.agent.type === 'bluebug')) {
               neighborCell.agent.dead = true; // got munched
-              redmuncher.stomach += neighborCell.agent.stomach/this.cec.redmuncherStomachFactor;
+              redmuncher.stomach += neighborCell.agent.stomach/this.cec.redmuncher.stomachFactor;
               neighborCell.agent = null; // should this kind of thing be paired with the general death cleanup logic?
           }
       }
@@ -32,15 +32,15 @@ class MuncherLogic {
           neighborCell = grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)];
           if(neighborCell.agent !== null && (neighborCell.agent.type === 'greenbug' || neighborCell.agent.type === 'bluebug')) {
               neighborCell.agent.dead = true; // got munched
-              redmuncher.stomach += neighborCell.agent.stomach/this.cec.redmuncherStomachFactor;
+              redmuncher.stomach += neighborCell.agent.stomach/this.cec.redmuncher.stomachFactor;
               neighborCell.agent = null; // should this kind of thing be paired with the general death cleanup logic?
           }
       }
 
-      redmuncher.stomach -= this.cec.redmuncherMetabolism;
+      redmuncher.stomach -= this.cec.redmuncher.metabolism;
       grid.rows[i][j].agent = null;
       let willReproduce = false;
-      if (redmuncher.stomach > Math.pow(2, this.cec.birthFactorShift + this.cec.redmuncherBirthFactor)) {
+      if (redmuncher.stomach > Math.pow(2, this.cec.birthFactorShift + this.cec.redmuncher.birthFactor)) {
         willReproduce = true;
       }
       if (redmuncher.stomach > 0) { // RIP redmuncher if empty stomach, otherwise it moves instead of dies
@@ -136,10 +136,10 @@ class MuncherLogic {
             let baby = {
               type: 'redmuncher',
               done: true, // "summoning sickness!"
-              stomach: this.cec.redmuncherBabyStomach
+              stomach: this.cec.redmuncher.babyStomach
             };
             this.vc.numRedmunchers++; // it seems unfortunate that this logic must live here for now
-            redmuncher.stomach = this.cec.redmuncherStartStomach;
+            redmuncher.stomach = this.cec.redmuncher.startStomach;
             grid.rows[i][j].agent = baby;
             munchers.push(baby);
           }

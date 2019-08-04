@@ -26,21 +26,21 @@ class GridView { // SINGLETON
               let shade = greenbug.stomach;
               this.ctx.fillStyle = "rgb(0, 140, 0)";
               this.ctx.fillRect(i * 30 + 8, j * 30 + 8, 15, 15);
-              this.ctx.fillStyle = "rgb(0, " + shade/Math.pow(2, this.cec.greenbugBirthFactor) + ", 0)";
+              this.ctx.fillStyle = "rgb(0, " + shade/Math.pow(2, this.cec.greenbug.birthFactor) + ", 0)";
               this.ctx.fillRect(i * 30 + 11, j * 30 + 11, 9, 9);
             } else if (this.vc.showBluebug && grid.rows[i][j].agent != null && grid.rows[i][j].agent.type === 'bluebug') {
               let bluebug = grid.rows[i][j].agent;
               let shade = bluebug.stomach;
               this.ctx.fillStyle = "rgb(0, 0, 140)";
               this.ctx.fillRect(i * 30 + 8, j * 30 + 8, 15, 15);
-              this.ctx.fillStyle = "rgb(0, 0, " + shade/Math.pow(2, this.cec.bluebugBirthFactor) + ")";
+              this.ctx.fillStyle = "rgb(0, 0, " + shade/Math.pow(2, this.cec.bluebug.birthFactor) + ")";
               this.ctx.fillRect(i * 30 + 11, j * 30 + 11, 9, 9);
             } else if (this.vc.showRedmuncher && grid.rows[i][j].agent != null && grid.rows[i][j].agent.type === 'redmuncher') {
               let redmuncher = grid.rows[i][j].agent;
               let shade = redmuncher.stomach;
               this.ctx.fillStyle = "rgb(140, 0, 0)";
               this.ctx.fillRect(i * 30 + 8, j * 30 + 8, 15, 15);
-              this.ctx.fillStyle = "rgb(" + shade/Math.pow(2, this.cec.redmuncherBirthFactor) + ", 0, 0)";
+              this.ctx.fillStyle = "rgb(" + shade/Math.pow(2, this.cec.redmuncher.birthFactor) + ", 0, 0)";
               this.ctx.fillRect(i * 30 + 11, j * 30 + 11, 9, 9);
             }
     

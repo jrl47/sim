@@ -21,14 +21,14 @@ class AgentMakerAndPutter {
             agents.bugs.push({
                 type: 'greenbug',
                 done: false,
-                stomach: this.cec.greenbugStartStomach
+                stomach: this.cec.greenbug.startStomach
             })
         }
         for (let i = 0; i < this.cec.numInitialBluebugs; i++) {
             agents.bugs.push({
                 type: 'bluebug',
                 done: false,
-                stomach: this.cec.bluebugStartStomach,
+                stomach: this.cec.bluebug.startStomach,
                 direction: 1
             })
         }
@@ -36,7 +36,7 @@ class AgentMakerAndPutter {
             agents.munchers.push({
                 type: 'redmuncher',
                 done: false,
-                stomach: this.cec.redmuncherStartStomach
+                stomach: this.cec.redmuncher.startStomach
             })
         }
 
