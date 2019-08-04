@@ -16,25 +16,35 @@ class Stepper {
         for(let i = 0; i < this.grid.size; i++) {
             for(let j = 0; j < this.grid.size; j++) {
                 this.gooLogic.doGooLogic(this.grid, neighborTotals, i, j);
-                this.bugLogic.doBugLogic(this.grid, this.agents, i, j);
-                this.muncherLogic.doMuncherLogic(this.grid, this.agents, i, j); // MUST come after bug logic unless we want to worry about removal order
+                this.bugLogic.doBugLogic(this.grid, this.agents.bugs, i, j);
+                this.muncherLogic.doMuncherLogic(this.grid, this.agents.munchers, i, j); // MUST come after bug logic unless we want to worry about removal order
             }
         }
-        for (let a = 0; a < this.agents.length; a++) {
-            this.agents[a].done = false;
-            if (this.agents[a].dead) {
-                if (this.agents[a].type === "greenbug") {
-                    this.vc.numGreenbugs--;
-                } else if (this.agents[a].type === "bluebug") {
-                    this.vc.numBluebugs--;
-                } else if (this.agents[a].type === "redmuncher") {
-                    this.vc.numRedmunchers--;
-                } else {
-            
-                }
-                this.agents.splice(a, 1);
-                a--;
-            }
+        for (let a = 0; a < this.agents.bugs.length; a++) {
+          this.agents.bugs[a].done = false;
+          if (this.agents.bugs[a].dead) {
+              if (this.agents.bugs[a].type === "greenbug") {
+                  this.vc.numGreenbugs--;
+              } else if (this.agents.bugs[a].type === "bluebug") {
+                  this.vc.numBluebugs--;
+              } else {
+          
+              }
+              this.agents.bugs.splice(a, 1);
+              a--;
+          }
+        }
+        for (let a = 0; a < this.agents.munchers.length; a++) {
+          this.agents.munchers[a].done = false;
+          if (this.agents.munchers[a].dead) {
+              if (this.agents.munchers[a].type === "redmuncher") {
+                  this.vc.numRedmunchers--;
+              } else {
+          
+              }
+              this.agents.munchers.splice(a, 1);
+              a--;
+          }
         }
     }
     getNeighborTotals(grid) {

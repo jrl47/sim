@@ -8,7 +8,7 @@ amp.putAgentConfig0(grid, agents);
 
 // View Setup
 let gv = new GridView(grid);
-let avm = new AgentInfoViewAndModel(agents);
+let avm = new AgentInfoViewAndModel();
 let draw = function() {
   gv.drawGrid();
   avm.drawInfo();
@@ -68,7 +68,6 @@ let timer = new Timer(
         amp.putAgentConfig0(grid, agents);
 
         gv.grid = grid;
-        avm.agents = agents;
         gv.clear();
 
         stepper.grid = grid;

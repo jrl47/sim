@@ -12,7 +12,7 @@ class MuncherLogic {
       // TODO add more to this function once different bug types are actually Classes
   }
 
-  doRedmuncherLogic(grid, redmuncher, i, j) {
+  doRedmuncherLogic(grid, redmuncher, i, j, munchers) {
       this.doSharedMuncherLogic(grid, redmuncher, i, j);
 
       if (grid.rows[i][j].state.red > 0) {
@@ -141,7 +141,7 @@ class MuncherLogic {
             this.vc.numRedmunchers++; // it seems unfortunate that this logic must live here for now
             redmuncher.stomach = this.cec.redmuncherStartStomach;
             grid.rows[i][j].agent = baby;
-            agents.push(baby);
+            munchers.push(baby);
           }
         } else {
           grid.rows[i][j].agent = redmuncher;
@@ -151,10 +151,10 @@ class MuncherLogic {
       }
   }
 
-  doMuncherLogic(grid, agents, i, j) {
+  doMuncherLogic(grid, munchers, i, j) {
       if (grid.rows[i][j].agent !== null && grid.rows[i][j].agent.done === false) {
           if (grid.rows[i][j].agent.type === 'redmuncher') {
-              this.doRedmuncherLogic(grid, grid.rows[i][j].agent, i, j);
+              this.doRedmuncherLogic(grid, grid.rows[i][j].agent, i, j, munchers);
           }
       }
   }

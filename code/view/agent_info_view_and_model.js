@@ -1,10 +1,9 @@
 class AgentInfoViewAndModel { // SINGLETON
-    constructor(agents) {
+    constructor() {
         if (!AgentInfoViewAndModel.instance) {
             AgentInfoViewAndModel.instance = this;
             this.vc = new ViewControl();
 
-            this.agents = agents;
             this.greenGrassButton = new Button("greenGrass");
             this.greenGrassButton.initialize(
                 'greenGrass',

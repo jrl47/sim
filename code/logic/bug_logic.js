@@ -12,7 +12,7 @@ class BugLogic {
       // TODO add more to this function once different bug types are actually Classes
   }
 
-  doGreenbugLogic(grid, greenbug, i, j) {
+  doGreenbugLogic(grid, greenbug, i, j, bugs) {
       this.doSharedBugLogic(grid, greenbug, i, j);
 
       if (grid.rows[i][j].state.green > 0) {
@@ -87,7 +87,7 @@ class BugLogic {
             this.vc.numGreenbugs++; // it seems unfortunate that this logic must live here for now
             greenbug.stomach = this.cec.greenbugStartStomach;
             grid.rows[i][j].agent = baby;
-            agents.push(baby);
+            bugs.push(baby);
           }
         } else {
           grid.rows[i][j].agent = greenbug;
@@ -97,7 +97,7 @@ class BugLogic {
       }
   }
 
-  doBluebugLogic(grid, bluebug, i, j) {
+  doBluebugLogic(grid, bluebug, i, j, bugs) {
       this.doSharedBugLogic(grid, bluebug, i, j);
 
       if (grid.rows[i][j].state.blue > 0) {
@@ -177,7 +177,7 @@ class BugLogic {
             bluebug.stomach = this.cec.bluebugStartStomach;
             bluebug.direction = 0;
             grid.rows[i][j].agent = baby;
-            agents.push(baby);
+            bugs.push(baby);
           }
         } else {
           grid.rows[i][j].agent = bluebug;
@@ -188,12 +188,12 @@ class BugLogic {
       }
   }
 
-  doBugLogic(grid, agents, i, j) {
+  doBugLogic(grid, bugs, i, j) {
       if (grid.rows[i][j].agent !== null && grid.rows[i][j].agent.done === false) {
           if (grid.rows[i][j].agent.type === 'greenbug') {
-              this.doGreenbugLogic(grid, grid.rows[i][j].agent, i, j);
+              this.doGreenbugLogic(grid, grid.rows[i][j].agent, i, j, bugs);
           } else if (grid.rows[i][j].agent.type === 'bluebug') {
-              this.doBluebugLogic(grid, grid.rows[i][j].agent, i, j);
+              this.doBluebugLogic(grid, grid.rows[i][j].agent, i, j, bugs);
           }
       }
   }

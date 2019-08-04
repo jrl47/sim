@@ -8,21 +8,24 @@ class AgentMakerAndPutter {
         return AgentMakerAndPutter.instance;
     }
     makeAgentConfig0() {
-        let agents = [];
+        let agents = {
+            bugs: [],
+            munchers: []
+        };
 
         this.vc.numGreenbugs = this.cec.numInitialGreenbugs;
         this.vc.numBluebugs = this.cec.numInitialBluebugs;
         this.vc.numRedmunchers = this.cec.numInitialRedmunchers;
 
         for (let i = 0; i < this.cec.numInitialGreenbugs; i++) {
-            agents.push({
+            agents.bugs.push({
                 type: 'greenbug',
                 done: false,
                 stomach: this.cec.greenbugStartStomach
             })
         }
         for (let i = 0; i < this.cec.numInitialBluebugs; i++) {
-            agents.push({
+            agents.bugs.push({
                 type: 'bluebug',
                 done: false,
                 stomach: this.cec.bluebugStartStomach,
@@ -30,7 +33,7 @@ class AgentMakerAndPutter {
             })
         }
         for (let i = 0; i < this.cec.numInitialRedmunchers; i++) {
-            agents.push({
+            agents.munchers.push({
                 type: 'redmuncher',
                 done: false,
                 stomach: this.cec.redmuncherStartStomach
@@ -40,14 +43,23 @@ class AgentMakerAndPutter {
         return agents;
     }
     putAgentConfig0(grid, agents) {
-        for (let i = 0; i < agents.length; i++) {
+        for (let i = 0; i < agents.bugs.length; i++) {
             let x = randInt(0, grid.size - 1);
             let y = randInt(0, grid.size - 1);
             while (grid.rows[x][y].agent !== null) {
                 x = randInt(0, grid.size - 1);
                 y = randInt(0, grid.size - 1);
             }
-            grid.rows[x][y].agent = agents[i];
+            grid.rows[x][y].agent = agents.bugs[i];
+        }
+        for (let i = 0; i < agents.munchers.length; i++) {
+            let x = randInt(0, grid.size - 1);
+            let y = randInt(0, grid.size - 1);
+            while (grid.rows[x][y].agent !== null) {
+                x = randInt(0, grid.size - 1);
+                y = randInt(0, grid.size - 1);
+            }
+            grid.rows[x][y].agent = agents.munchers[i];
         }
     }
 }
