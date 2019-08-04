@@ -13,7 +13,7 @@ class GooLogic {
 
       let redMinusGreen = grid.rows[i][j].state.red - grid.rows[i][j].state.green;
       if (redMinusGreen > 0) {
-        greenPenalty += redMinusGreen
+        greenPenalty += redMinusGreen;
       } else {
         redPenalty -= redMinusGreen;
       }
@@ -27,13 +27,13 @@ class GooLogic {
       if (greenMinusBlue > 0) {
         bluePenalty += greenMinusBlue;
       } else {
-        greenPenalty -= greenMinusBlue
+        greenPenalty -= greenMinusBlue;
       }
 
       let gooPenaltyScale = 150;
-      grid.rows[i][j].state.red = Math.floor(grid.rows[i][j].state.red * Math.pow(.25, redPenalty/gooPenaltyScale));
+      grid.rows[i][j].state.red = Math.floor(grid.rows[i][j].state.red * Math.pow(.2, redPenalty/gooPenaltyScale));
       grid.rows[i][j].state.green = Math.floor(grid.rows[i][j].state.green * Math.pow(.9, greenPenalty/gooPenaltyScale));
-      grid.rows[i][j].state.blue = Math.floor(grid.rows[i][j].state.blue * Math.pow(.75, bluePenalty/gooPenaltyScale));
+      grid.rows[i][j].state.blue = Math.floor(grid.rows[i][j].state.blue * Math.pow(.7, bluePenalty/gooPenaltyScale));
 
       let chg = 0;
 

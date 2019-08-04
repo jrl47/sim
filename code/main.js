@@ -1,6 +1,6 @@
 // Grid Setup
 let gm = new GridMaker();
-let grid = gm.makeGridSetup0();
+let grid = gm.makeGridSetup1();
 // let grid = gm.makeGridSetup2();
 let amp = new AgentMakerAndPutter();
 let agents = amp.makeAgentConfig0();
@@ -62,7 +62,7 @@ let timer = new Timer(
       console.log('blue? ' + (blameBlue));
       numSteps = 0;
       if (numExperiments < maxExperiments) {
-        grid = gm.makeGridSetup0();
+        grid = gm.makeGridSetup1();
         // grid = gm.makeGridSetup2();
         agents = amp.makeAgentConfig0();
         amp.putAgentConfig0(grid, agents);
