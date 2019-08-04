@@ -11,13 +11,21 @@ class Stepper {
         }
         return Stepper.instance;
     }
+    doBugLogic() { // TODO
+
+    }
+    doMuncherLogic() { // TODO
+
+    }
     step() {
         let neighborTotals = this.getNeighborTotals(this.grid);
         for(let i = 0; i < this.grid.size; i++) {
             for(let j = 0; j < this.grid.size; j++) {
                 this.gooLogic.doGooLogic(this.grid, neighborTotals, i, j);
                 this.bugLogic.doBugLogic(this.grid, this.agents.bugs, i, j);
+                // this.doBugLogic(); TODO for refactor
                 this.muncherLogic.doMuncherLogic(this.grid, this.agents.munchers, i, j); // MUST come after bug logic unless we want to worry about removal order
+                // this.doMuncherLogic(); // MUST come after bug logic unless we want to worry about removal order TODO for refactor
             }
         }
         for (let a = 0; a < this.agents.bugs.length; a++) {
