@@ -18,26 +18,19 @@ class AgentMakerAndPutter {
         this.vc.numRedmunchers = this.cec.numInitialRedmunchers;
 
         for (let i = 0; i < this.cec.numInitialGreenbugs; i++) {
-            agents.bugs.push({
-                type: 'greenbug',
-                done: false,
-                stomach: this.cec.greenbug.startStomach
-            })
+            agents.bugs.push(
+                new Greenbug(false)
+            )
         }
         for (let i = 0; i < this.cec.numInitialBluebugs; i++) {
-            agents.bugs.push({
-                type: 'bluebug',
-                done: false,
-                stomach: this.cec.bluebug.startStomach,
-                direction: 1
-            })
+            agents.bugs.push(
+                new Bluebug(false)
+            )
         }
         for (let i = 0; i < this.cec.numInitialRedmunchers; i++) {
-            agents.munchers.push({
-                type: 'redmuncher',
-                done: false,
-                stomach: this.cec.redmuncher.startStomach
-            })
+            agents.munchers.push(
+                new Redmuncher(false)
+            )
         }
 
         return agents;

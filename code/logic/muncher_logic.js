@@ -22,7 +22,7 @@ class MuncherLogic {
       let neighborCell = -1;
       for(let k = 0; k < 4; k++) {
           neighborCell = grid.rows[mod(i + ORTH_SHIFTS_X[k], grid.size)][mod(j + ORTH_SHIFTS_Y[k], grid.size)];
-          if(neighborCell.agent !== null && (neighborCell.agent.type === 'greenbug' || neighborCell.agent.type === 'bluebug')) {
+          if(neighborCell.agent !== null && (neighborCell.agent instanceof Greenbug || neighborCell.agent instanceof Bluebug)) {
               neighborCell.agent.dead = true; // got munched
               redmuncher.stomach += neighborCell.agent.stomach/this.cec.redmuncher.stomachFactor;
               neighborCell.agent = null; // should this kind of thing be paired with the general death cleanup logic?
@@ -30,7 +30,7 @@ class MuncherLogic {
       }
       for(let k = 0; k < 4; k++) {
           neighborCell = grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)];
-          if(neighborCell.agent !== null && (neighborCell.agent.type === 'greenbug' || neighborCell.agent.type === 'bluebug')) {
+          if(neighborCell.agent !== null && (neighborCell.agent instanceof Greenbug || neighborCell.agent instanceof Bluebug)) {
               neighborCell.agent.dead = true; // got munched
               redmuncher.stomach += neighborCell.agent.stomach/this.cec.redmuncher.stomachFactor;
               neighborCell.agent = null; // should this kind of thing be paired with the general death cleanup logic?
@@ -53,7 +53,7 @@ class MuncherLogic {
         if (!done) {
           for (let k = 0; k < ORTH_SHIFTS_X.length; k++) {
             if (grid.rows[mod(i + ORTH_SHIFTS_X[k], grid.size)][mod(j + ORTH_SHIFTS_Y[k], grid.size)].agent !== null &&
-              grid.rows[mod(i + ORTH_SHIFTS_X[k], grid.size)][mod(j + ORTH_SHIFTS_Y[k], grid.size)].agent.type === 'bluebug') {
+              grid.rows[mod(i + ORTH_SHIFTS_X[k], grid.size)][mod(j + ORTH_SHIFTS_Y[k], grid.size)].agent instanceof Bluebug) {
                 direction = pursueDirections[k];
                 done = true;
             }
@@ -64,7 +64,7 @@ class MuncherLogic {
           pursueDirections = [0, 2, 3, 1];
           for (let k = 0; k < DIAG_SHIFTS_X.length; k++) {
             if (grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)].agent !== null &&
-              grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)].agent.type === 'bluebug') {
+              grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)].agent instanceof Bluebug) {
                 direction = pursueDirections[k];
                 done = true;
             }
@@ -75,7 +75,7 @@ class MuncherLogic {
           pursueDirections = [0, 1, 2, 3];
           for (let k = 0; k < ORTH_SHIFTS_X_1.length; k++) {
             if (grid.rows[mod(i + ORTH_SHIFTS_X_1[k], grid.size)][mod(j + ORTH_SHIFTS_Y_1[k], grid.size)].agent !== null &&
-              grid.rows[mod(i + ORTH_SHIFTS_X_1[k], grid.size)][mod(j + ORTH_SHIFTS_Y_1[k], grid.size)].agent.type === 'bluebug') {
+              grid.rows[mod(i + ORTH_SHIFTS_X_1[k], grid.size)][mod(j + ORTH_SHIFTS_Y_1[k], grid.size)].agent instanceof Bluebug) {
                 direction = pursueDirections[k];
                 done = true;
             }
@@ -86,7 +86,7 @@ class MuncherLogic {
           pursueDirections = [0, 2, 3, 1];
           for (let k = 0; k < DIAG_SHIFTS_X.length; k++) {
             if (grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)].agent !== null &&
-              grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)].agent.type === 'greenbug') {
+              grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)].agent instanceof Greenbug) {
                 direction = pursueDirections[k];
                 done = true;
             }
@@ -97,7 +97,7 @@ class MuncherLogic {
           pursueDirections = [0, 1, 2, 3];
           for (let k = 0; k < ORTH_SHIFTS_X_1.length; k++) {
             if (grid.rows[mod(i + ORTH_SHIFTS_X_1[k], grid.size)][mod(j + ORTH_SHIFTS_Y_1[k], grid.size)].agent !== null &&
-              grid.rows[mod(i + ORTH_SHIFTS_X_1[k], grid.size)][mod(j + ORTH_SHIFTS_Y_1[k], grid.size)].agent.type === 'greenbug') {
+              grid.rows[mod(i + ORTH_SHIFTS_X_1[k], grid.size)][mod(j + ORTH_SHIFTS_Y_1[k], grid.size)].agent instanceof Greenbug) {
                 direction = pursueDirections[k];
                 done = true;
             }
@@ -108,8 +108,8 @@ class MuncherLogic {
           pursueDirections = [0, 2, 3, 1];
           for (let k = 0; k < DIAG_SHIFTS_X_1.length; k++) {
             if (grid.rows[mod(i + DIAG_SHIFTS_X_1[k], grid.size)][mod(j + DIAG_SHIFTS_Y_1[k], grid.size)].agent !== null &&
-              (grid.rows[mod(i + DIAG_SHIFTS_X_1[k], grid.size)][mod(j + DIAG_SHIFTS_Y_1[k], grid.size)].agent.type === 'greenbug' ||
-              grid.rows[mod(i + DIAG_SHIFTS_X_1[k], grid.size)][mod(j + DIAG_SHIFTS_Y_1[k], grid.size)].agent.type === 'bluebug')) {
+              (grid.rows[mod(i + DIAG_SHIFTS_X_1[k], grid.size)][mod(j + DIAG_SHIFTS_Y_1[k], grid.size)].agent instanceof Greenbug ||
+              grid.rows[mod(i + DIAG_SHIFTS_X_1[k], grid.size)][mod(j + DIAG_SHIFTS_Y_1[k], grid.size)].agent instanceof Bluebug)) {
                 direction = pursueDirections[k];
                 done = true;
             }
@@ -120,8 +120,8 @@ class MuncherLogic {
           pursueDirections = [0, 1, 2, 3];
           for (let k = 0; k < ORTH_SHIFTS_X_2.length; k++) {
             if (grid.rows[mod(i + ORTH_SHIFTS_X_2[k], grid.size)][mod(j + ORTH_SHIFTS_Y_2[k], grid.size)].agent !== null &&
-              (grid.rows[mod(i + ORTH_SHIFTS_X_2[k], grid.size)][mod(j + ORTH_SHIFTS_Y_2[k], grid.size)].agent.type === 'greenbug' ||
-              grid.rows[mod(i + ORTH_SHIFTS_X_2[k], grid.size)][mod(j + ORTH_SHIFTS_Y_2[k], grid.size)].agent.type === 'bluebug')) {
+              (grid.rows[mod(i + ORTH_SHIFTS_X_2[k], grid.size)][mod(j + ORTH_SHIFTS_Y_2[k], grid.size)].agent instanceof Greenbug ||
+              grid.rows[mod(i + ORTH_SHIFTS_X_2[k], grid.size)][mod(j + ORTH_SHIFTS_Y_2[k], grid.size)].agent instanceof Bluebug)) {
                 direction = pursueDirections[k];
                 done = true;
             }
@@ -133,11 +133,7 @@ class MuncherLogic {
         if (destinationCell.agent === null) {
           destinationCell.agent = redmuncher;
           if (willReproduce) {
-            let baby = {
-              type: 'redmuncher',
-              done: true, // "summoning sickness!"
-              stomach: this.cec.redmuncher.babyStomach
-            };
+            let baby = new Redmuncher(true);
             this.vc.numRedmunchers++; // it seems unfortunate that this logic must live here for now
             redmuncher.stomach = this.cec.redmuncher.startStomach;
             grid.rows[i][j].agent = baby;
@@ -153,7 +149,7 @@ class MuncherLogic {
 
   doMuncherLogic(grid, munchers, i, j) {
       if (grid.rows[i][j].agent !== null && grid.rows[i][j].agent.done === false) {
-          if (grid.rows[i][j].agent.type === 'redmuncher') {
+          if (grid.rows[i][j].agent instanceof Redmuncher) {
               this.doRedmuncherLogic(grid, grid.rows[i][j].agent, i, j, munchers);
           }
       }

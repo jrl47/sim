@@ -31,9 +31,9 @@ class Stepper {
         for (let a = 0; a < this.agents.bugs.length; a++) {
           this.agents.bugs[a].done = false;
           if (this.agents.bugs[a].dead) {
-              if (this.agents.bugs[a].type === "greenbug") {
+              if (this.agents.bugs[a] instanceof Greenbug) {
                   this.vc.numGreenbugs--;
-              } else if (this.agents.bugs[a].type === "bluebug") {
+              } else if (this.agents.bugs[a] instanceof Bluebug) {
                   this.vc.numBluebugs--;
               } else {
           
@@ -45,7 +45,7 @@ class Stepper {
         for (let a = 0; a < this.agents.munchers.length; a++) {
           this.agents.munchers[a].done = false;
           if (this.agents.munchers[a].dead) {
-              if (this.agents.munchers[a].type === "redmuncher") {
+              if (this.agents.munchers[a] instanceof Redmuncher) {
                   this.vc.numRedmunchers--;
               } else {
           

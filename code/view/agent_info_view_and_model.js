@@ -21,17 +21,17 @@ class AgentInfoViewAndModel { // SINGLETON
             );
             this.greenbugButton = new Button("greenbug");
             this.greenbugButton.initialize(
-                'greenbug',
+                "greenbug",
                 () => { this.vc.showGreenbug = !this.vc.showGreenbug; }
             );
             this.bluebugButton = new Button("bluebug");
             this.bluebugButton.initialize(
-                'bluebug',
+                "bluebug",
                 () => { this.vc.showBluebug = !this.vc.showBluebug; }
             );
             this.redmuncherButton = new Button("redmuncher");
             this.redmuncherButton.initialize(
-                'redmuncher',
+                "redmuncher",
                 () => { this.vc.showRedmuncher = !this.vc.showRedmuncher; }
             );
 

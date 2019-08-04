@@ -34,7 +34,7 @@ class BugLogic {
         if (!done) {
           for (let k = 0; k < ORTH_SHIFTS_X.length; k++) {
             if (grid.rows[mod(i + ORTH_SHIFTS_X[k], grid.size)][mod(j + ORTH_SHIFTS_Y[k], grid.size)].agent !== null &&
-              grid.rows[mod(i + ORTH_SHIFTS_X[k], grid.size)][mod(j + ORTH_SHIFTS_Y[k], grid.size)].agent.type === 'redmuncher') {
+              grid.rows[mod(i + ORTH_SHIFTS_X[k], grid.size)][mod(j + ORTH_SHIFTS_Y[k], grid.size)].agent instanceof Redmuncher) {
                 direction = runDirections[k];
                 done = true;
             }
@@ -45,7 +45,7 @@ class BugLogic {
           runDirections = [2, 0, 1, 3];
           for (let k = 0; k < DIAG_SHIFTS_X.length; k++) {
             if (grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)].agent !== null &&
-              grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)].agent.type === 'redmuncher') {
+              grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)].agent instanceof Redmuncher) {
                 direction = runDirections[k];
                 done = true;
             }
@@ -56,7 +56,7 @@ class BugLogic {
           runDirections = [1, 0, 3, 2];
           for (let k = 0; k < ORTH_SHIFTS_X_1.length; k++) {
             if (grid.rows[mod(i + ORTH_SHIFTS_X_1[k], grid.size)][mod(j + ORTH_SHIFTS_Y_1[k], grid.size)].agent !== null &&
-              grid.rows[mod(i + ORTH_SHIFTS_X_1[k], grid.size)][mod(j + ORTH_SHIFTS_Y_1[k], grid.size)].agent.type === 'redmuncher') {
+              grid.rows[mod(i + ORTH_SHIFTS_X_1[k], grid.size)][mod(j + ORTH_SHIFTS_Y_1[k], grid.size)].agent instanceof Redmuncher) {
                 direction = runDirections[k];
                 done = true;
             }
@@ -67,7 +67,7 @@ class BugLogic {
           let runDirections = [2, 0, 1, 3];
           for (let k = 0; k < DIAG_SHIFTS_X_1.length; k++) {
             if (grid.rows[mod(i + DIAG_SHIFTS_X_1[k], grid.size)][mod(j + DIAG_SHIFTS_Y_1[k], grid.size)].agent !== null &&
-              grid.rows[mod(i + DIAG_SHIFTS_X_1[k], grid.size)][mod(j + DIAG_SHIFTS_Y_1[k], grid.size)].agent.type === 'redmuncher') {
+              grid.rows[mod(i + DIAG_SHIFTS_X_1[k], grid.size)][mod(j + DIAG_SHIFTS_Y_1[k], grid.size)].agent instanceof Redmuncher) {
                 direction = runDirections[k];
                 done = true;
             }
@@ -78,11 +78,7 @@ class BugLogic {
         if (destinationCell.agent === null) {
           destinationCell.agent = greenbug;
           if (willReproduce) {
-            let baby = {
-              type: 'greenbug',
-              done: true, // "summoning sickness!"
-              stomach: this.cec.greenbug.babyStomach
-            };
+            let baby = new Greenbug(true);
             this.vc.numGreenbugs++; // it seems unfortunate that this logic must live here for now
             greenbug.stomach = this.cec.greenbug.startStomach;
             grid.rows[i][j].agent = baby;
@@ -121,7 +117,7 @@ class BugLogic {
         let runDirections = [1, 0, 3, 2];
         for (let k = 0; k < ORTH_SHIFTS_X.length; k++) {
           if (grid.rows[mod(i + ORTH_SHIFTS_X[k], grid.size)][mod(j + ORTH_SHIFTS_Y[k], grid.size)].agent !== null &&
-            grid.rows[mod(i + ORTH_SHIFTS_X[k], grid.size)][mod(j + ORTH_SHIFTS_Y[k], grid.size)].agent.type === 'redmuncher') {
+            grid.rows[mod(i + ORTH_SHIFTS_X[k], grid.size)][mod(j + ORTH_SHIFTS_Y[k], grid.size)].agent instanceof Redmuncher) {
               direction = runDirections[k];
               done = true;
           }
@@ -131,7 +127,7 @@ class BugLogic {
           runDirections = [2, 0, 1, 3];
           for (let k = 0; k < DIAG_SHIFTS_X.length; k++) {
             if (grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)].agent !== null &&
-              grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)].agent.type === 'redmuncher') {
+              grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)].agent instanceof Redmuncher) {
                 direction = runDirections[k];
                 done = true;
             }
@@ -142,7 +138,7 @@ class BugLogic {
           runDirections = [1, 0, 3, 2];
           for (let k = 0; k < ORTH_SHIFTS_X_1.length; k++) {
             if (grid.rows[mod(i + ORTH_SHIFTS_X_1[k], grid.size)][mod(j + ORTH_SHIFTS_Y_1[k], grid.size)].agent !== null &&
-              grid.rows[mod(i + ORTH_SHIFTS_X_1[k], grid.size)][mod(j + ORTH_SHIFTS_Y_1[k], grid.size)].agent.type === 'redmuncher') {
+              grid.rows[mod(i + ORTH_SHIFTS_X_1[k], grid.size)][mod(j + ORTH_SHIFTS_Y_1[k], grid.size)].agent instanceof Redmuncher) {
                 direction = runDirections[k];
                 done = true;
             }
@@ -153,25 +149,20 @@ class BugLogic {
           let runDirections = [2, 0, 1, 3];
           for (let k = 0; k < DIAG_SHIFTS_X_1.length; k++) {
             if (grid.rows[mod(i + DIAG_SHIFTS_X_1[k], grid.size)][mod(j + DIAG_SHIFTS_Y_1[k], grid.size)].agent !== null &&
-              grid.rows[mod(i + DIAG_SHIFTS_X_1[k], grid.size)][mod(j + DIAG_SHIFTS_Y_1[k], grid.size)].agent.type === 'redmuncher') {
+              grid.rows[mod(i + DIAG_SHIFTS_X_1[k], grid.size)][mod(j + DIAG_SHIFTS_Y_1[k], grid.size)].agent instanceof Redmuncher) {
                 direction = runDirections[k];
                 done = true;
             }
           }
         }
 
-      //   console.log(grid + ' ' + mod(i + ORTH_SHIFTS_X[direction], grid.size) + ' '+  mod(j + ORTH_SHIFTS_Y[direction], grid.size));
+        // console.log(grid + ' ' + mod(i + ORTH_SHIFTS_X[direction], grid.size) + ' '+  mod(j + ORTH_SHIFTS_Y[direction], grid.size));
         let destinationCell = grid.rows[mod(i + ORTH_SHIFTS_X[direction], grid.size)]
         [mod(j + ORTH_SHIFTS_Y[direction], grid.size)];
         if (destinationCell.agent === null) {
           destinationCell.agent = bluebug;
           if (willReproduce) {
-            let baby = {
-              type: 'bluebug',
-              done: true, // "summoning sickness!"
-              stomach: this.cec.bluebug.babyStomach,
-              direction: 1
-            };
+            let baby = new Bluebug(true);
             this.vc.numBluebugs++; // it seems unfortunate that this logic must live here for now
             bluebug.stomach = this.cec.bluebug.startStomach;
             bluebug.direction = 0;
@@ -189,9 +180,9 @@ class BugLogic {
 
   doBugLogic(grid, bugs, i, j) {
       if (grid.rows[i][j].agent !== null && grid.rows[i][j].agent.done === false) {
-          if (grid.rows[i][j].agent.type === 'greenbug') {
+          if (grid.rows[i][j].agent instanceof Greenbug) {
               this.doGreenbugLogic(grid, grid.rows[i][j].agent, i, j, bugs);
-          } else if (grid.rows[i][j].agent.type === 'bluebug') {
+          } else if (grid.rows[i][j].agent instanceof Bluebug) {
               this.doBluebugLogic(grid, grid.rows[i][j].agent, i, j, bugs);
           }
       }
