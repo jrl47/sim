@@ -31,9 +31,9 @@ class GooLogic {
       }
 
       let gooPenaltyScale = 150;
-      grid.rows[i][j].state.red = Math.floor(grid.rows[i][j].state.red * Math.pow(.2, redPenalty/gooPenaltyScale));
-      grid.rows[i][j].state.green = Math.floor(grid.rows[i][j].state.green * Math.pow(.9, greenPenalty/gooPenaltyScale));
-      grid.rows[i][j].state.blue = Math.floor(grid.rows[i][j].state.blue * Math.pow(.7, bluePenalty/gooPenaltyScale));
+      grid.rows[i][j].state.red = Math.floor(grid.rows[i][j].state.red * Math.pow(.25, redPenalty/gooPenaltyScale));
+      grid.rows[i][j].state.green = Math.floor(grid.rows[i][j].state.green * Math.pow(.95, greenPenalty/gooPenaltyScale));
+      grid.rows[i][j].state.blue = Math.floor(grid.rows[i][j].state.blue * Math.pow(.75, bluePenalty/gooPenaltyScale));
 
       let chg = 0;
 
@@ -48,7 +48,7 @@ class GooLogic {
         case 5: chg = 2; break;
         case 6: chg = 1; break;
         case 7: chg = 0; break;
-        default: chg = -2;
+        default: chg = -3;
       }
       grid.rows[i][j].state.green += chg;
       if (grid.rows[i][j].state.green < 0) {
@@ -65,7 +65,7 @@ class GooLogic {
         case 5: chg = 1; break;
         case 6: chg = -19; break;
         case 7: chg = -3; break;
-        default: chg = -5;
+        default: chg = -7;
       }
       grid.rows[i][j].state.blue += chg;
       if (grid.rows[i][j].state.blue < 0) {
@@ -74,15 +74,15 @@ class GooLogic {
 
       let redNeighborTotal = neighborTotals[i][j].red;
       switch (Math.floor(redNeighborTotal / 250)) {
-        case 0: chg = 12; break;
-        case 1: chg = 9; break;
-        case 2: chg = 6; break;
+        case 0: chg = 9; break;
+        case 1: chg = 7; break;
+        case 2: chg = 4; break;
         case 3: chg = 3; break;
-        case 4: chg = 18; break;
+        case 4: chg = 14; break;
         case 5: chg = -1; break;
         case 6: chg = 1; break;
         case 7: chg = 3; break;
-        default: chg = -55;
+        default: chg = -28;
       }
       grid.rows[i][j].state.red += chg;
       if (grid.rows[i][j].state.red < 0) {
