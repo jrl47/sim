@@ -1,7 +1,9 @@
 // Grid Setup
 let gm = new GridMaker();
+let grid = gm.makeGridSetupA();
+// let grid = gm.makeGridSetup0();
 // let grid = gm.makeGridSetup1();
-let grid = gm.makeGridSetup2();
+// let grid = gm.makeGridSetup2();
 let amp = new AgentMakerAndPutter();
 let agents = amp.makeAgentConfig0();
 amp.putAgentConfig0(grid, agents);
@@ -27,14 +29,31 @@ let totalSteps = 0;
 let maxSteps = 0;
 let numExperiments = 0;
 let maxExperiments = 100;
+
 let blameRed = 0;
 let blameGreen = 0
 let blameBlue = 0;
+
+let currentMaxRed = 0;
+let currentMaxGreen = 0;
+let currentMaxBlue = 0;
+let maxRed = 0;
+let maxGreen = 0;
+let maxBlue = 0;
 
 let changes = -1; // "changes" object to modify experiment params
 
 let timer = new Timer(
   () => {
+    if (vc.numRedmunchers > maxRed) {
+      currentMaxRed = vc.numRedmunchers;
+    }
+    if (vc.numGreenbugs > maxGreen) {
+      currentMaxGreen = vc.numGreenbugs;
+    }
+    if (vc.numBluebugs > maxBlue) {
+      currentMaxBlue = vc.numBluebugs;
+    }
     if (vc.numGreenbugs !== 0 && vc.numBluebugs !== 0 && vc.numRedmunchers !== 0) {
       stepper.step();
       draw();
@@ -60,10 +79,17 @@ let timer = new Timer(
       console.log('red? ' + (blameRed));
       console.log('green? ' + (blameGreen));
       console.log('blue? ' + (blameBlue));
+
+      maxRed += currentMaxRed;
+      maxGreen += currentMaxGreen;
+      maxBlue += currentMaxBlue;
+
       numSteps = 0;
       if (numExperiments < maxExperiments) {
+        let grid = gm.makeGridSetupA();
+        // let grid = gm.makeGridSetup0();
         // grid = gm.makeGridSetup1();
-        grid = gm.makeGridSetup2();
+        // grid = gm.makeGridSetup2();
         agents = amp.makeAgentConfig0();
         amp.putAgentConfig0(grid, agents);
 
@@ -77,8 +103,9 @@ let timer = new Timer(
           maxSteps = Math.floor(totalSteps/maxExperiments);
           // start again but with a "new" set of changes
           console.log(maxSteps);
-          console.log(blameBlue);
-          console.log(blameRed);
+          console.log('Max Redmuncher Population: ' + maxRed/maxExperiments);
+          console.log('Max Greenbug Population: ' + maxGreen/maxExperiments);
+          console.log('Max Bluebug Population: ' + maxBlue/maxExperiments);
           timer.pause();
         } else {
           // "undo" the changes
