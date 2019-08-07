@@ -2,36 +2,36 @@ class CurrentExperimentConstants {
     constructor() {
         if (!CurrentExperimentConstants.instance) {
             CurrentExperimentConstants.instance = this;
-            this.numInitialGreenbugs = 20;
-            this.numInitialBluebugs = 35;
-            this.numInitialRedmunchers = 3;
+            this.numInitialGreenbugs = 7;
+            this.numInitialBluebugs = 9;
+            this.numInitialRedmunchers = 2;
 
             this.greenbug = {
-                startStomach: 680,
-                babyStomach: 130,
+                startStomach: 1800,
+                babyStomach: 800,
                 metabolism: 18,
                 grazeLimit: 85,
-                birthFactor: 2
-            }
-
-            this.bluebug = {
-                startStomach: 640,
-                babyStomach: 80,
-                metabolism: 14.5,
-                grazeLimit: 75,
                 birthFactor: 1.5
             }
 
-            this.redmuncher = {
-                startStomach: 2400,
-                babyStomach: 320,
-                metabolism: 43,
-                grazeLimit: 115,
-                birthFactor: 3.5,
-                stomachFactor: 65
+            this.bluebug = {
+                startStomach: 680,
+                babyStomach: 60,
+                metabolism: 14.5,
+                grazeLimit: 75,
+                birthFactor: 0.5
             }
 
-            this.birthFactorShift = 8;
+            this.redmuncher = {
+                startStomach: 4200,
+                babyStomach: 1000,
+                metabolism: 45,
+                grazeLimit: 115,
+                birthFactor: 3.5,
+                stomachFactor: 40
+            }
+
+            this.birthFactorShift = 10;
         }
         return CurrentExperimentConstants.instance;
     }

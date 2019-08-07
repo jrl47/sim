@@ -45,13 +45,13 @@ let changes = -1; // "changes" object to modify experiment params
 
 let timer = new Timer(
   () => {
-    if (vc.numRedmunchers > maxRed) {
+    if (vc.numRedmunchers > currentMaxRed) {
       currentMaxRed = vc.numRedmunchers;
     }
-    if (vc.numGreenbugs > maxGreen) {
+    if (vc.numGreenbugs > currentMaxGreen) {
       currentMaxGreen = vc.numGreenbugs;
     }
-    if (vc.numBluebugs > maxBlue) {
+    if (vc.numBluebugs > currentMaxBlue) {
       currentMaxBlue = vc.numBluebugs;
     }
     if (vc.numGreenbugs !== 0 && vc.numBluebugs !== 0 && vc.numRedmunchers !== 0) {
@@ -83,6 +83,9 @@ let timer = new Timer(
       maxRed += currentMaxRed;
       maxGreen += currentMaxGreen;
       maxBlue += currentMaxBlue;
+      currentMaxRed = 0;
+      currentMaxGreen = 0;
+      currentMaxBlue = 0;
 
       numSteps = 0;
       if (numExperiments < maxExperiments) {

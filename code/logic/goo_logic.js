@@ -30,10 +30,10 @@ class GooLogic {
         greenPenalty -= greenMinusBlue;
       }
 
-      let gooPenaltyScale = 150;
-      grid.rows[i][j].state.red = Math.floor(grid.rows[i][j].state.red * Math.pow(.4, redPenalty/gooPenaltyScale));
-      grid.rows[i][j].state.green = Math.floor(grid.rows[i][j].state.green * Math.pow(.95, greenPenalty/gooPenaltyScale));
-      grid.rows[i][j].state.blue = Math.floor(grid.rows[i][j].state.blue * Math.pow(.8, bluePenalty/gooPenaltyScale));
+      let gooPenaltyScale = 250;
+      grid.rows[i][j].state.red = Math.floor(grid.rows[i][j].state.red * Math.pow(.5, redPenalty/gooPenaltyScale));
+      grid.rows[i][j].state.green = Math.floor(grid.rows[i][j].state.green * Math.pow(.975, greenPenalty/gooPenaltyScale));
+      grid.rows[i][j].state.blue = Math.floor(grid.rows[i][j].state.blue * Math.pow(.85, bluePenalty/gooPenaltyScale));
 
       let chg = 0;
 
@@ -74,14 +74,14 @@ class GooLogic {
 
       let redNeighborTotal = neighborTotals[i][j].red;
       switch (Math.floor(redNeighborTotal / 250)) {
-        case 0: chg = 9; break;
-        case 1: chg = 6; break;
+        case 0: chg = 8; break;
+        case 1: chg = 5; break;
         case 2: chg = 4; break;
         case 3: chg = 3; break;
-        case 4: chg = 12; break;
+        case 4: chg = 9; break;
         case 5: chg = -3; break;
-        case 6: chg = 2; break;
-        case 7: chg = 2; break;
+        case 6: chg = 1; break;
+        case 7: chg = 1; break;
         default: chg = -22;
       }
       grid.rows[i][j].state.red += chg;
