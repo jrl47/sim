@@ -40,10 +40,10 @@ class GooLogic {
       let greenNeighborTotal = neighborTotals[i][j].green;
       switch (Math.floor(greenNeighborTotal / 250)) {
         // case 0: chg = 0; break;
-        case 0: chg = 8; break;
-        case 1: chg = 7; break;
-        case 2: chg = 5; break;
-        case 3: chg = 4; break;
+        case 0: chg = 6; break;
+        case 1: chg = 5; break;
+        case 2: chg = 4; break;
+        case 3: chg = 3; break;
         case 4: chg = 3; break;
         case 5: chg = 2; break;
         case 6: chg = 1; break;
@@ -57,10 +57,10 @@ class GooLogic {
 
       let blueNeighborTotal = neighborTotals[i][j].blue;
       switch (Math.floor(blueNeighborTotal / 250)) {
-        case 0: chg = 10; break;
+        case 0: chg = 6; break;
         case 1: chg = 3; break;
-        case 2: chg = 8; break;
-        case 3: chg = 12; break;
+        case 2: chg = 5; break;
+        case 3: chg = 9; break;
         case 4: chg = 3; break;
         case 5: chg = 1; break;
         case 6: chg = -19; break;
@@ -78,7 +78,7 @@ class GooLogic {
         case 1: chg = 5; break;
         case 2: chg = 4; break;
         case 3: chg = 3; break;
-        case 4: chg = 9; break;
+        case 4: chg = 10; break;
         case 5: chg = -3; break;
         case 6: chg = 1; break;
         case 7: chg = 1; break;
