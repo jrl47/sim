@@ -27,8 +27,9 @@ draw();
 let numSteps = 0;
 let totalSteps = 0;
 let maxSteps = 0;
+let maxAvgSteps = 0;
 let numExperiments = 0;
-let maxExperiments = 100;
+let maxExperiments = 30;
 
 let blameRed = 0;
 let blameGreen = 0
@@ -87,6 +88,10 @@ let timer = new Timer(
       currentMaxGreen = 0;
       currentMaxBlue = 0;
 
+      if (numSteps > maxSteps) {
+        maxSteps = numSteps;
+      }
+
       numSteps = 0;
       if (numExperiments < maxExperiments) {
         let grid = gm.makeGridSetupA();
@@ -102,10 +107,11 @@ let timer = new Timer(
         stepper.grid = grid;
         stepper.agents = agents;
       } else {
-        if (totalSteps/maxExperiments > maxSteps) {
-          maxSteps = Math.floor(totalSteps/maxExperiments);
+        if (totalSteps/maxExperiments > maxAvgSteps) {
+          maxAvgSteps = Math.floor(totalSteps/maxExperiments);
           // start again but with a "new" set of changes
-          console.log(maxSteps);
+          console.log('Maximum Number of Steps: ' + maxSteps);
+          console.log('Average Number of Steps: ' + maxAvgSteps);
           console.log('Max Redmuncher Population: ' + maxRed/maxExperiments);
           console.log('Max Greenbug Population: ' + maxGreen/maxExperiments);
           console.log('Max Bluebug Population: ' + maxBlue/maxExperiments);
