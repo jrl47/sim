@@ -31,21 +31,21 @@ class GooLogic {
       }
 
       let gooPenaltyScale = 250;
-      grid.rows[i][j].state.red = Math.floor(grid.rows[i][j].state.red * Math.pow(.5, redPenalty/gooPenaltyScale));
+      grid.rows[i][j].state.red = Math.floor(grid.rows[i][j].state.red * Math.pow(.55, redPenalty/gooPenaltyScale));
       grid.rows[i][j].state.green = Math.floor(grid.rows[i][j].state.green * Math.pow(.975, greenPenalty/gooPenaltyScale));
-      grid.rows[i][j].state.blue = Math.floor(grid.rows[i][j].state.blue * Math.pow(.85, bluePenalty/gooPenaltyScale));
+      grid.rows[i][j].state.blue = Math.floor(grid.rows[i][j].state.blue * Math.pow(.9, bluePenalty/gooPenaltyScale));
 
       let chg = 0;
 
       let greenNeighborTotal = neighborTotals[i][j].green;
       switch (Math.floor(greenNeighborTotal / 250)) {
         // case 0: chg = 0; break;
-        case 0: chg = 6; break;
-        case 1: chg = 5; break;
-        case 2: chg = 4; break;
-        case 3: chg = 3; break;
-        case 4: chg = 3; break;
-        case 5: chg = 2; break;
+        case 0: chg = 5; break;
+        case 1: chg = 4; break;
+        case 2: chg = 3; break;
+        case 3: chg = 2; break;
+        case 4: chg = 2; break;
+        case 5: chg = 1; break;
         case 6: chg = 1; break;
         case 7: chg = 0; break;
         default: chg = -3;
@@ -57,13 +57,13 @@ class GooLogic {
 
       let blueNeighborTotal = neighborTotals[i][j].blue;
       switch (Math.floor(blueNeighborTotal / 250)) {
-        case 0: chg = 6; break;
-        case 1: chg = 3; break;
-        case 2: chg = 5; break;
-        case 3: chg = 9; break;
-        case 4: chg = 3; break;
+        case 0: chg = 5; break;
+        case 1: chg = 2; break;
+        case 2: chg = 4; break;
+        case 3: chg = 6; break;
+        case 4: chg = 1; break;
         case 5: chg = 1; break;
-        case 6: chg = -19; break;
+        case 6: chg = -17; break;
         case 7: chg = -3; break;
         default: chg = -7;
       }
@@ -74,14 +74,14 @@ class GooLogic {
 
       let redNeighborTotal = neighborTotals[i][j].red;
       switch (Math.floor(redNeighborTotal / 250)) {
-        case 0: chg = 8; break;
+        case 0: chg = 7; break;
         case 1: chg = 5; break;
         case 2: chg = 4; break;
         case 3: chg = 3; break;
-        case 4: chg = 10; break;
-        case 5: chg = -3; break;
-        case 6: chg = 1; break;
-        case 7: chg = 1; break;
+        case 4: chg = 9; break;
+        case 5: chg = -2; break;
+        case 6: chg = -7; break;
+        case 7: chg = 2; break;
         default: chg = -22;
       }
       grid.rows[i][j].state.red += chg;

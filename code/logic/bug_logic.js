@@ -27,7 +27,7 @@ class BugLogic {
       if (greenbug.stomach > 0) { // RIP greenbug if empty stomach, otherwise it moves instead of dies
         let direction = randInt(0, 3);
 
-        if (randInt(0, 1) <= 0) { // 50% of random direction choice with no computation time devoted to "looking"
+        if (randInt(0, 1) <= 0) { // 50% chance that computation time will be devoted to "looking"
           // "Vision"
           let done = false;
           // orth
@@ -74,8 +74,6 @@ class BugLogic {
               }
             }
           }
-        } else {
-          direction = randInt(0, 3);
         }
 
         let destinationCell = grid.rows[mod(i + ORTH_SHIFTS_X[direction], grid.size)][mod(j + ORTH_SHIFTS_Y[direction], grid.size)];
@@ -116,7 +114,7 @@ class BugLogic {
         // }
         let direction = bluebug.direction;
 
-        if (randInt(0, 1) <= 0) { // 50% of random direction choice with no computation time devoted to "looking"
+        if (randInt(0, 1) <= 0) { // 50% chance that computation time will be devoted to "looking"
           // "Vision"
           let done = false;
           // orth
@@ -161,8 +159,6 @@ class BugLogic {
               }
             }
           }
-        } else {
-          direction = randInt(0, 3);
         }
 
         // console.log(grid + ' ' + mod(i + ORTH_SHIFTS_X[direction], grid.size) + ' '+  mod(j + ORTH_SHIFTS_Y[direction], grid.size));

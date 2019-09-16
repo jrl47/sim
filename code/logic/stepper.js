@@ -79,13 +79,13 @@ class Stepper {
       
         if (color === 'green') {
           selfWeight = 8;
-          orthWeight = 2;
+          orthWeight = 1.7;
         } else if (color === 'blue') {
           selfWeight = 9;
-          orthWeight = 2;
+          orthWeight = 1.7;
         } else if (color === 'red') {
           selfWeight = 10;
-          orthWeight = 2.5;
+          orthWeight = 2.1;
         }
       
         result += grid.rows[i][j].state[color] * selfWeight;
