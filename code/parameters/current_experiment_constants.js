@@ -20,18 +20,18 @@ class CurrentExperimentConstants {
             this.bluebug = {
                 startStomach: 1500,
                 babyStomach: 120,
-                metabolism: 21,
+                metabolism: 25,
                 grazeLimit: 85,
                 birthFactor: 0.5
             }
 
             this.redmuncher = {
-                startStomach: 7500,
+                startStomach: 7800,
                 babyStomach: 1200,
                 metabolism: 45,
                 grazeLimit: 120,
                 birthFactor: 2.2,
-                stomachFactor: 22,
+                stomachFactor: 20,
                 fatigueThreshold: 1500
             }
 
