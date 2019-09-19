@@ -7,32 +7,32 @@ class CurrentExperimentConstants {
             this.numInitialBluebugs = 16//;
             + 20;
             this.numInitialRedmunchers = 2//;
-            + 10;
+            + 6;
 
             this.greenbug = {
                 startStomach: 4500,
                 babyStomach: 450,
-                metabolism: 36,
+                metabolism: 35.5,
                 grazeLimit: 100,
                 birthFactor: 1.5
             }
 
             this.bluebug = {
                 startStomach: 1500,
-                babyStomach: 120,
-                metabolism: 25,
+                babyStomach: 140,
+                metabolism: 23.5,
                 grazeLimit: 85,
                 birthFactor: 0.5
             }
 
             this.redmuncher = {
-                startStomach: 7800,
-                babyStomach: 1200,
-                metabolism: 45,
+                startStomach: 9000,
+                babyStomach: 2600,
+                metabolism: 38.5,
                 grazeLimit: 120,
-                birthFactor: 2.2,
-                stomachFactor: 20,
-                fatigueThreshold: 1500
+                birthFactor: 2.8,
+                stomachFactor: 29,
+                fatigueThreshold: 1300
             }
 
             this.birthFactorShift = 11;

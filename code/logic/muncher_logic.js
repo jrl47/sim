@@ -117,7 +117,7 @@ class MuncherLogic {
               }
             }
           }
-          for (let l = 3; l < 7; l++) {
+          for (let l = 3; l < 8; l++) {
             // "far far orth, for all bugs" (lowestestestestest priority)
             if (!done) {
               pursueDirections = [0, 1, 2, 3];
