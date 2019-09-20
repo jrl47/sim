@@ -55,9 +55,9 @@ class BugLogic {
           // "far orth" (low priority)
           if (!done) {
             runDirections = [1, 0, 3, 2];
-            for (let k = 0; k < ORTH_SHIFTS_X_1.length; k++) {
-              if (grid.rows[mod(i + ORTH_SHIFTS_X_1[k], grid.size)][mod(j + ORTH_SHIFTS_Y_1[k], grid.size)].agent !== null &&
-                grid.rows[mod(i + ORTH_SHIFTS_X_1[k], grid.size)][mod(j + ORTH_SHIFTS_Y_1[k], grid.size)].agent instanceof Redmuncher) {
+            for (let k = 0; k < ORTH_SHIFTS_X_2.length; k++) {
+              if (grid.rows[mod(i + ORTH_SHIFTS_X_2[k], grid.size)][mod(j + ORTH_SHIFTS_Y_2[k], grid.size)].agent !== null &&
+                grid.rows[mod(i + ORTH_SHIFTS_X_2[k], grid.size)][mod(j + ORTH_SHIFTS_Y_2[k], grid.size)].agent instanceof Redmuncher) {
                   direction = runDirections[k];
                   done = true;
               }
@@ -66,9 +66,9 @@ class BugLogic {
           // "far diag" (lowest priority)
           if (!done) {
             let runDirections = [2, 0, 1, 3];
-            for (let k = 0; k < DIAG_SHIFTS_X_1.length; k++) {
-              if (grid.rows[mod(i + DIAG_SHIFTS_X_1[k], grid.size)][mod(j + DIAG_SHIFTS_Y_1[k], grid.size)].agent !== null &&
-                grid.rows[mod(i + DIAG_SHIFTS_X_1[k], grid.size)][mod(j + DIAG_SHIFTS_Y_1[k], grid.size)].agent instanceof Redmuncher) {
+            for (let k = 0; k < DIAG_SHIFTS_X_2.length; k++) {
+              if (grid.rows[mod(i + DIAG_SHIFTS_X_2[k], grid.size)][mod(j + DIAG_SHIFTS_Y_2[k], grid.size)].agent !== null &&
+                grid.rows[mod(i + DIAG_SHIFTS_X_2[k], grid.size)][mod(j + DIAG_SHIFTS_Y_2[k], grid.size)].agent instanceof Redmuncher) {
                   direction = runDirections[k];
                   done = true;
               }
@@ -140,9 +140,9 @@ class BugLogic {
           // "far orth"
           if (!done) {
             runDirections = [1, 0, 3, 2];
-            for (let k = 0; k < ORTH_SHIFTS_X_1.length; k++) {
-              if (grid.rows[mod(i + ORTH_SHIFTS_X_1[k], grid.size)][mod(j + ORTH_SHIFTS_Y_1[k], grid.size)].agent !== null &&
-                grid.rows[mod(i + ORTH_SHIFTS_X_1[k], grid.size)][mod(j + ORTH_SHIFTS_Y_1[k], grid.size)].agent instanceof Redmuncher) {
+            for (let k = 0; k < ORTH_SHIFTS_X_2.length; k++) {
+              if (grid.rows[mod(i + ORTH_SHIFTS_X_2[k], grid.size)][mod(j + ORTH_SHIFTS_Y_2[k], grid.size)].agent !== null &&
+                grid.rows[mod(i + ORTH_SHIFTS_X_2[k], grid.size)][mod(j + ORTH_SHIFTS_Y_2[k], grid.size)].agent instanceof Redmuncher) {
                   direction = runDirections[k];
                   done = true;
               }
@@ -151,9 +151,9 @@ class BugLogic {
           // "far diag"
           if (!done) {
             let runDirections = [2, 0, 1, 3];
-            for (let k = 0; k < DIAG_SHIFTS_X_1.length; k++) {
-              if (grid.rows[mod(i + DIAG_SHIFTS_X_1[k], grid.size)][mod(j + DIAG_SHIFTS_Y_1[k], grid.size)].agent !== null &&
-                grid.rows[mod(i + DIAG_SHIFTS_X_1[k], grid.size)][mod(j + DIAG_SHIFTS_Y_1[k], grid.size)].agent instanceof Redmuncher) {
+            for (let k = 0; k < DIAG_SHIFTS_X_2.length; k++) {
+              if (grid.rows[mod(i + DIAG_SHIFTS_X_2[k], grid.size)][mod(j + DIAG_SHIFTS_Y_2[k], grid.size)].agent !== null &&
+                grid.rows[mod(i + DIAG_SHIFTS_X_2[k], grid.size)][mod(j + DIAG_SHIFTS_Y_2[k], grid.size)].agent instanceof Redmuncher) {
                   direction = runDirections[k];
                   done = true;
               }

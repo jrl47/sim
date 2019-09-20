@@ -3,6 +3,6 @@ class Bluebug extends Bug {
         super();
         this.done = isBaby;
         this.stomach = isBaby ? this.cec.bluebug.babyStomach : this.cec.bluebug.startStomach;
-        this.direction = 0;
+        this.direction = randInt(0, 3);
     }
 }
