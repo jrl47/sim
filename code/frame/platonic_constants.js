@@ -1,3 +1,5 @@
+// DOWN, UP, LEFT, RIGHT
+
 let ORTH_SHIFTS_X = [0, 0, -1, 1];
 let ORTH_SHIFTS_Y = [-1, 1, 0, 0];
 
@@ -13,40 +15,64 @@ let DIAG_SHIFTS_Y_2 = [-2, 2, -2, 2];
 let KNIGHT_SHIFTS_X_2 = [1, 1, -1, -1, 2, 2, -2, -2];
 let KNIGHT_SHIFTS_Y_2 = [-2, 2, -2, 2, -1, 1, -1, 1];
 
-let ORTH_SHIFTS_X_3 = [0, 0, -3, 3];
-let ORTH_SHIFTS_Y_3 = [-3, 3, 0, 0];
-
-let DIAG_SHIFTS_X_3 = [3, 3, -3, -3];
-let DIAG_SHIFTS_Y_3 = [-3, 3, -3, 3];
-
 let KNIGHT_SHIFTS_X_3 = [1, 1, -1, -1, 3, 3, -3, -3];
 let KNIGHT_SHIFTS_Y_3 = [-3, 3, -3, 3, -1, 1, -1, 1];
 
 let DKNIGHT_SHIFTS_X_3 = [2, 2, -2, -2, 3, 3, -3, -3];
 let DKNIGHT_SHIFTS_Y_3 = [-3, 3, -3, 3, -2, 2, -2, 2];
 
-let SHIFT_INDEX_X = [];
-SHIFT_INDEX_X.push([]);
-SHIFT_INDEX_X[0][1] = ORTH_SHIFTS_X;
-SHIFT_INDEX_X[0][2] = ORTH_SHIFTS_X_2;
-SHIFT_INDEX_X[0][3] = ORTH_SHIFTS_X_3;
-SHIFT_INDEX_X.push([]);
-SHIFT_INDEX_X[1][1] = DIAG_SHIFTS_X;
-SHIFT_INDEX_X[1][2] = KNIGHT_SHIFTS_X_2;
-SHIFT_INDEX_X[1][3] = KNIGHT_SHIFTS_X_3;
-SHIFT_INDEX_X.push([]);
-SHIFT_INDEX_X[2][2] = DIAG_SHIFTS_X_2;
-SHIFT_INDEX_X[2][3] = DKNIGHT_SHIFTS_X_3;
+let SHIFT_INDEX = [];
 
-let SHIFT_INDEX_Y = [];
-SHIFT_INDEX_Y.push([]);
-SHIFT_INDEX_Y[0][1] = ORTH_SHIFTS_Y;
-SHIFT_INDEX_Y[0][2] = ORTH_SHIFTS_Y_2;
-SHIFT_INDEX_Y[0][3] = ORTH_SHIFTS_Y_3;
-SHIFT_INDEX_Y.push([]);
-SHIFT_INDEX_Y[1][1] = DIAG_SHIFTS_Y;
-SHIFT_INDEX_Y[1][2] = KNIGHT_SHIFTS_Y_2;
-SHIFT_INDEX_Y[1][3] = KNIGHT_SHIFTS_Y_3;
-SHIFT_INDEX_Y.push([]);
-SHIFT_INDEX_Y[2][2] = DIAG_SHIFTS_Y_2;
-SHIFT_INDEX_Y[2][3] = DKNIGHT_SHIFTS_Y_3;
+for (let i = 0; i < 10; i++) {
+    SHIFT_INDEX.push([]);
+    for (let j = 0; j < 10; j++) {
+        SHIFT_INDEX[i].push({});
+    }
+}
+
+SHIFT_INDEX[0][1].x = ORTH_SHIFTS_X;
+SHIFT_INDEX[0][1].y = ORTH_SHIFTS_Y;
+SHIFT_INDEX[0][2].x = ORTH_SHIFTS_X_2;
+SHIFT_INDEX[0][2].y = ORTH_SHIFTS_Y_2;
+
+SHIFT_INDEX[1][1].x = DIAG_SHIFTS_X;
+SHIFT_INDEX[1][1].y = DIAG_SHIFTS_Y;
+SHIFT_INDEX[1][2].x = KNIGHT_SHIFTS_X_2;
+SHIFT_INDEX[1][2].y = KNIGHT_SHIFTS_Y_2;
+SHIFT_INDEX[1][3].x = KNIGHT_SHIFTS_X_3;
+SHIFT_INDEX[1][3].y = KNIGHT_SHIFTS_Y_3;
+
+SHIFT_INDEX[2][2].x = DIAG_SHIFTS_X_2;
+SHIFT_INDEX[2][2].y = DIAG_SHIFTS_Y_2;
+SHIFT_INDEX[2][3].x = DKNIGHT_SHIFTS_X_3;
+SHIFT_INDEX[2][3].y = DKNIGHT_SHIFTS_Y_3;
+
+for (let i = 3; i <= 8; i++) {
+    SHIFT_INDEX[0][i].x = ORTH_SHIFTS_X.map(function(entry) { return entry * i; });
+    SHIFT_INDEX[0][i].y = ORTH_SHIFTS_Y.map(function(entry) { return entry * i; });
+
+    SHIFT_INDEX[i][i].x = DIAG_SHIFTS_X.map(function(entry) { return entry * i; });
+    SHIFT_INDEX[i][i].y = DIAG_SHIFTS_Y.map(function(entry) { return entry * i; });
+}
+
+
+function pursueDirection(i, j) {
+    if (i === 0) {
+        return [0, 1, 2, 3];
+    } else if (i === j) {
+        return [0, 2, 3, 1];
+    } else {
+        return [0, 1, 0, 1, 3, 3, 2, 2];
+    }
+}
+
+function runDirection(i, j) {
+    if (i === 0 || i === j) {
+        return [1, 0, 3, 2];
+    } else if (i === j) {
+        return [1, 3, 2, 0];
+    }
+    //  else {
+    //     return [1, 0, 1, 0, 2, 2, 3, 3]
+    // }
+}

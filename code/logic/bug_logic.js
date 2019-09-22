@@ -30,47 +30,22 @@ class BugLogic {
         if (randInt(0, 1) <= 0) { // 50% chance that computation time will be devoted to "looking"
           // "Vision"
           let done = false;
-          // orth
-          let runDirections = [1, 0, 3, 2];
-          if (!done) {
-            for (let k = 0; k < ORTH_SHIFTS_X.length; k++) {
-              if (grid.rows[mod(i + ORTH_SHIFTS_X[k], grid.size)][mod(j + ORTH_SHIFTS_Y[k], grid.size)].agent !== null &&
-                grid.rows[mod(i + ORTH_SHIFTS_X[k], grid.size)][mod(j + ORTH_SHIFTS_Y[k], grid.size)].agent instanceof Redmuncher) {
-                  direction = runDirections[k];
-                  done = true;
-              }
-            }
-          }
-          // diag (arbitrarily chose the 135 degree angle "runaway angle" convention for it)
-          if (!done) {
-            runDirections = [2, 0, 1, 3];
-            for (let k = 0; k < DIAG_SHIFTS_X.length; k++) {
-              if (grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)].agent !== null &&
-                grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)].agent instanceof Redmuncher) {
-                  direction = runDirections[k];
-                  done = true;
-              }
-            }
-          }
-          // "far orth" (low priority)
-          if (!done) {
-            runDirections = [1, 0, 3, 2];
-            for (let k = 0; k < ORTH_SHIFTS_X_2.length; k++) {
-              if (grid.rows[mod(i + ORTH_SHIFTS_X_2[k], grid.size)][mod(j + ORTH_SHIFTS_Y_2[k], grid.size)].agent !== null &&
-                grid.rows[mod(i + ORTH_SHIFTS_X_2[k], grid.size)][mod(j + ORTH_SHIFTS_Y_2[k], grid.size)].agent instanceof Redmuncher) {
-                  direction = runDirections[k];
-                  done = true;
-              }
-            }
-          }
-          // "far diag" (lowest priority)
-          if (!done) {
-            let runDirections = [2, 0, 1, 3];
-            for (let k = 0; k < DIAG_SHIFTS_X_2.length; k++) {
-              if (grid.rows[mod(i + DIAG_SHIFTS_X_2[k], grid.size)][mod(j + DIAG_SHIFTS_Y_2[k], grid.size)].agent !== null &&
-                grid.rows[mod(i + DIAG_SHIFTS_X_2[k], grid.size)][mod(j + DIAG_SHIFTS_Y_2[k], grid.size)].agent instanceof Redmuncher) {
-                  direction = runDirections[k];
-                  done = true;
+          
+          let visibleZones = [
+            [0, 1],
+            [1, 1],
+            [0, 2],
+            [2, 2]
+          ];
+          for (let v = 0; v < visibleZones.length; v++) {
+            if (!done) {
+              let i = visibleZones[v][0], j = visibleZones[v][1];
+              for (let k = 0; k < SHIFT_INDEX[i][j].x.length; k++) {
+                if (grid.rows[mod(i + SHIFT_INDEX[i][j].x[k], grid.size)][mod(j + SHIFT_INDEX[i][j].y[k], grid.size)].agent !== null &&
+                  grid.rows[mod(i + SHIFT_INDEX[i][j].x[k], grid.size)][mod(j + SHIFT_INDEX[i][j].y[k], grid.size)].agent instanceof Redmuncher) {
+                    direction = runDirection(i, j)[k];
+                    done = true;
+                }
               }
             }
           }
@@ -117,45 +92,22 @@ class BugLogic {
         if (randInt(0, 1) <= 0) { // 50% chance that computation time will be devoted to "looking"
           // "Vision"
           let done = false;
-          // orth
-          let runDirections = [1, 0, 3, 2];
-          for (let k = 0; k < ORTH_SHIFTS_X.length; k++) {
-            if (grid.rows[mod(i + ORTH_SHIFTS_X[k], grid.size)][mod(j + ORTH_SHIFTS_Y[k], grid.size)].agent !== null &&
-              grid.rows[mod(i + ORTH_SHIFTS_X[k], grid.size)][mod(j + ORTH_SHIFTS_Y[k], grid.size)].agent instanceof Redmuncher) {
-                direction = runDirections[k];
-                done = true;
-            }
-          }
-          // diag (arbitrarily chose the 135 degree angle "runaway angle" convention for it)
-          if (!done) {
-            runDirections = [2, 0, 1, 3];
-            for (let k = 0; k < DIAG_SHIFTS_X.length; k++) {
-              if (grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)].agent !== null &&
-                grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)].agent instanceof Redmuncher) {
-                  direction = runDirections[k];
-                  done = true;
-              }
-            }
-          }
-          // "far orth"
-          if (!done) {
-            runDirections = [1, 0, 3, 2];
-            for (let k = 0; k < ORTH_SHIFTS_X_2.length; k++) {
-              if (grid.rows[mod(i + ORTH_SHIFTS_X_2[k], grid.size)][mod(j + ORTH_SHIFTS_Y_2[k], grid.size)].agent !== null &&
-                grid.rows[mod(i + ORTH_SHIFTS_X_2[k], grid.size)][mod(j + ORTH_SHIFTS_Y_2[k], grid.size)].agent instanceof Redmuncher) {
-                  direction = runDirections[k];
-                  done = true;
-              }
-            }
-          }
-          // "far diag"
-          if (!done) {
-            let runDirections = [2, 0, 1, 3];
-            for (let k = 0; k < DIAG_SHIFTS_X_2.length; k++) {
-              if (grid.rows[mod(i + DIAG_SHIFTS_X_2[k], grid.size)][mod(j + DIAG_SHIFTS_Y_2[k], grid.size)].agent !== null &&
-                grid.rows[mod(i + DIAG_SHIFTS_X_2[k], grid.size)][mod(j + DIAG_SHIFTS_Y_2[k], grid.size)].agent instanceof Redmuncher) {
-                  direction = runDirections[k];
-                  done = true;
+
+          let visibleZones = [
+            [0, 1],
+            [1, 1],
+            [0, 2],
+            [2, 2]
+          ];
+          for (let v = 0; v < visibleZones.length; v++) {
+            if (!done) {
+              let i = visibleZones[v][0], j = visibleZones[v][1];
+              for (let k = 0; k < SHIFT_INDEX[i][j].x.length; k++) {
+                if (grid.rows[mod(i + SHIFT_INDEX[i][j].x[k], grid.size)][mod(j + SHIFT_INDEX[i][j].y[k], grid.size)].agent !== null &&
+                  grid.rows[mod(i + SHIFT_INDEX[i][j].x[k], grid.size)][mod(j + SHIFT_INDEX[i][j].y[k], grid.size)].agent instanceof Redmuncher) {
+                    direction = runDirection(i, j)[k];
+                    done = true;
+                }
               }
             }
           }
