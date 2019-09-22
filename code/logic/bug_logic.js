@@ -31,17 +31,9 @@ class BugLogic {
           // "Vision"
           let done = false;
           
-          let visibleZones = [
-            [0, 1],
-            [1, 1],
-            [0, 2],
-            [1, 2],
-            [2, 2],
-            [0, 3]
-          ];
-          for (let v = 0; v < visibleZones.length; v++) {
+          for (let v = 0; v < this.cec.greenbug.visibleZones.length; v++) {
             if (!done) {
-              let i = visibleZones[v][0], j = visibleZones[v][1];
+              let i = this.cec.greenbug.visibleZones[v][0], j = this.cec.greenbug.visibleZones[v][1];
               for (let k = 0; k < SHIFT_INDEX[i][j].x.length; k++) {
                 if (grid.rows[mod(i + SHIFT_INDEX[i][j].x[k], grid.size)][mod(j + SHIFT_INDEX[i][j].y[k], grid.size)].agent !== null &&
                   grid.rows[mod(i + SHIFT_INDEX[i][j].x[k], grid.size)][mod(j + SHIFT_INDEX[i][j].y[k], grid.size)].agent instanceof Redmuncher) {
@@ -95,16 +87,9 @@ class BugLogic {
           // "Vision"
           let done = false;
 
-          let visibleZones = [
-            [0, 1],
-            [1, 1],
-            [0, 2],
-            [1, 2],
-            [2, 2]
-          ];
-          for (let v = 0; v < visibleZones.length; v++) {
+          for (let v = 0; v < this.cec.bluebug.visibleZones.length; v++) {
             if (!done) {
-              let i = visibleZones[v][0], j = visibleZones[v][1];
+              let i = this.cec.bluebug.visibleZones[v][0], j = this.cec.bluebug.visibleZones[v][1];
               for (let k = 0; k < SHIFT_INDEX[i][j].x.length; k++) {
                 if (grid.rows[mod(i + SHIFT_INDEX[i][j].x[k], grid.size)][mod(j + SHIFT_INDEX[i][j].y[k], grid.size)].agent !== null &&
                   grid.rows[mod(i + SHIFT_INDEX[i][j].x[k], grid.size)][mod(j + SHIFT_INDEX[i][j].y[k], grid.size)].agent instanceof Redmuncher) {

@@ -78,8 +78,7 @@ function runDirection(i, j) {
         return [1, 0, 3, 2];
     } else if (i === j) {
         return [1, 3, 2, 0];
-    }
-     else {
+    } else {
         return [1, 0, 1, 0, 2, 2, 3, 3]
     }
 }

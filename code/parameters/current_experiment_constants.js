@@ -14,7 +14,15 @@ class CurrentExperimentConstants {
                 babyStomach: 1000,
                 metabolism: 40,
                 grazeLimit: 100,
-                birthFactor: 1.6
+                birthFactor: 1.6,
+                visibleZones: [
+                    [0, 1],
+                    [1, 1],
+                    [0, 2],
+                    [1, 2],
+                    [2, 2],
+                    [0, 3]
+                ]
             }
 
             this.bluebug = {
@@ -22,7 +30,14 @@ class CurrentExperimentConstants {
                 babyStomach: 300,
                 metabolism: 33,
                 grazeLimit: 85,
-                birthFactor: 0.6
+                birthFactor: 0.6,
+                visibleZones: [
+                    [0, 1],
+                    [1, 1],
+                    [0, 2],
+                    [1, 2],
+                    [2, 2]
+                ]
             }
 
             this.redmuncher = {
@@ -32,7 +47,33 @@ class CurrentExperimentConstants {
                 grazeLimit: 120,
                 birthFactor: 3.1,
                 stomachFactor: 12,
-                fatigueThreshold: 2000
+                fatigueThreshold: 2000,
+                fatigueVisibleZones: [
+                    [0, 1],
+                    [1, 1],
+                    [0, 2]
+                ],
+                visibleZones: [
+                    [2, 2],
+                    [1, 2],
+                    [0, 3],
+                    [1, 3],
+                    [2, 3],
+                    [3, 3],
+                    [0, 4],
+                    [1, 4],
+                    [2, 4],
+                    [3, 4],
+                    [4, 4],
+                    [0, 5],
+                    [5, 5],
+                    [0, 6],
+                    [6, 6],
+                    [0, 7],
+                    [7, 7],
+                    [0, 8],
+                    [8, 8]
+                  ]
             }
 
             this.birthFactorShift = 11;
