@@ -41,11 +41,18 @@ SHIFT_INDEX[1][2].x = KNIGHT_SHIFTS_X_2;
 SHIFT_INDEX[1][2].y = KNIGHT_SHIFTS_Y_2;
 SHIFT_INDEX[1][3].x = KNIGHT_SHIFTS_X_3;
 SHIFT_INDEX[1][3].y = KNIGHT_SHIFTS_Y_3;
+SHIFT_INDEX[1][4].x = [1, 1, -1, -1, 4, 4, -4, -4];
+SHIFT_INDEX[1][4].y = [-4, 4, -4, 4, -1, 1, -1, 1];
 
 SHIFT_INDEX[2][2].x = DIAG_SHIFTS_X_2;
 SHIFT_INDEX[2][2].y = DIAG_SHIFTS_Y_2;
 SHIFT_INDEX[2][3].x = DKNIGHT_SHIFTS_X_3;
 SHIFT_INDEX[2][3].y = DKNIGHT_SHIFTS_Y_3;
+SHIFT_INDEX[2][4].x = [2, 2, -2, -2, 4, 4, -4, -4];
+SHIFT_INDEX[2][4].y = [-4, 4, -4, 4, -2, 2, -2, 2];
+
+SHIFT_INDEX[3][4].x = [3, 3, -3, -3, 4, 4, -4, -4];
+SHIFT_INDEX[3][4].y = [-4, 4, -4, 4, -3, 3, -3, 3];
 
 for (let i = 3; i <= 8; i++) {
     SHIFT_INDEX[0][i].x = ORTH_SHIFTS_X.map(function(entry) { return entry * i; });
@@ -72,7 +79,7 @@ function runDirection(i, j) {
     } else if (i === j) {
         return [1, 3, 2, 0];
     }
-    //  else {
-    //     return [1, 0, 1, 0, 2, 2, 3, 3]
-    // }
+     else {
+        return [1, 0, 1, 0, 2, 2, 3, 3]
+    }
 }

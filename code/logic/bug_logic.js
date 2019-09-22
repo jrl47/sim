@@ -35,7 +35,9 @@ class BugLogic {
             [0, 1],
             [1, 1],
             [0, 2],
-            [2, 2]
+            [1, 2],
+            [2, 2],
+            [0, 3]
           ];
           for (let v = 0; v < visibleZones.length; v++) {
             if (!done) {
@@ -97,6 +99,7 @@ class BugLogic {
             [0, 1],
             [1, 1],
             [0, 2],
+            [1, 2],
             [2, 2]
           ];
           for (let v = 0; v < visibleZones.length; v++) {

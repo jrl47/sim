@@ -46,75 +46,98 @@ class MuncherLogic {
       if (redmuncher.stomach > 0) { // RIP redmuncher if empty stomach, otherwise it moves instead of dies
         let direction = randInt(0, 3); // AI is same as unless it sees something
 
-        if (redmuncher.stomach > this.cec.redmuncher.fatigueThreshold) { // vision only happens if muncher is not too hungry
-          // "Vision"
-          let done = false;
+        // "Vision"
+        let done = false;
 
 
-          // orth
-          let pursueDirections = [0, 1, 2, 3];
+        // // orth
+        // let pursueDirections = [0, 1, 2, 3];
+        // if (!done) {
+        //   for (let k = 0; k < ORTH_SHIFTS_X.length; k++) {
+        //     if (grid.rows[mod(i + ORTH_SHIFTS_X[k], grid.size)][mod(j + ORTH_SHIFTS_Y[k], grid.size)].agent !== null &&
+        //       grid.rows[mod(i + ORTH_SHIFTS_X[k], grid.size)][mod(j + ORTH_SHIFTS_Y[k], grid.size)].agent instanceof Bluebug ||
+        //       grid.rows[mod(i + ORTH_SHIFTS_X[k], grid.size)][mod(j + ORTH_SHIFTS_Y[k], grid.size)].agent instanceof Greenbug) {
+        //         direction = pursueDirections[k];
+        //         done = true;
+        //     }
+        //   }
+        // }
+        // // diag, for bluebugs (arbitrarily chose the 135 degree angle "runaway angle" convention for it)
+        // if (!done) {
+        //   pursueDirections = [0, 2, 3, 1];
+        //   for (let k = 0; k < DIAG_SHIFTS_X.length; k++) {
+        //     if (grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)].agent !== null &&
+        //       grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)].agent instanceof Bluebug) {
+        //         direction = pursueDirections[k];
+        //         done = true;
+        //     }
+        //   }
+        // }
+        // // "far orth, for bluebugs" 
+        // if (!done) {
+        //   pursueDirections = [0, 1, 2, 3];
+        //   for (let k = 0; k < ORTH_SHIFTS_X_2.length; k++) {
+        //     if (grid.rows[mod(i + ORTH_SHIFTS_X_2[k], grid.size)][mod(j + ORTH_SHIFTS_Y_2[k], grid.size)].agent !== null &&
+        //       grid.rows[mod(i + ORTH_SHIFTS_X_2[k], grid.size)][mod(j + ORTH_SHIFTS_Y_2[k], grid.size)].agent instanceof Bluebug) {
+        //         direction = pursueDirections[k];
+        //         done = true;
+        //     }
+        //   }
+        // }
+        // // "diag, for greenbugs"
+        // if (!done) {
+        //   pursueDirections = [0, 2, 3, 1];
+        //   for (let k = 0; k < DIAG_SHIFTS_X.length; k++) {
+        //     if (grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)].agent !== null &&
+        //       grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)].agent instanceof Greenbug) {
+        //         direction = pursueDirections[k];
+        //         done = true;
+        //     }
+        //   }
+        // }
+        // // "far orth, for greenbugs"
+        // if (!done) {
+        //   pursueDirections = [0, 1, 2, 3];
+        //   for (let k = 0; k < ORTH_SHIFTS_X_2.length; k++) {
+        //     if (grid.rows[mod(i + ORTH_SHIFTS_X_2[k], grid.size)][mod(j + ORTH_SHIFTS_Y_2[k], grid.size)].agent !== null &&
+        //       grid.rows[mod(i + ORTH_SHIFTS_X_2[k], grid.size)][mod(j + ORTH_SHIFTS_Y_2[k], grid.size)].agent instanceof Greenbug) {
+        //         direction = pursueDirections[k];
+        //         done = true;
+        //     }
+        //   }
+        // }
+
+        let visibleZones = [
+          [0, 1],
+          [1, 1],
+          [0, 2]
+        ];
+        for (let v = 0; v < visibleZones.length; v++) {
           if (!done) {
-            for (let k = 0; k < ORTH_SHIFTS_X.length; k++) {
-              if (grid.rows[mod(i + ORTH_SHIFTS_X[k], grid.size)][mod(j + ORTH_SHIFTS_Y[k], grid.size)].agent !== null &&
-                grid.rows[mod(i + ORTH_SHIFTS_X[k], grid.size)][mod(j + ORTH_SHIFTS_Y[k], grid.size)].agent instanceof Bluebug ||
-                grid.rows[mod(i + ORTH_SHIFTS_X[k], grid.size)][mod(j + ORTH_SHIFTS_Y[k], grid.size)].agent instanceof Greenbug) {
-                  direction = pursueDirections[k];
+            let i = visibleZones[v][0], j = visibleZones[v][1];
+            for (let k = 0; k < SHIFT_INDEX[i][j].x.length; k++) {
+              if (grid.rows[mod(i + SHIFT_INDEX[i][j].x[k], grid.size)][mod(j + SHIFT_INDEX[i][j].y[k], grid.size)].agent !== null &&
+                grid.rows[mod(i + SHIFT_INDEX[i][j].x[k], grid.size)][mod(j + SHIFT_INDEX[i][j].y[k], grid.size)].agent instanceof Bluebug ||
+                grid.rows[mod(i + SHIFT_INDEX[i][j].x[k], grid.size)][mod(j + SHIFT_INDEX[i][j].y[k], grid.size)].agent instanceof Greenbug) {
+                  direction = pursueDirection(i, j)[k];
                   done = true;
               }
             }
           }
-          // diag, for bluebugs (arbitrarily chose the 135 degree angle "runaway angle" convention for it)
-          if (!done) {
-            pursueDirections = [0, 2, 3, 1];
-            for (let k = 0; k < DIAG_SHIFTS_X.length; k++) {
-              if (grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)].agent !== null &&
-                grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)].agent instanceof Bluebug) {
-                  direction = pursueDirections[k];
-                  done = true;
-              }
-            }
-          }
-          // "far orth, for bluebugs" 
-          if (!done) {
-            pursueDirections = [0, 1, 2, 3];
-            for (let k = 0; k < ORTH_SHIFTS_X_2.length; k++) {
-              if (grid.rows[mod(i + ORTH_SHIFTS_X_2[k], grid.size)][mod(j + ORTH_SHIFTS_Y_2[k], grid.size)].agent !== null &&
-                grid.rows[mod(i + ORTH_SHIFTS_X_2[k], grid.size)][mod(j + ORTH_SHIFTS_Y_2[k], grid.size)].agent instanceof Bluebug) {
-                  direction = pursueDirections[k];
-                  done = true;
-              }
-            }
-          }
-          // "diag, for greenbugs"
-          if (!done) {
-            pursueDirections = [0, 2, 3, 1];
-            for (let k = 0; k < DIAG_SHIFTS_X.length; k++) {
-              if (grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)].agent !== null &&
-                grid.rows[mod(i + DIAG_SHIFTS_X[k], grid.size)][mod(j + DIAG_SHIFTS_Y[k], grid.size)].agent instanceof Greenbug) {
-                  direction = pursueDirections[k];
-                  done = true;
-              }
-            }
-          }
-          // "far orth, for greenbugs"
-          if (!done) {
-            pursueDirections = [0, 1, 2, 3];
-            for (let k = 0; k < ORTH_SHIFTS_X_2.length; k++) {
-              if (grid.rows[mod(i + ORTH_SHIFTS_X_2[k], grid.size)][mod(j + ORTH_SHIFTS_Y_2[k], grid.size)].agent !== null &&
-                grid.rows[mod(i + ORTH_SHIFTS_X_2[k], grid.size)][mod(j + ORTH_SHIFTS_Y_2[k], grid.size)].agent instanceof Greenbug) {
-                  direction = pursueDirections[k];
-                  done = true;
-              }
-            }
-          }
-          let visibleZones = [
+        }
+
+        if (redmuncher.stomach > this.cec.redmuncher.fatigueThreshold) { // hq vision only happens if muncher is not too hungry
+          visibleZones = [
             [2, 2],
             [1, 2],
+            [0, 3],
             [1, 3],
             [2, 3],
-            [0, 3],
             [3, 3],
             [0, 4],
+            [1, 4],
+            [2, 4],
+            [3, 4],
             [4, 4],
             [0, 5],
             [5, 5],
