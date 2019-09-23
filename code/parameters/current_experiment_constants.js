@@ -2,19 +2,36 @@ class CurrentExperimentConstants {
     constructor() {
         if (!CurrentExperimentConstants.instance) {
             CurrentExperimentConstants.instance = this;
-            this.numInitialGreenbugs = 15;
-            // + 20;
-            this.numInitialBluebugs = 20;
-            // + 20;
-            this.numInitialRedmunchers = 3;
-            // + 6;
+            this.numInitialGreenbugs = 15//;
+            + 20;
+            this.numInitialBluebugs = 20//;
+            + 20;
+            this.numInitialRedmunchers = 3//;
+            + 6;
 
             this.greenbug = {
-                startStomach: 5000,
-                babyStomach: 1000,
-                metabolism: 40,
+                startStomach: 5100,
+                babyStomach: 900,
+                metabolism: 44,
                 grazeLimit: 100,
                 birthFactor: 1.6,
+                visibleZones: [
+                    [0, 1],
+                    [1, 1],
+                    [0, 2],
+                    [1, 2],
+                    [2, 2],
+                    [0, 3],
+                    [3, 3]
+                ]
+            }
+
+            this.bluebug = {
+                startStomach: 2100,
+                babyStomach: 300,
+                metabolism: 38,
+                grazeLimit: 85,
+                birthFactor: 0.5,
                 visibleZones: [
                     [0, 1],
                     [1, 1],
@@ -25,37 +42,22 @@ class CurrentExperimentConstants {
                 ]
             }
 
-            this.bluebug = {
-                startStomach: 2100,
-                babyStomach: 300,
-                metabolism: 33,
-                grazeLimit: 85,
-                birthFactor: 0.6,
-                visibleZones: [
-                    [0, 1],
-                    [1, 1],
-                    [0, 2],
-                    [1, 2],
-                    [2, 2]
-                ]
-            }
-
             this.redmuncher = {
-                startStomach: 13000,
-                babyStomach: 4000,
-                metabolism: 41,
+                startStomach: 13500,
+                babyStomach: 3500,
+                metabolism: 45,
                 grazeLimit: 120,
                 birthFactor: 3.1,
-                stomachFactor: 12,
+                stomachFactor: 7,
                 fatigueThreshold: 2000,
                 fatigueVisibleZones: [
                     [0, 1],
                     [1, 1],
-                    [0, 2]
+                    [0, 2],
+                    [2, 2],
+                    [1, 2]
                 ],
                 visibleZones: [
-                    [2, 2],
-                    [1, 2],
                     [0, 3],
                     [1, 3],
                     [2, 3],

@@ -78,9 +78,6 @@ class BugLogic {
       }
       if (bluebug.stomach > 0) { // RIP bluebug if empty stomach, otherwise it moves instead of dies
 
-        // if (bluebug.stomach < 120) { // bluebugs are usually steadfast in their direction. but they have limits...
-        //   bluebug.direction = randInt(0, 3);
-        // }
         let direction = bluebug.direction;
 
         if (randInt(0, 1) <= 0) { // 50% chance that computation time will be devoted to "looking"

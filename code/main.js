@@ -29,7 +29,7 @@ let totalSteps = 0;
 let maxSteps = 0;
 let maxAvgSteps = 0;
 let numExperiments = 0;
-let maxExperiments = 8;
+let maxExperiments = 10;
 
 let blameRed = 0;
 let blameGreen = 0
