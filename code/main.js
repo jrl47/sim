@@ -11,16 +11,18 @@ amp.putAgentConfig0(grid, agents);
 // View Setup
 let gv = new GridView(grid);
 let avm = new AgentInfoViewAndModel();
+let fv = new FunctionView();
 let draw = function() {
   gv.drawGrid();
   avm.drawInfo();
+  fv.drawFunctions();
 }
-
-// Engine Setup
-let stepper = new Stepper(grid, agents);
 
 // Need this to access # of each critter
 let vc = new ViewControl();
+
+// Engine Setup
+let stepper = new Stepper(grid, agents);
 
 // startup
 draw();
@@ -45,6 +47,7 @@ let maxBlue = 0;
 let changes = -1; // "changes" object to modify experiment params
 
 let timer = new Timer(
+  61, // timer interval
   () => {
     if (vc.numRedmunchers > currentMaxRed) {
       currentMaxRed = vc.numRedmunchers;
@@ -63,7 +66,6 @@ let timer = new Timer(
         console.log(numSteps);
       }
     } else {
-
       if (vc.numRedmunchers === 0) {
         blameRed++;
       }

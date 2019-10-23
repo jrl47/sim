@@ -1,5 +1,5 @@
 class Timer { // SINGLETON
-    constructor(tickCallback) {
+    constructor(interval, tickCallback) {
         // Note:
         // - "Timer" must be used here instead of "this" because a new object is always created when a constructor is invoked with
         // the "new" keyword, and the new object is always bound to "this" inside the constructor.
@@ -18,7 +18,7 @@ class Timer { // SINGLETON
             this.ticks = 0;
 
             this.expected = -1;
-            this.interval = 57;
+            this.interval = interval;
 
             this.unpause();
         }

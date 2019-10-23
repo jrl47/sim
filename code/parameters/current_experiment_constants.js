@@ -2,12 +2,12 @@ class CurrentExperimentConstants {
     constructor() {
         if (!CurrentExperimentConstants.instance) {
             CurrentExperimentConstants.instance = this;
-            this.numInitialGreenbugs = 15//;
-            + 20;
-            this.numInitialBluebugs = 20//;
-            + 20;
-            this.numInitialRedmunchers = 3//;
-            + 6;
+            this.numInitialGreenbugs = 15;
+            // + 20;
+            this.numInitialBluebugs = 20;
+            // + 20;
+            this.numInitialRedmunchers = 3;
+            // + 6;
 
             this.greenbug = {
                 startStomach: 5100,
