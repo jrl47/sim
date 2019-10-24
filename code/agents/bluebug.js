@@ -5,7 +5,7 @@ class Bluebug extends Bug {
         this.stomach = isBaby ? this.cec.bluebug.babyStomach : this.cec.bluebug.startStomach;
         this.direction = randInt(0, 3);
     }
-    step(grid, i, j, bugs) {
+    step(grid, bugs, i, j) {
         super.step();
         if (grid.rows[i][j].state.blue > 0) {
             this.stomach += Math.min(this.cec.bluebug.grazeLimit, grid.rows[i][j].state.blue);

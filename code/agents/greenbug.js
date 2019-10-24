@@ -4,7 +4,7 @@ class Greenbug extends Bug {
         this.done = isBaby;
         this.stomach = isBaby ? this.cec.greenbug.babyStomach : this.cec.greenbug.startStomach;
     }
-    step(grid, i, j, bugs) {
+    step(grid, bugs, i, j) {
         super.step();
         if (grid.rows[i][j].state.green > 0) {
             this.stomach += Math.min(this.cec.greenbug.grazeLimit, grid.rows[i][j].state.green);

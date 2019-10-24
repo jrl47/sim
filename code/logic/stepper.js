@@ -12,7 +12,7 @@ class Stepper {
     }
     doBugLogic(i, j) {
       if (this.grid.rows[i][j].agent !== null && this.grid.rows[i][j].agent.done === false && this.grid.rows[i][j].agent instanceof Bug) {
-          this.grid.rows[i][j].agent.step(this.grid, i, j, this.agents.bugs);
+          this.grid.rows[i][j].agent.step(this.grid, this.agents.bugs, i, j);
       }
     }
     doMuncherLogic(i, j) {
