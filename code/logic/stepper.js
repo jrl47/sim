@@ -5,27 +5,28 @@ class Stepper {
             this.grid = grid;
             this.agents = agents;
             this.vc = new ViewControl();
+            this.cec = new CurrentExperimentConstants();
             this.gooLogic = new GooLogic();
-            this.bugLogic = new BugLogic();
-            this.muncherLogic = new MuncherLogic();
         }
         return Stepper.instance;
     }
-    doBugLogic() { // TODO
-
+    doBugLogic(i, j) {
+      if (this.grid.rows[i][j].agent !== null && this.grid.rows[i][j].agent.done === false && this.grid.rows[i][j].agent instanceof Bug) {
+          this.grid.rows[i][j].agent.step(this.grid, i, j, this.agents.bugs);
+      }
     }
-    doMuncherLogic() { // TODO
-
+    doMuncherLogic(i, j) {
+      if (this.grid.rows[i][j].agent !== null && this.grid.rows[i][j].agent.done === false && this.grid.rows[i][j].agent instanceof Muncher) {
+        this.grid.rows[i][j].agent.step(this.grid, this.agents.munchers, i, j);
+      }
     }
     step() {
         let neighborTotals = this.getNeighborTotals(this.grid);
         for(let i = 0; i < this.grid.size; i++) {
             for(let j = 0; j < this.grid.size; j++) {
                 this.gooLogic.doGooLogic(this.grid, neighborTotals, i, j);
-                this.bugLogic.doBugLogic(this.grid, this.agents.bugs, i, j);
-                // this.doBugLogic(); TODO for refactor
-                this.muncherLogic.doMuncherLogic(this.grid, this.agents.munchers, i, j); // MUST come after bug logic unless we want to worry about removal order
-                // this.doMuncherLogic(); // MUST come after bug logic unless we want to worry about removal order TODO for refactor
+                this.doBugLogic(i, j);
+                this.doMuncherLogic(i, j);
             }
         }
         for (let a = 0; a < this.agents.bugs.length; a++) {
