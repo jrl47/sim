@@ -5,7 +5,7 @@ class Bluebug extends Bug {
         this.stomach = isBaby ? this.cec.bluebug.babyStomach : this.cec.bluebug.startStomach;
         this.direction = randInt(0, 3);
     }
-    step(grid, bugs, i, j) {
+    step(grid, agents, i, j) {
         super.step();
         if (grid.rows[i][j].state.blue > 0) {
             this.stomach += Math.min(this.cec.bluebug.grazeLimit, grid.rows[i][j].state.blue);
@@ -46,11 +46,10 @@ class Bluebug extends Bug {
             destinationCell.agent = this;
             if (willReproduce) {
             let baby = new Bluebug(true);
-            this.vc.numBluebugs++; // it seems unfortunate that this logic must live here for now
             this.stomach = this.cec.bluebug.startStomach;
             this.direction = 0;
             grid.rows[i][j].agent = baby;
-            bugs.push(baby);
+            agents.add(baby);
             }
         } else {
             grid.rows[i][j].agent = this;

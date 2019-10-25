@@ -5,7 +5,7 @@ class GridMaker {
         }
         return GridMaker.instance;
     }
-    makeGridSetupA() {
+    gridA() {
         let grid = new Grid(120);
             for (let i = 0; i < grid.size; i++) {
                 for (let j = 0; j < grid.size; j++) {
@@ -16,7 +16,7 @@ class GridMaker {
         }
         return grid;
     }
-    makeGridSetup0() {
+    grid0() {
         let grid = new Grid(60);
             for (let i = 0; i < grid.size; i++) {
                 for (let j = 0; j < grid.size; j++) {
@@ -27,7 +27,7 @@ class GridMaker {
         }
         return grid;
     }
-    makeGridSetup1() {
+    grid1() {
         let grid = new Grid(40);
             for (let i = 0; i < grid.size; i++) {
                 for (let j = 0; j < grid.size; j++) {
@@ -38,7 +38,7 @@ class GridMaker {
         }
         return grid;
     }
-    makeGridSetup2() {
+    grid2() {
         let grid = new Grid(27);
             for (let i = 0; i < grid.size; i++) {
                 for (let j = 0; j < grid.size; j++) {

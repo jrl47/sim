@@ -4,7 +4,7 @@ class Greenbug extends Bug {
         this.done = isBaby;
         this.stomach = isBaby ? this.cec.greenbug.babyStomach : this.cec.greenbug.startStomach;
     }
-    step(grid, bugs, i, j) {
+    step(grid, agents, i, j) {
         super.step();
         if (grid.rows[i][j].state.green > 0) {
             this.stomach += Math.min(this.cec.greenbug.grazeLimit, grid.rows[i][j].state.green);
@@ -42,10 +42,9 @@ class Greenbug extends Bug {
             destinationCell.agent = this;
             if (willReproduce) {
             let baby = new Greenbug(true);
-            this.vc.numGreenbugs++; // if this can be refactored then agents won't need vcs
             this.stomach = this.cec.greenbug.startStomach;
             grid.rows[i][j].agent = baby;
-            bugs.push(baby);
+            agents.add(baby);
             }
         } else {
             grid.rows[i][j].agent = this;

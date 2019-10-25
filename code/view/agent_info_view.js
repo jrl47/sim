@@ -1,8 +1,9 @@
-class AgentInfoViewAndModel { // SINGLETON
+class AgentInfoView { // SINGLETON
     constructor() {
-        if (!AgentInfoViewAndModel.instance) {
-            AgentInfoViewAndModel.instance = this;
+        if (!AgentInfoView.instance) {
+            AgentInfoView.instance = this;
             this.vc = new ViewControl();
+            this.md = new Metadata();
 
             this.greenGrassButton = new Button("greenGrass");
             this.greenGrassButton.initialize(
@@ -39,11 +40,11 @@ class AgentInfoViewAndModel { // SINGLETON
             this.numBluebugsDisplay = document.getElementById("numBluebugsDisplay");
             this.numRedmunchersDisplay = document.getElementById("numRedmunchersDisplay");
         }
-        return AgentInfoViewAndModel.instance;
+        return AgentInfoView.instance;
     }
     drawInfo() {
-        this.numGreenbugsDisplay.textContent = '# of greenbugs: ' + this.vc.numGreenbugs;
-        this.numBluebugsDisplay.textContent = '# of bluebugs: ' + this.vc.numBluebugs;
-        this.numRedmunchersDisplay.textContent = '# of redmunchers: ' + this.vc.numRedmunchers;
+        this.numGreenbugsDisplay.textContent = '# of greenbugs: ' + this.md.numGreenbugs;
+        this.numBluebugsDisplay.textContent = '# of bluebugs: ' + this.md.numBluebugs;
+        this.numRedmunchersDisplay.textContent = '# of redmunchers: ' + this.md.numRedmunchers;
     }
 }

@@ -5,7 +5,7 @@ class Grid {
         for(let i = 0; i < this.size; i++) {
             this.rows.push([]);
             for(let j = 0; j < this.size; j++) {
-            this.rows[i].push(new Cell(i, j));
+                this.rows[i].push(new Cell(i, j));
             }
         }
     }

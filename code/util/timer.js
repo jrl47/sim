@@ -1,18 +1,18 @@
 class Timer { // SINGLETON
-    constructor(interval, tickCallback) {
+    constructor(interval) {
         // Note:
         // - "Timer" must be used here instead of "this" because a new object is always created when a constructor is invoked with
         // the "new" keyword, and the new object is always bound to "this" inside the constructor.
-        // - However, that object will only be returned by the "new" call if no return type is defined. The new object is (I guess)
-        // discarded otherwise and instead the return type determines what comes out of the "new" call.
+        // - However, that object will only be returned by the "new" call if there is no return statement. The new object is (I guess)
+        // discarded otherwise and instead the return statement determines what comes out of the "new" call.
         // References:
         // - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new
         // - https://medium.freecodecamp.org/demystifying-javascripts-new-keyword-874df126184c
         if (!Timer.instance) {
-            // The first time the constructor is called, we do want to use the new object that has been bound to "this."
-            // If we just used Timer.instance instead, then (I think) the object returned would not actually inherit from
-            // Timer.prototype. But setting Timer.instance to "this" prevents that issue. Still, we must avoid using "this"
-            // after the first time, because each time the constructor is called, it will be bound to a newly created object.
+            // The first time the constructor is called, we do want to use the new object that has been bound to "this." If we just
+            // used Timer.instance instead, then (I think) the object returned would not actually inherit from Timer.prototype. But
+            // setting Timer.instance to "this" prevents that issue. Still, we must avoid using "this" in the constructor after the
+            // first time, because each time the constructor is called, it will be bound to a newly created object. Weird!
             Timer.instance = this;
             this.tickCallbacks = [];
             this.ticks = 0;
@@ -22,14 +22,16 @@ class Timer { // SINGLETON
 
             this.unpause();
         }
-        Timer.instance.tickCallbacks.push(tickCallback);
         return Timer.instance;
     }
+    addTickCallback(tickCallback) {
+        this.tickCallbacks.push(tickCallback);
+    }
     pause() {
-        clearInterval(Timer.instance.intervalId);
+        clearInterval(this.intervalId);
     } 
     unpause() {
-        Timer.instance.intervalId = setInterval(
+        this.intervalId = setInterval(
             () => {
                 if (this.expected === -1) {
                     this.expected = Date.now() + this.interval;
@@ -41,17 +43,22 @@ class Timer { // SINGLETON
                     }
                     this.expected = newExpected;
                 }
-                Timer.instance.callTickCallbacks();
+                this.callTickCallbacks();
             }
             , this.interval);
     }
     callTickCallbacks() {
-        for (let i = 0; i < Timer.instance.tickCallbacks.length; i++) {
-            let remove = Timer.instance.tickCallbacks[i].call();
+        for (let i = 0; i < this.tickCallbacks.length; i++) {
+            let remove = this.tickCallbacks[i].call();
             if (remove) {
-                Timer.instance.tickCallbacks.splice(i, 1);
+                this.tickCallbacks.splice(i, 1);
             }
         }
-        Timer.instance.ticks++;
+        this.ticks++;
+        // uncomment for a fixed end time
+        // if (Timer.instance.ticks > 500) {
+        //     console.log('DONE!');
+        //     clearInterval(Timer.instance.intervalId);
+        // }
     }
 }

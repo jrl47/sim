@@ -1,7 +1,7 @@
 class Cell {
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
+    constructor(i, j) {
+        this.i = i;
+        this.j = j;
         this.state = {};
         this.agent = null;
     }

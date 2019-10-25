@@ -8,9 +8,6 @@ class ViewControl {
             this.showGreenbug = true;
             this.showBluebug = true;
             this.showRedmuncher = true;
-            this.numGreenbugs = -1;
-            this.numBluebugs = -1;
-            this.numRedmunchers = -1;
         }
         return ViewControl.instance;
     }

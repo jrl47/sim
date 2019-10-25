@@ -1,4 +1,4 @@
-class GooLogic {
+class GooLogic { // SINGLETON
   constructor(size) {
       if (!GooLogic.instance) {
         GooLogic.instance = this;
@@ -88,5 +88,44 @@ class GooLogic {
       if (grid.rows[i][j].state.red < 0) {
         grid.rows[i][j].state.red = 0;
       }
+  }
+  getNeighborTotals(grid) {
+    let neighborTotals = [];
+    for(let i = 0; i < grid.size; i++) {
+      neighborTotals.push([]);
+      for(var j = 0; j < grid.size; j++) {
+        neighborTotals[i].push(
+          {
+            blue: this.getWeightedNeighborTotal(grid, 'blue', i, j),
+            green: this.getWeightedNeighborTotal(grid, 'green', i, j),
+            red: this.getWeightedNeighborTotal(grid, 'red', i, j)
+          }
+        );
+      }
+    }
+    return neighborTotals;
+  }
+  getWeightedNeighborTotal(grid, color, i, j) {
+    let result = 0;
+  
+    let selfWeight = -1;
+    let orthWeight = -1;
+  
+    if (color === 'green') {
+      selfWeight = 8;
+      orthWeight = 1.7;
+    } else if (color === 'blue') {
+      selfWeight = 9;
+      orthWeight = 1.7;
+    } else if (color === 'red') {
+      selfWeight = 10;
+      orthWeight = 2.1;
+    }
+  
+    result += grid.rows[i][j].state[color] * selfWeight;
+    for (let k = 0; k < 4; k++) {
+      result += grid.rows[mod(i + ORTH_SHIFTS_X[k], grid.size)][mod(j + ORTH_SHIFTS_Y[k], grid.size)].state[color] * orthWeight;
+    }
+    return result;
   }
 }

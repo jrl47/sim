@@ -4,7 +4,7 @@ class Redmuncher extends Muncher{
         this.done = isBaby;
         this.stomach = isBaby ? this.cec.redmuncher.babyStomach : this.cec.redmuncher.startStomach;
     }
-    step(grid, munchers, i, j) {
+    step(grid, agents, i, j) {
         super.step();
         if (grid.rows[i][j].state.red > 0) {
             this.stomach += Math.min(this.cec.redmuncher.grazeLimit, grid.rows[i][j].state.red);
@@ -76,10 +76,9 @@ class Redmuncher extends Muncher{
             destinationCell.agent = this;
             if (willReproduce) {
             let baby = new Redmuncher(true);
-            this.vc.numRedmunchers++; // it seems unfortunate that this logic must live here for now
             this.stomach = this.cec.redmuncher.startStomach;
             grid.rows[i][j].agent = baby;
-            munchers.push(baby);
+            agents.add(baby);
             }
         } else {
             grid.rows[i][j].agent = this;
