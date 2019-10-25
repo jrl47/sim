@@ -2,17 +2,17 @@ class CurrentExperimentConstants {
     constructor() {
         if (!CurrentExperimentConstants.instance) {
             CurrentExperimentConstants.instance = this;
-            this.numInitialGreenbugs = 15;
-            // + 20;
-            this.numInitialBluebugs = 20;
-            // + 20;
-            this.numInitialRedmunchers = 3;
-            // + 6;
+            this.numInitialGreenbugs = 15//;
+            + 20;
+            this.numInitialBluebugs = 20//;
+            + 20;
+            this.numInitialRedmunchers = 3//;
+            + 6;
 
             this.greenbug = {
                 startStomach: 5100,
                 babyStomach: 900,
-                metabolism: 44,
+                metabolism: 42,
                 grazeLimit: 100,
                 birthFactor: 1.6,
                 visibleZones: [
@@ -29,7 +29,7 @@ class CurrentExperimentConstants {
             this.bluebug = {
                 startStomach: 2100,
                 babyStomach: 300,
-                metabolism: 38,
+                metabolism: 36,
                 grazeLimit: 85,
                 birthFactor: 0.5,
                 visibleZones: [
@@ -45,7 +45,7 @@ class CurrentExperimentConstants {
             this.redmuncher = {
                 startStomach: 13500,
                 babyStomach: 3500,
-                metabolism: 45,
+                metabolism: 44,
                 grazeLimit: 120,
                 birthFactor: 3.1,
                 stomachFactor: 7,

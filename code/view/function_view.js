@@ -7,7 +7,7 @@ class FunctionView { // SINGLETON
             this.vc = new ViewControl();
             this.AXIS_WIDTH = 40;
             this.xScale = 2;
-            this.yScale = 1;
+            this.yScale = 1/2;
             this.interval = 100;
             this.max = 350;
 
@@ -16,7 +16,7 @@ class FunctionView { // SINGLETON
             this.lastGreenEnd = 0;
             this.lastRedEnd = 0;
 
-            this.c.style.background = 'white';
+            this.c.style.background = 'rgb(255, 240, 252)';
 
             this.ctx.fillStyle = "rgb(0, 0, 0)";
             for (let i = 0; i < this.max/this.interval; i++) {
@@ -25,7 +25,7 @@ class FunctionView { // SINGLETON
                 this.ctx.fillText("" + i * this.interval, 2, this.c.height - 2 - (i * this.interval) / this.yScale);
             }
 
-            this.ctx.lineWidth = 3;
+            this.ctx.lineWidth = 7;
 
             this.ctx.fillStyle = "rgb(0, 0, 0)";
             this.ctx.fillRect(this.AXIS_WIDTH - 1, 0, 1, this.c.height);
@@ -52,7 +52,7 @@ class FunctionView { // SINGLETON
                 this.c.height - (this.lastGreenEnd / this.yScale));
             this.ctx.lineTo(this.AXIS_WIDTH + (this.numLines + 1) * this.xScale,
                 this.c.height - (this.vc.numGreenbugs / this.yScale));
-            this.ctx.strokeStyle = "rgb(0, 255, 0)";
+            this.ctx.strokeStyle = "rgb(40, 255, 70)";
             this.ctx.stroke();
 
             this.ctx.beginPath();
@@ -76,7 +76,7 @@ class FunctionView { // SINGLETON
                 this.c.height - (this.lastGreenEnd / this.yScale));
             this.ctx.lineTo(this.c.width - ((this.c.width - this.AXIS_WIDTH) % this.xScale),
                 this.c.height - (this.vc.numGreenbugs / this.yScale));
-            this.ctx.strokeStyle = "rgb(0, 255, 0)";
+            this.ctx.strokeStyle = "rgb(40, 255, 70)";
             this.ctx.stroke();
 
             this.ctx.beginPath();
