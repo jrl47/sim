@@ -1,34 +1,14 @@
 class Greenbug extends Bug {
     constructor(isBaby) {
-        super();
-        this.done = isBaby;
-        this.stomach = isBaby ? this.cec.greenbug.babyStomach : this.cec.greenbug.startStomach;
-        this.statesToGraze = ['green'];
-        this.grazeLimit = this.cec.greenbug.grazeLimit;
-        this.metabolism = this.cec.greenbug.metabolism;
-        this.birthFactor = this.cec.greenbug.birthFactor;
+        super(isBaby);
+        this.stomach = isBaby ? cec.greenbug.babyStomach : cec.greenbug.startStomach;
     }
     step(grid, agents, i, j) {
         super.step(grid, agents, i, j);
-        if (this.stomach > 0) { // RIP greenbug if empty stomach, otherwise it moves instead of dies
-            this.direction = randInt(0, 3);
-
+        if (!this.isStarved()) {
+            this.direction = randInt(0, 3); // unlike bluebugs, greenbugs randomize each turn by defualt.
             if (randInt(0, 1) <= 0) { // 50% chance that computation time will be devoted to "looking"
-                // "Vision"
-                let done = false;
-                
-                for (let v = 0; v < this.cec.greenbug.visibleZones.length; v++) {
-                if (!done) {
-                    let i = this.cec.greenbug.visibleZones[v][0], j = this.cec.greenbug.visibleZones[v][1];
-                    for (let k = 0; k < SHIFT_INDEX[i][j].x.length; k++) {
-                    if (grid.rows[mod(i + SHIFT_INDEX[i][j].x[k], grid.size)][mod(j + SHIFT_INDEX[i][j].y[k], grid.size)].agent !== null &&
-                        grid.rows[mod(i + SHIFT_INDEX[i][j].x[k], grid.size)][mod(j + SHIFT_INDEX[i][j].y[k], grid.size)].agent instanceof Redmuncher) {
-                        this.direction = runDirection(i, j)[k];
-                        done = true;
-                    }
-                    }
-                }
-                }
+                super.doVision(grid, agents, i, j);
             }
 
             let destinationCell = grid.rows[mod(i + ORTH_SHIFTS_X[this.direction], grid.size)][mod(j + ORTH_SHIFTS_Y[this.direction], grid.size)];
@@ -36,7 +16,7 @@ class Greenbug extends Bug {
                 destinationCell.agent = this;
                 if (this.willReproduce) {
                 let baby = new Greenbug(true);
-                this.stomach = this.cec.greenbug.startStomach;
+                this.stomach = cec.greenbug.startStomach;
                 grid.rows[i][j].agent = baby;
                 agents.add(baby);
                 }
@@ -48,3 +28,11 @@ class Greenbug extends Bug {
         }
     }
 }
+
+// Necessary because ES6 does not allow for static const fields inside of classes.
+// Reference: https://stackoverflow.com/questions/32647215/declaring-static-constants-in-es6-classes
+Object.defineProperty(Greenbug, 'statesToGraze', {value: ['green'], writable : false, enumerable : true, configurable : false});
+Object.defineProperty(Greenbug, 'grazeLimit', {value: cec.greenbug.grazeLimit, writable : false, enumerable : true, configurable : false});
+Object.defineProperty(Greenbug, 'metabolism', {value: cec.greenbug.metabolism, writable : false, enumerable : true, configurable : false});
+Object.defineProperty(Greenbug, 'birthFactor', {value: cec.greenbug.birthFactor, writable : false, enumerable : true, configurable : false});
+Object.defineProperty(Greenbug, 'visibleZones', {value: cec.greenbug.visibleZones, writable : false, enumerable : true, configurable : false});

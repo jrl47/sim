@@ -83,3 +83,4 @@ class CurrentExperimentConstants {
         return CurrentExperimentConstants.instance;
     }
 }
+cec = new CurrentExperimentConstants();

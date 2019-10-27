@@ -1,22 +1,29 @@
 class Agent {
-    constructor() {
-        this.done = false;
-        this.cec = new CurrentExperimentConstants();
+    constructor(isBaby) {
+        this.done = isBaby;
     }
-    step(grid, agents, i, j) {
+    startTurn(grid, i, j) {
         this.done = true;
-        for (let k = 0; k < this.statesToGraze.length; k++) {
-            if (grid.rows[i][j].state[this.statesToGraze[k]] > 0) {
-                this.stomach += Math.min(this.grazeLimit, grid.rows[i][j].state[this.statesToGraze[k]]);
-                grid.rows[i][j].state[this.statesToGraze[k]] -= Math.min(this.grazeLimit, grid.rows[i][j].state[this.statesToGraze[k]]);
+        grid.rows[i][j].agent = null;
+    }
+    eat(grid, agents, i, j) {
+        for (let k = 0; k < this.constructor.statesToGraze.length; k++) {
+            if (grid.rows[i][j].state[this.constructor.statesToGraze[k]] > 0) {
+                this.stomach += Math.min(this.constructor.grazeLimit, grid.rows[i][j].state[this.constructor.statesToGraze[k]]);
+                grid.rows[i][j].state[this.constructor.statesToGraze[k]] -=
+                    Math.min(this.constructor.grazeLimit, grid.rows[i][j].state[this.constructor.statesToGraze[k]]);
             }
         }
-        this.stomach -= this.metabolism;
-        grid.rows[i][j].agent = null;
-
+    }
+    metabolize() {
+        this.stomach -= this.constructor.metabolism;
         this.willReproduce = false;
-        if (this.stomach > Math.pow(2, this.cec.birthFactorShift + this.birthFactor)) {
+        if (this.stomach > Math.pow(2, this.constructor.birthFactorShift + this.constructor.birthFactor)) {
             this.willReproduce = true;
         }
     }
+    isStarved() {
+        return this.stomach < 0;
+    }
 }
+Object.defineProperty(Agent, 'birthFactorShift', {value: cec.birthFactorShift, writable : false, enumerable : true, configurable : false});
