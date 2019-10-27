@@ -2,13 +2,7 @@ class Muncher extends Agent {
     constructor(isBaby) {
         super(isBaby);
     }
-    step(grid, agents, i, j) {
-        super.startTurn(grid, i, j);
-        super.eat(grid, agents, i, j);
-        this.eat(grid, agents, i, j);
-        super.metabolize();
-    }
-    eat(grid, agents, i, j) {
+    munch(grid, i, j) {
         let neighborCell = -1;
         let directionsToLookX = [ORTH_SHIFTS_X, DIAG_SHIFTS_X];
         let directionsToLookY = [ORTH_SHIFTS_Y, DIAG_SHIFTS_Y];
@@ -31,21 +25,33 @@ class Muncher extends Agent {
             }
         }
     }
-    doVision(grid, agents, i, j) {
-        let visionDone = false;
-        if (this.stomach > this.fatigueThreshold) { // hq vision only happens if muncher is not too hungry
-            for (let v = 0; v < this.constructor.visibleZones.length; v++) {
-            if (!visionDone) {
-                let i = this.constructor.visibleZones[v][0], j = this.constructor.visibleZones[v][1];
-                for (let k = 0; k < SHIFT_INDEX[i][j].x.length; k++) {
-                if (grid.rows[mod(i + SHIFT_INDEX[i][j].x[k], grid.size)][mod(j + SHIFT_INDEX[i][j].y[k], grid.size)].agent !== null &&
-                    grid.rows[mod(i + SHIFT_INDEX[i][j].x[k], grid.size)][mod(j + SHIFT_INDEX[i][j].y[k], grid.size)].agent instanceof Bluebug ||
-                    grid.rows[mod(i + SHIFT_INDEX[i][j].x[k], grid.size)][mod(j + SHIFT_INDEX[i][j].y[k], grid.size)].agent instanceof Greenbug) {
-                    this.direction = pursueDirection(i, j)[k];
-                    visionDone = true;
-                }
+    doFatiguedVision(grid, i, j) {
+        for (let v = 0; v < this.constructor.fatigueVisibleZones.length; v++) {
+            if (!this.visionDone) {
+            let a = this.constructor.fatigueVisibleZones[v][0], b = this.constructor.fatigueVisibleZones[v][1];
+            for (let k = 0; k < SHIFT_INDEX[a][b].x.length; k++) {
+                if (grid.rows[mod(i + SHIFT_INDEX[a][b].x[k], grid.size)][mod(j + SHIFT_INDEX[a][b].y[k], grid.size)].agent !== null &&
+                grid.rows[mod(i + SHIFT_INDEX[a][b].x[k], grid.size)][mod(j + SHIFT_INDEX[a][b].y[k], grid.size)].agent instanceof Bluebug ||
+                grid.rows[mod(i + SHIFT_INDEX[a][b].x[k], grid.size)][mod(j + SHIFT_INDEX[a][b].y[k], grid.size)].agent instanceof Greenbug) {
+                    this.direction = pursueDirection(a, b)[k];
+                    this.visionDone = true;
                 }
             }
+            }
+        }
+    }
+    doVision(grid, i, j) {
+            for (let v = 0; v < this.constructor.visibleZones.length; v++) {
+            if (!this.visionDone) {
+                let a = this.constructor.visibleZones[v][0], b = this.constructor.visibleZones[v][1];
+                for (let k = 0; k < SHIFT_INDEX[a][b].x.length; k++) {
+                if (grid.rows[mod(i + SHIFT_INDEX[a][b].x[k], grid.size)][mod(j + SHIFT_INDEX[a][b].y[k], grid.size)].agent !== null &&
+                    grid.rows[mod(i + SHIFT_INDEX[a][b].x[k], grid.size)][mod(j + SHIFT_INDEX[a][b].y[k], grid.size)].agent instanceof Bluebug ||
+                    grid.rows[mod(i + SHIFT_INDEX[a][b].x[k], grid.size)][mod(j + SHIFT_INDEX[a][b].y[k], grid.size)].agent instanceof Greenbug) {
+                    this.direction = pursueDirection(a, b)[k];
+                    this.visionDone = true;
+                }
+                }
             }
         }
     }
