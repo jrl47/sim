@@ -38,7 +38,7 @@ class Timer { // SINGLETON
                 } else {
                     let newExpected = Date.now() + this.interval;
                     if (newExpected - this.expected > this.interval + 3) {
-                        console.log('loop struggling!!!');
+                        // console.log('loop struggling!!!');
                         // clearInterval(Timer.instance.intervalId);
                     }
                     this.expected = newExpected;
