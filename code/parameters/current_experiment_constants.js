@@ -3,18 +3,18 @@ class CurrentExperimentConstants {
         if (!CurrentExperimentConstants.instance) {
             CurrentExperimentConstants.instance = this;
             this.numInitialGreenbugs = 15//;
-            + 20;
+            + 30;
             this.numInitialBluebugs = 20//;
-            + 20;
+            + 33;
             this.numInitialRedmunchers = 3//;
-            + 6;
+            + 4;
 
             this.greenbug = {
-                startStomach: 5100,
-                babyStomach: 900,
-                metabolism: 42,
+                startStomach: 5500,
+                babyStomach: 1100,
+                metabolism: 41,
                 grazeLimit: 100,
-                birthFactor: 1.6,
+                birthFactor: 1.8,
                 visibleZones: [
                     [0, 1],
                     [1, 1],
@@ -22,34 +22,35 @@ class CurrentExperimentConstants {
                     [1, 2],
                     [2, 2],
                     [0, 3],
-                    [3, 3]
+                    [1, 3],
+                    [2, 3],
+                    [3, 3],
+                    [0, 4]
                 ]
             }
 
             this.bluebug = {
-                startStomach: 2100,
-                babyStomach: 300,
-                metabolism: 36,
-                grazeLimit: 85,
-                birthFactor: 0.5,
+                startStomach: 2500,
+                babyStomach: 500,
+                metabolism: 39,
+                grazeLimit: 90,
+                birthFactor: 0.9,
                 visibleZones: [
                     [0, 1],
                     [1, 1],
                     [0, 2],
-                    [1, 2],
-                    [2, 2],
-                    [0, 3]
+                    [1, 2]
                 ]
             }
 
             this.redmuncher = {
-                startStomach: 13500,
-                babyStomach: 3500,
+                startStomach: 16500,
+                babyStomach: 2000,
                 metabolism: 44,
-                grazeLimit: 120,
-                birthFactor: 3.1,
-                stomachFactor: 7,
-                fatigueThreshold: 2000,
+                grazeLimit: 125,
+                birthFactor: 3.3,
+                stomachFactor: 120,
+                fatigueThreshold: 1000,
                 fatigueVisibleZones: [
                     [0, 1],
                     [1, 1],
@@ -68,6 +69,10 @@ class CurrentExperimentConstants {
                     [3, 4],
                     [4, 4],
                     [0, 5],
+                    [1, 5],
+                    [2, 5],
+                    [3, 5],
+                    [4, 5],
                     [5, 5],
                     [0, 6],
                     [6, 6],

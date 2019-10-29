@@ -19,8 +19,12 @@ class Agent {
             }
 
             this.visionDone = false;
-            if (this instanceof Bug) {
-                if (randInt(0, 1) <= 0) {
+            if (this instanceof Greenbug) {
+                if (randInt(0, 5) <= 4) {
+                    this.doVision(grid, i, j);
+                }
+            } else if (this instanceof Bluebug) {
+                if (randInt(0, 4) <= 3) {
                     this.doVision(grid, i, j);
                 }
             } else if (this instanceof Muncher) {
@@ -34,11 +38,11 @@ class Agent {
                 if (this.willReproduce) {
                     this.reproduce(grid, agents, i, j);
                     if (this instanceof Bluebug) {
-                        this.direction = 0;
+                        this.direction = randInt(0, 3);
                     }
                 }
             } else {
-                if (this instanceof Bluebug) {
+                if (this instanceof Bluebug) { // non-Bluebugs change every time anyway
                     this.direction = randInt(0, 3);
                 }
             }

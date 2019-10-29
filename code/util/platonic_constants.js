@@ -43,6 +43,8 @@ SHIFT_INDEX[1][3].x = KNIGHT_SHIFTS_X_3;
 SHIFT_INDEX[1][3].y = KNIGHT_SHIFTS_Y_3;
 SHIFT_INDEX[1][4].x = [1, 1, -1, -1, 4, 4, -4, -4];
 SHIFT_INDEX[1][4].y = [-4, 4, -4, 4, -1, 1, -1, 1];
+SHIFT_INDEX[1][5].x = [1, 1, -1, -1, 5, 5, -5, -5];
+SHIFT_INDEX[1][5].y = [-5, 5, -5, 5, -1, 1, -1, 1];
 
 SHIFT_INDEX[2][2].x = DIAG_SHIFTS_X_2;
 SHIFT_INDEX[2][2].y = DIAG_SHIFTS_Y_2;
@@ -50,9 +52,16 @@ SHIFT_INDEX[2][3].x = DKNIGHT_SHIFTS_X_3;
 SHIFT_INDEX[2][3].y = DKNIGHT_SHIFTS_Y_3;
 SHIFT_INDEX[2][4].x = [2, 2, -2, -2, 4, 4, -4, -4];
 SHIFT_INDEX[2][4].y = [-4, 4, -4, 4, -2, 2, -2, 2];
+SHIFT_INDEX[2][5].x = [2, 2, -2, -2, 5, 5, -5, -5];
+SHIFT_INDEX[2][5].y = [-5, 5, -5, 5, -2, 2, -2, 2];
 
 SHIFT_INDEX[3][4].x = [3, 3, -3, -3, 4, 4, -4, -4];
 SHIFT_INDEX[3][4].y = [-4, 4, -4, 4, -3, 3, -3, 3];
+SHIFT_INDEX[3][5].x = [3, 3, -3, -3, 5, 5, -5, -5];
+SHIFT_INDEX[3][5].y = [-5, 5, -5, 5, -3, 3, -3, 3];
+
+SHIFT_INDEX[4][5].x = [4, 4, -4, -4, 5, 5, -5, -5];
+SHIFT_INDEX[4][5].y = [-5, 5, -5, 5, -4, 4, -4, 4];
 
 for (let i = 3; i <= 8; i++) {
     SHIFT_INDEX[0][i].x = ORTH_SHIFTS_X.map(function(entry) { return entry * i; });
