@@ -36,12 +36,12 @@ class Timer { // SINGLETON
                 if (this.expected === -1) {
                     this.expected = Date.now() + this.interval;
                 } else {
-                    let newExpected = Date.now() + this.interval;
-                    if (newExpected - this.expected > this.interval + 3) {
-                        // console.log('loop struggling!!!');
-                        // clearInterval(Timer.instance.intervalId);
-                    }
-                    this.expected = newExpected;
+                    // let newExpected = Date.now() + this.interval;
+                    // if (newExpected - this.expected > this.interval + 3) {
+                    //     console.log('loop struggling!!!');
+                    //     // clearInterval(Timer.instance.intervalId);
+                    // }
+                    // this.expected = newExpected;
                 }
                 this.callTickCallbacks();
             }
@@ -56,7 +56,7 @@ class Timer { // SINGLETON
         }
         this.ticks++;
         // uncomment for a fixed end time
-        // if (Timer.instance.ticks > 500) {
+        // if (Timer.instance.ticks > 2000) {
         //     console.log('DONE!');
         //     clearInterval(Timer.instance.intervalId);
         // }

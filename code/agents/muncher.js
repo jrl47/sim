@@ -31,8 +31,7 @@ class Muncher extends Agent {
             let a = this.constructor.fatigueVisibleZones[v][0], b = this.constructor.fatigueVisibleZones[v][1];
             for (let k = 0; k < SHIFT_INDEX[a][b].x.length; k++) {
                 if (grid.rows[mod(i + SHIFT_INDEX[a][b].x[k], grid.size)][mod(j + SHIFT_INDEX[a][b].y[k], grid.size)].agent !== null &&
-                grid.rows[mod(i + SHIFT_INDEX[a][b].x[k], grid.size)][mod(j + SHIFT_INDEX[a][b].y[k], grid.size)].agent instanceof Bluebug ||
-                grid.rows[mod(i + SHIFT_INDEX[a][b].x[k], grid.size)][mod(j + SHIFT_INDEX[a][b].y[k], grid.size)].agent instanceof Greenbug) {
+                grid.rows[mod(i + SHIFT_INDEX[a][b].x[k], grid.size)][mod(j + SHIFT_INDEX[a][b].y[k], grid.size)].agent instanceof Bug) {
                     this.direction = pursueDirection(a, b)[k];
                     this.visionDone = true;
                 }
@@ -46,7 +45,6 @@ class Muncher extends Agent {
                 let a = this.constructor.visibleZones[v][0], b = this.constructor.visibleZones[v][1];
                 for (let k = 0; k < SHIFT_INDEX[a][b].x.length; k++) {
                 if (grid.rows[mod(i + SHIFT_INDEX[a][b].x[k], grid.size)][mod(j + SHIFT_INDEX[a][b].y[k], grid.size)].agent !== null &&
-                    grid.rows[mod(i + SHIFT_INDEX[a][b].x[k], grid.size)][mod(j + SHIFT_INDEX[a][b].y[k], grid.size)].agent instanceof Bluebug ||
                     grid.rows[mod(i + SHIFT_INDEX[a][b].x[k], grid.size)][mod(j + SHIFT_INDEX[a][b].y[k], grid.size)].agent instanceof Greenbug) {
                     this.direction = pursueDirection(a, b)[k];
                     this.visionDone = true;

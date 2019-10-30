@@ -30,21 +30,21 @@ class GooLogic { // SINGLETON
         greenPenalty -= greenMinusBlue;
       }
 
-      let gooPenaltyScale = 250;
-      grid.rows[i][j].state.red = Math.floor(grid.rows[i][j].state.red * Math.pow(.55, redPenalty/gooPenaltyScale));
-      grid.rows[i][j].state.green = Math.floor(grid.rows[i][j].state.green * Math.pow(.975, greenPenalty/gooPenaltyScale));
-      grid.rows[i][j].state.blue = Math.floor(grid.rows[i][j].state.blue * Math.pow(.9, bluePenalty/gooPenaltyScale));
+      let gooPenaltyScale = 80;
+      grid.rows[i][j].state.red -= Math.max(Math.floor(6*redPenalty/gooPenaltyScale), 0);
+      grid.rows[i][j].state.green -= Math.max(Math.floor(1.5*greenPenalty/gooPenaltyScale), 0);
+      grid.rows[i][j].state.blue -= Math.max(Math.floor(bluePenalty/gooPenaltyScale), 0);
 
       let chg = 0;
 
       let greenNeighborTotal = neighborTotals[i][j].green;
-      switch (Math.floor(greenNeighborTotal / 250)) {
+      switch (Math.floor(greenNeighborTotal / 230)) {
         // case 0: chg = 0; break;
         case 0: chg = 5; break;
         case 1: chg = 4; break;
         case 2: chg = 3; break;
         case 3: chg = 2; break;
-        case 4: chg = 2; break;
+        case 4: chg = 1; break;
         case 5: chg = 1; break;
         case 6: chg = 1; break;
         case 7: chg = 0; break;
@@ -56,15 +56,15 @@ class GooLogic { // SINGLETON
       }
 
       let blueNeighborTotal = neighborTotals[i][j].blue;
-      switch (Math.floor(blueNeighborTotal / 250)) {
-        case 0: chg = 5; break;
+      switch (Math.floor(blueNeighborTotal / 230)) {
+        case 0: chg = 3; break;
         case 1: chg = 2; break;
-        case 2: chg = 4; break;
-        case 3: chg = 6; break;
-        case 4: chg = 1; break;
+        case 2: chg = 2; break;
+        case 3: chg = 3; break;
+        case 4: chg = 2; break;
         case 5: chg = 1; break;
-        case 6: chg = -17; break;
-        case 7: chg = -3; break;
+        case 6: chg = 1; break;
+        case 7: chg = -13; break;
         default: chg = -7;
       }
       grid.rows[i][j].state.blue += chg;
@@ -73,16 +73,16 @@ class GooLogic { // SINGLETON
       }
 
       let redNeighborTotal = neighborTotals[i][j].red;
-      switch (Math.floor(redNeighborTotal / 250)) {
-        case 0: chg = 7; break;
-        case 1: chg = 5; break;
-        case 2: chg = 4; break;
-        case 3: chg = 3; break;
-        case 4: chg = 9; break;
-        case 5: chg = -2; break;
+      switch (Math.floor(redNeighborTotal / 230)) {
+        case 0: chg = 4; break;
+        case 1: chg = 3; break;
+        case 2: chg = 2; break;
+        case 3: chg = 2; break;
+        case 4: chg = 3; break;
+        case 5: chg = -12; break;
         case 6: chg = -7; break;
-        case 7: chg = 2; break;
-        default: chg = -22;
+        case 7: chg = 1; break;
+        default: chg = -55;
       }
       grid.rows[i][j].state.red += chg;
       if (grid.rows[i][j].state.red < 0) {
@@ -113,19 +113,24 @@ class GooLogic { // SINGLETON
   
     if (color === 'green') {
       selfWeight = 8;
-      orthWeight = 1.7;
+      orthWeight = 1.3;
     } else if (color === 'blue') {
       selfWeight = 9;
-      orthWeight = 1.7;
+      orthWeight = 1.4;
     } else if (color === 'red') {
       selfWeight = 10;
-      orthWeight = 2.1;
+      orthWeight = 1.6;
     }
   
     result += grid.rows[i][j].state[color] * selfWeight;
     for (let k = 0; k < 4; k++) {
       result += grid.rows[mod(i + ORTH_SHIFTS_X[k], grid.size)][mod(j + ORTH_SHIFTS_Y[k], grid.size)].state[color] * orthWeight;
     }
+    // for (let k = 0; k < 4; k++) {
+    //   result += grid.rows[mod(i + ORTH_SHIFTS_X[k], grid.size)][mod(j + ORTH_SHIFTS_Y[k], grid.size)].state[color];
+    // }
+    // result *= orthWeight;
+    // result += grid.rows[i][j].state[color] * selfWeight;
     return result;
   }
 }
