@@ -20,11 +20,11 @@ class Agent {
 
             this.visionDone = false;
             if (this instanceof Greenbug) {
-                if (randInt(0, 9) <= 2) {
+                if (randInt(0, 10) <= 9) {
                     this.doVision(grid, i, j);
                 }
             } else if (this instanceof Bluebug) {
-                if (randInt(0, 4) <= 1) {
+                if (randInt(0, 4) <= 0) {
                     this.doVision(grid, i, j);
                 }
             } else if (this instanceof Muncher) {

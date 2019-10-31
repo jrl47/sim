@@ -3,18 +3,18 @@ class CurrentExperimentConstants {
         if (!CurrentExperimentConstants.instance) {
             CurrentExperimentConstants.instance = this;
             this.numInitialGreenbugs = 15//;
-            + 155;
+            + 85;
             this.numInitialBluebugs = 20//;
-            + 193;
+            + 143;
             this.numInitialRedmunchers = 3//;
-            + 5;
+            + 3;
 
             this.greenbug = {
-                startStomach: 5500,
-                babyStomach: 1100,
-                metabolism: 42,
+                startStomach: 6000,
+                babyStomach: 1200,
+                metabolism: 45,
                 grazeLimit: 110,
-                birthFactor: 2.3,
+                birthFactor: 2.2,
                 visibleZones: [
                     [0, 1],
                     [1, 1],
@@ -32,7 +32,7 @@ class CurrentExperimentConstants {
             this.bluebug = {
                 startStomach: 2500,
                 babyStomach: 500,
-                metabolism: 60,
+                metabolism: 65,
                 grazeLimit: 95,
                 birthFactor: 0.9,
                 visibleZones: [
@@ -44,23 +44,23 @@ class CurrentExperimentConstants {
             }
 
             this.redmuncher = {
-                startStomach: 19000,
-                babyStomach: 2000,
-                metabolism: 32,
+                startStomach: 20000,
+                babyStomach: 2500,
+                metabolism: 20,
                 grazeLimit: 125,
                 birthFactor: 3.5,
-                stomachFactor: 6,
-                fatigueThreshold: 1000,
+                stomachFactor: 130,
+                fatigueThreshold: 1200,
                 fatigueVisibleZones: [
                     [0, 1],
                     [1, 1],
                     [0, 2],
                     [2, 2],
-                    [1, 2]
+                    [1, 2],
+                    [0, 3],
+                    [1, 3]
                 ],
                 visibleZones: [
-                    [0, 3],
-                    [1, 3],
                     [2, 3],
                     [3, 3],
                     [0, 4],
@@ -75,6 +75,9 @@ class CurrentExperimentConstants {
                     [4, 5],
                     [5, 5],
                     [0, 6],
+                    [1, 6],
+                    [2, 6],
+                    [3, 6],
                     [6, 6],
                     [0, 7],
                     [7, 7],

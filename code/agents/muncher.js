@@ -31,7 +31,7 @@ class Muncher extends Agent {
             let a = this.constructor.fatigueVisibleZones[v][0], b = this.constructor.fatigueVisibleZones[v][1];
             for (let k = 0; k < SHIFT_INDEX[a][b].x.length; k++) {
                 if (grid.rows[mod(i + SHIFT_INDEX[a][b].x[k], grid.size)][mod(j + SHIFT_INDEX[a][b].y[k], grid.size)].agent !== null &&
-                grid.rows[mod(i + SHIFT_INDEX[a][b].x[k], grid.size)][mod(j + SHIFT_INDEX[a][b].y[k], grid.size)].agent instanceof Bug) {
+                grid.rows[mod(i + SHIFT_INDEX[a][b].x[k], grid.size)][mod(j + SHIFT_INDEX[a][b].y[k], grid.size)].agent instanceof Greenbug) {
                     this.direction = pursueDirection(a, b)[k];
                     this.visionDone = true;
                 }
@@ -51,6 +51,20 @@ class Muncher extends Agent {
                 }
                 }
             }
+        }
+        if (!this.visionDone) { // ONLY look for bluebugs if no greenbugs are anywhere in sight
+            for (let v = 0; v < this.constructor.fatigueVisibleZones.length; v++) {
+                if (!this.visionDone) {
+                let a = this.constructor.fatigueVisibleZones[v][0], b = this.constructor.fatigueVisibleZones[v][1];
+                for (let k = 0; k < SHIFT_INDEX[a][b].x.length; k++) {
+                    if (grid.rows[mod(i + SHIFT_INDEX[a][b].x[k], grid.size)][mod(j + SHIFT_INDEX[a][b].y[k], grid.size)].agent !== null &&
+                    grid.rows[mod(i + SHIFT_INDEX[a][b].x[k], grid.size)][mod(j + SHIFT_INDEX[a][b].y[k], grid.size)].agent instanceof Bluebug) {
+                        this.direction = pursueDirection(a, b)[k];
+                        this.visionDone = true;
+                    }
+                }
+                }
+            }   
         }
     }
 }

@@ -1,4 +1,4 @@
-let timer = new Timer(13.2);
+let timer = new Timer(13.5);
 
 let grid = -1;
 let agents = -1;
