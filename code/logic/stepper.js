@@ -24,9 +24,21 @@ class Stepper {
     }
     step() {
         let neighborTotals = this.gooLogic.getNeighborTotals(this.grid);
-        for(let i = 0; i < this.grid.size; i++) {
+        if (timer.ticks % 8 === 0) {
+          // let start = Date.now();
+          // console.log('goo');
+          for(let i = 0; i < this.grid.size; i++) {
             for(let j = 0; j < this.grid.size; j++) {
                 this.gooLogic.doGooLogic(this.grid, neighborTotals, i, j);
+            }
+          }
+          // let end = Date.now();
+          // console.log(end - start);
+        }
+        // console.log('bug');
+        // let start = Date.now();
+        for(let i = 0; i < this.grid.size; i++) {
+            for(let j = 0; j < this.grid.size; j++) {
                 this.doBugLogic(i, j);
                 this.doMuncherLogic(i, j);
             }
@@ -37,5 +49,7 @@ class Stepper {
             this.agents.delete(agent);
           }
         });
+        // let end = Date.now();
+        // console.log(end - start);
     }
 }

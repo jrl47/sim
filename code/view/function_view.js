@@ -7,7 +7,7 @@ class FunctionView { // SINGLETON
             this.md = new Metadata();
             this.AXIS_WIDTH = 40;
             this.xScale = 2;
-            this.yScale = 1/3;
+            this.yScale = 1/5;
             this.interval = 100;
             this.max = 350;
 
