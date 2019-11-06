@@ -3,18 +3,18 @@ class CurrentExperimentConstants {
         if (!CurrentExperimentConstants.instance) {
             CurrentExperimentConstants.instance = this;
             this.numInitialGreenbugs = 15//;
-            + 65;
+            + 35;
             this.numInitialBluebugs = 20//;
             + 78;
             this.numInitialRedmunchers = 3//;
-            + 3;
+            + 2;
 
             this.greenbug = {
                 startStomach: 6000,
                 babyStomach: 1200,
-                metabolism: 32,
+                metabolism: 36,
                 grazeLimit: 110,
-                birthFactor: 2.1,
+                birthFactor: 2.0,
                 visibleZones: [
                     [0, 1],
                     [1, 1],
@@ -46,10 +46,10 @@ class CurrentExperimentConstants {
             this.redmuncher = {
                 startStomach: 20000,
                 babyStomach: 2500,
-                metabolism: 20,
+                metabolism: 22,
                 grazeLimit: 125,
                 birthFactor: 3.5,
-                stomachFactor: 200,
+                stomachFactor: 195,
                 fatigueThreshold: 1200,
                 fatigueVisibleZones: [
                     [0, 1],

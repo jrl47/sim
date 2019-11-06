@@ -20,7 +20,7 @@ class Agent {
 
             this.visionDone = false;
             if (this instanceof Greenbug) {
-                if (randInt(0, 11) <= 10) {
+                if (randInt(0, 12) <= 11) {
                     this.doVision(grid, i, j);
                 }
             } else if (this instanceof Bluebug) {
