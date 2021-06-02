@@ -12,7 +12,7 @@ class CurrentExperimentConstants {
             this.greenbug = {
                 startStomach: 6000,
                 babyStomach: 1200,
-                metabolism: 36,
+                metabolism: 35,
                 grazeLimit: 110,
                 birthFactor: 2.0,
                 visibleZones: [
@@ -46,10 +46,10 @@ class CurrentExperimentConstants {
             this.redmuncher = {
                 startStomach: 20000,
                 babyStomach: 2500,
-                metabolism: 22,
+                metabolism: 21,
                 grazeLimit: 125,
                 birthFactor: 3.5,
-                stomachFactor: 195,
+                stomachFactor: 220,
                 fatigueThreshold: 1200,
                 fatigueVisibleZones: [
                     [0, 1],

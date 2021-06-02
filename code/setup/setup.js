@@ -9,7 +9,7 @@ class Setup { // SINGLETON
         return Setup.instance;
     }
     grid() {
-        return this.gm.gridB();
+        return this.gm.gridC();
     }
     agents() {
         return this.am.agents0();

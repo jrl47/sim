@@ -1,4 +1,4 @@
-let timer = new Timer(10.2);
+let timer = new Timer(40);
 
 let grid = -1;
 let agents = -1;
@@ -22,9 +22,9 @@ view.draw();
 let stepper = new Stepper(grid, agents);
 let doStep = () => {
   stepper.step();
-  if (timer.ticks % 250 === 0) {
+  // if (timer.ticks % 250 === 0) {
     view.draw();
-  }
+  // }
 };
 // timer.addTickCallback(() => {doStep()});
 
