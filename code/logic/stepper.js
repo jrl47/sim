@@ -12,15 +12,8 @@ class Stepper {
       this.grid = grid;
       this.agents = agents;
     }
-    doBugLogic(i, j) {
-      if (this.grid.rows[i][j].agent !== null && this.grid.rows[i][j].agent.done === false && this.grid.rows[i][j].agent instanceof Bug) {
-          this.grid.rows[i][j].agent.step(this.grid, this.agents, i, j);
-      }
-    }
-    doMuncherLogic(i, j) {
-      if (this.grid.rows[i][j].agent !== null && this.grid.rows[i][j].agent.done === false && this.grid.rows[i][j].agent instanceof Muncher) {
-        this.grid.rows[i][j].agent.step(this.grid, this.agents, i, j);
-      }
+    doAgentLogic(agent) {
+      agent.step(this.grid, this.agents);
     }
     step() {
         let neighborTotals = this.gooLogic.getNeighborTotals(this.grid);
@@ -37,12 +30,15 @@ class Stepper {
         }
         // console.log('bug');
         // let start = Date.now();
-        for(let i = 0; i < this.grid.size; i++) {
-            for(let j = 0; j < this.grid.size; j++) {
-                this.doBugLogic(i, j);
-                this.doMuncherLogic(i, j);
-            }
-        }
+
+        this.agents.bugs.forEach((bug) => {
+          this.doAgentLogic(bug);
+        });
+
+        this.agents.munchers.forEach((muncher) => {
+          this.doAgentLogic(muncher);
+        });
+
         this.agents.agents.forEach((agent, sameAgent, set) => {
           agent.done = false;
           if (agent.dead) {

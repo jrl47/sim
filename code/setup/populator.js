@@ -13,6 +13,8 @@ class Populator {
                 x = randInt(0, grid.size - 1);
                 y = randInt(0, grid.size - 1);
             }
+            // this redundancy allows for the major efficiency improvement of iterating over the agents, not the grid, to do their logic.
+            bug.setLocation(x, y);
             grid.rows[x][y].agent = bug;
         });
         agents.munchers.forEach((muncher, sameMuncher, set) => {
@@ -22,6 +24,8 @@ class Populator {
                 x = randInt(0, grid.size - 1);
                 y = randInt(0, grid.size - 1);
             }
+            // this redundancy allows for the major efficiency improvement of iterating over the agents, not the grid, to do their logic.
+            muncher.setLocation(x, y);
             grid.rows[x][y].agent = muncher;
         });
     }
