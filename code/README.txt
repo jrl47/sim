@@ -18,3 +18,19 @@ In any case, now grid size shouldn't be such a decisive slowdown factor. Let's t
 It seems fine around 140-150. Loop struggling as per the timer metric becomes uncommon around 205. For the 160x160 map I
 rechecked it just now and it becomes uncommon around 200. Ok, so that's good in that the size doesn't seem to matter much,
 but wasn't it struggling less at 170 before? Ugh! Maybe my computer is varying for who knows what reason?
+
+OF COURSE! I did all my hardcore testing with the DISPLAY OFF, because that takes forever, duh!
+
+Ok, now I'm at a total loss. Display off does indeed help, but the "loop struggling" mechanism just seems broken.
+When I manually time the step function, and I tried it in three different increasingly inclusive ways, the last of which
+was to put the start and end around the timer function that calls the tickcallbacks, I get intervals of like 10-20,
+usually closer to 10. What gives?
+
+When I time both the step and the view stages, as expected, the view phase takes like 130-170 ms, step is still tiny.
+
+OMFG. All I had to do was increase the fudge factor from +3 to +5 in that timer method. All the "loop struggling" printout
+was detecting was jitter in the javascript setTimeout method, I'm pretty sure!
+
+WOW, with all this, I can now run the small map at an interval of 8!!! And the big map, at 15. Which is surprising, since
+the big map is not just lagging below 15 on the goo turns, it's on all of the turns (or at 14, all of the turns in certain)
+long stretches of time. I think the reason is just that the bigger map under current parameters allows more agents to live.

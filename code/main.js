@@ -1,4 +1,4 @@
-let timer = new Timer(200);
+let timer = new Timer(15);
 
 let grid = -1;
 let agents = -1;
@@ -21,10 +21,18 @@ view.draw();
 // Engine Setup
 let stepper = new Stepper(grid, agents);
 let doStep = () => {
+  // let start = Date.now();
+  // console.log('STEP');
   stepper.step();
-  // if (timer.ticks % 250 === 0) {
+  // let end = Date.now();
+  // console.log(end - start);
+  if (timer.ticks % 250 === 0) {
+    // start = Date.now();
+    // console.log('VIEW');
     view.draw();
-  // }
+    // end = Date.now();
+    // console.log(end - start);
+  }
 };
 // timer.addTickCallback(() => {doStep()});
 
