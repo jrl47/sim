@@ -43,6 +43,10 @@ class Agent {
                 if (this.stomach > this.constructor.fatigueThreshold) {
                     this.doVision(grid);
                 }
+                // redmunchers get an extra move sometimes
+                if (randInt(0, 3) === 0) { // TODO make this not random and chosen at a cost based on if chase is happening
+                    this.move(grid);
+                }
             }
 
             if (this.move(grid)) { // can't reproduce if it was blocked
@@ -83,6 +87,7 @@ class Agent {
         }
     }
     move(grid) {
+        grid.rows[this.i][this.j].agent = null;
         let destinationCell = grid.rows[mod(this.i + ORTH_SHIFTS_X[this.direction], grid.size)][mod(this.j + ORTH_SHIFTS_Y[this.direction], grid.size)];
         if (destinationCell.agent === null) {
             destinationCell.agent = this;
