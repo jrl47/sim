@@ -33,17 +33,17 @@ class Timer { // SINGLETON
     unpause() {
         this.intervalId = setInterval(
             () => {
-                if (this.expected === -1) {
-                    this.expected = Date.now() + this.interval;
-                } else {
-                    let newExpected = Date.now() + this.interval;
-                    // console.log(newExpected - this.expected);
-                    if (newExpected - this.expected > this.interval + 5) {
-                        console.log('loop struggling!!!');
-                        // clearInterval(Timer.instance.intervalId);
-                    }
-                    this.expected = newExpected;
-                }
+                // if (this.expected === -1) {
+                //     this.expected = Date.now() + this.interval;
+                // } else {
+                //     let newExpected = Date.now() + this.interval;
+                //     // console.log(newExpected - this.expected);
+                //     if (newExpected - this.expected > this.interval + 5) {
+                //         console.log('loop struggling!!!');
+                //         // clearInterval(Timer.instance.intervalId);
+                //     }
+                //     this.expected = newExpected;
+                // }
                 this.callTickCallbacks();
             }
             , this.interval);

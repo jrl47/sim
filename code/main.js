@@ -1,4 +1,4 @@
-let timer = new Timer(15);
+let timer = new Timer(8);
 
 let grid = -1;
 let agents = -1;
@@ -26,7 +26,7 @@ let doStep = () => {
   stepper.step();
   // let end = Date.now();
   // console.log(end - start);
-  if (timer.ticks % 250 === 0) {
+  if (timer.ticks % 200 === 0) {
     // start = Date.now();
     // console.log('VIEW');
     view.draw();

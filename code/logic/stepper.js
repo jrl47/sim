@@ -17,7 +17,7 @@ class Stepper {
     }
     step() {
         let neighborTotals = this.gooLogic.getNeighborTotals(this.grid);
-        if (timer.ticks % 8 === 0) {
+        if (timer.ticks % 12 === 0) {
           // let start = Date.now();
           // console.log('goo');
           for(let i = 0; i < this.grid.size; i++) {
@@ -31,12 +31,12 @@ class Stepper {
         // console.log('bug');
         // let start = Date.now();
 
-        this.agents.bugs.forEach((bug) => {
-          this.doAgentLogic(bug);
-        });
-
         this.agents.munchers.forEach((muncher) => {
           this.doAgentLogic(muncher);
+        });
+
+        this.agents.bugs.forEach((bug) => {
+          this.doAgentLogic(bug);
         });
 
         this.agents.agents.forEach((agent, sameAgent, set) => {
